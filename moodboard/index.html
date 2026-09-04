@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra Nova — визуальная система «Кадастровый лист» v1.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..600&family=Golos+Text:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Prata&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Commissioner:wght@300..700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TERRA NOVA · Визуальная система «Кадастровый лист» · v1.1
+   Мудборд. Один файл. Без фреймворков.
+   v1.1 — учтены референсы владельца: скругления, фото на всю
+   ширину, салатовые плитки, наложение снимков, иконки в кругах.
+   ============================================================ */
+
+:root{
+  color-scheme: light;
+
+  /* --- Цвет --- */
+  --paper:      #F6F3EC;   /* тёплая база */
+  --surface:    #FFFFFF;   /* карточки */
+  --surface-2:  #FBF9F5;   /* вложенные плоскости */
+  --tint:       #E7EFE2;   /* салатовая плитка */
+  --tint-deep:  #D7E3D0;
+
+  /* Синяя семья — данные и проверка */
+  --sky:        #E2ECF1;   /* светлая плитка данных */
+  --sky-2:      #C9DCE6;   /* граница, вложенная плоскость */
+  --water:      #6F97AE;   /* марки, иконки, линии — не текст */
+
+  --ink:        #171B18;
+  --ink-2:      #4A524A;
+  --ink-3:      #838B82;
+
+  --forest:     #24462F;
+  --forest-dp:  #16301F;
+  --forest-lt:  #3A6244;
+  --sage:       #7E8C6E;
+  --clay:       #A75D3C;
+  --slate:      #24384F;
+
+  --line:    rgba(23,27,24,.14);
+  --line-2:  rgba(23,27,24,.07);
+  --grid:    rgba(23,27,24,.038);
+
+  /* --- Шрифты. Пара 1 по умолчанию, остальные — ниже, по data-font --- */
+  --serif: "Alegreya", Georgia, "Times New Roman", serif;
+  --sans:  "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --h-weight: 500;
+  --h-track: -.018em;
+
+  /* --- Форма --- */
+  --r-card: 14px;
+  --r-img:  16px;
+  --r-fld:  10px;
+  --r-pill: 999px;
+  --r-chip: 8px;
+
+  /* --- Метрика --- */
+  --bar: 58px;
+  --pad: clamp(18px, 4vw, 64px);
+  --maxw: 1320px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.62;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to right,  var(--grid) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px 40px);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+img,svg{ max-width:100%; }
+[hidden]{ display:none !important; }
+
+/* ------------------------------------------------------------
+   Служебная типографика
+   ------------------------------------------------------------ */
+.mono{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+.mono--clay{ color:var(--clay); }
+.mono--paper{ color:rgba(246,243,236,.62); }
+
+/* --- Пара 2: строгая контрастная антиква + тот же гротеск --- */
+html[data-font="2"]{
+  --serif:"Prata", Georgia, "Times New Roman", serif;
+  --h-weight:400;
+  --h-track:-.012em;
+}
+/* --- Пара 3: только гротеск, заголовки жирным (как в WANDER и ПУТЬ) --- */
+html[data-font="3"]{
+  --serif:"Golos Text", -apple-system, "Segoe UI", Arial, sans-serif;
+  --h-weight:600;
+  --h-track:-.032em;
+}
+html[data-font="3"] em{ font-style:normal; }
+/* У Prata нет курсива и других начертаний — акцент делаем только цветом */
+html[data-font="2"] em{ font-style:normal; }
+html[data-font="2"] .cover__three,
+html[data-font="2"] .spec__name,
+html[data-font="2"] .sw__role,
+html[data-font="2"] .mk-site__logo b,
+html[data-font="2"] .mk-pdf__head b,
+html[data-font="2"] .mk-mail__head b,
+html[data-font="2"] .brand b{ font-weight:400; }
+/* Пара 3 — заголовки гротеском требуют плотности */
+html[data-font="3"] .cover__three,
+html[data-font="3"] .spec__glyph,
+html[data-font="3"] .t-display,
+html[data-font="3"] .t-h2,
+html[data-font="3"] .t-h3,
+html[data-font="3"] .pz-hero__txt h4,
+html[data-font="3"] .mk-pdf__ttl,
+html[data-font="3"] .mk-post h4,
+html[data-font="3"] .mk-story h4,
+html[data-font="3"] .mk-mail__body h4,
+html[data-font="3"] .mk-site__split h5,
+html[data-font="3"] .d-italic b,
+html[data-font="3"] .d-italic em,
+html[data-font="3"] .spec__name,
+html[data-font="3"] .sw__role,
+html[data-font="3"] .pricerow b,
+html[data-font="3"] .brand b,
+html[data-font="3"] .mk-site__logo b{ font-weight:600; letter-spacing:-.03em; }
+html[data-font="3"] .measure p{ font-weight:400; letter-spacing:0; }
+html[data-font="3"] .cover__sub{ font-weight:400; }
+
+/* --- Пара 4: «Документ». Шрифты Паратайпа для государственных бумаг --- */
+html[data-font="4"]{
+  --serif:"PT Serif", Georgia, serif;
+  --sans:"PT Sans", -apple-system, "Segoe UI", Arial, sans-serif;
+  --h-weight:400; --h-track:-.008em;
+}
+html[data-font="4"] .btn,
+html[data-font="4"] .tile b,
+html[data-font="4"] .mk-mail__btn{ font-weight:700; }
+
+/* --- Пара 5: «Редакция». Издательская антиква + нейтральный гротеск --- */
+html[data-font="5"]{
+  --serif:"Spectral", Georgia, serif;
+  --sans:"Commissioner", -apple-system, "Segoe UI", Arial, sans-serif;
+  --h-weight:400; --h-track:-.022em;
+}
+
+/* --- Пара 6: «Контраст». Тонкая антиква + геометрия двадцатых --- */
+html[data-font="6"]{
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sans:"Jost", -apple-system, "Segoe UI", Arial, sans-serif;
+  --h-weight:500; --h-track:-.012em;
+}
+/* Cormorant светлее прочих — на мелких заголовках добавляем плотности */
+html[data-font="6"] .sw__role,
+html[data-font="6"] .spec__name,
+html[data-font="6"] .pricerow b,
+html[data-font="6"] .dev h3,
+html[data-font="6"] .tex__body h3,
+html[data-font="6"] .legend h3{ font-weight:600; }
+html[data-font="6"] .measure p{ font-size:18px; }
+
+/* Переключатель шрифтовых пар */
+.fontsel{
+  flex:0 0 auto; position:relative;
+  display:flex; align-items:center; gap:8px;
+  border:1px solid var(--line); border-radius:var(--r-pill);
+  padding:6px 12px 6px 14px; background:var(--surface);
+}
+.fontsel span{
+  font-family:var(--mono); font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.fontsel select{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.06em;
+  color:var(--ink); background:transparent; border:0; cursor:pointer;
+  padding:2px 0; max-width:150px;
+}
+.fontsel select:focus{ outline:1px solid var(--forest); outline-offset:3px; border-radius:3px; }
+
+h1,h2,h3,h4{ font-family:var(--serif); font-weight:var(--h-weight); margin:0; letter-spacing:var(--h-track); }
+p{ margin:0 0 1em; } p:last-child{ margin-bottom:0; }
+a{ color:var(--forest); text-underline-offset:3px; }
+
+/* ------------------------------------------------------------
+   Панель
+   ------------------------------------------------------------ */
+.topbar{
+  position:sticky; top:0; z-index:60;
+  height:var(--bar);
+  display:flex; align-items:center; gap:14px;
+  padding:0 var(--pad);
+  background:rgba(246,243,236,.93);
+  backdrop-filter:saturate(140%) blur(9px);
+  -webkit-backdrop-filter:saturate(140%) blur(9px);
+  border-bottom:1px solid var(--line);
+}
+.brand{ display:flex; align-items:center; gap:9px; flex:0 0 auto; text-decoration:none; color:var(--ink); }
+.brand svg{ display:block; }
+.brand b{ font-family:var(--serif); font-weight:500; font-size:15px; white-space:nowrap; }
+
+.navwrap{
+  flex:1 1 auto; min-width:0;
+  overflow-x:auto; overflow-y:hidden;
+  scrollbar-width:none; -ms-overflow-style:none;
+  mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);
+}
+.navwrap::-webkit-scrollbar{ display:none; }
+.nav{ display:flex; align-items:center; gap:2px; padding:0 12px; width:max-content; }
+.nav a{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-3); text-decoration:none; padding:7px 11px; border-radius:var(--r-pill);
+  white-space:nowrap; transition:color .25s ease, background-color .25s ease;
+}
+.nav a:hover{ color:var(--ink); background:var(--line-2); }
+.nav a.is-active{ color:var(--forest); background:var(--tint); }
+
+.notes-btn{
+  flex:0 0 auto;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-2); background:transparent;
+  border:1px solid var(--line); border-radius:var(--r-pill);
+  padding:8px 14px; cursor:pointer;
+  display:flex; align-items:center; gap:7px;
+  transition:border-color .25s ease, color .25s ease;
+}
+.notes-btn:hover{ border-color:var(--ink-2); color:var(--ink); }
+.notes-btn .dot{ width:6px; height:6px; border-radius:50%; background:var(--forest); transition:background-color .25s ease; }
+body.notes-off .notes-btn .dot{ background:transparent; box-shadow:inset 0 0 0 1px var(--ink-3); }
+.notes-btn .lbl-off{ display:none; }
+body.notes-off .notes-btn .lbl-on{ display:none; }
+body.notes-off .notes-btn .lbl-off{ display:inline; }
+
+/* ------------------------------------------------------------
+   Секции
+   ------------------------------------------------------------ */
+.section{ padding:clamp(54px,7.5vw,112px) var(--pad); scroll-margin-top:var(--bar); position:relative; }
+.inner{ max-width:var(--maxw); margin:0 auto; }
+.grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.2vw,30px); }
+
+.shead{
+  display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.2vw,30px);
+  align-items:end; margin-bottom:clamp(28px,4.2vw,54px);
+  padding-bottom:16px; border-bottom:1px solid var(--line);
+}
+.shead__idx{ grid-column:span 12; }
+.shead__ttl{ grid-column:span 12; }
+.shead__note{ grid-column:span 12; }
+.shead h2{ font-size:clamp(30px,4.4vw,50px); line-height:1.02; margin-top:8px; }
+.shead h2 em{ font-style:italic; color:var(--forest); }
+
+/* Пояснения */
+.note{
+  font-family:var(--mono); font-size:11.5px; line-height:1.65;
+  color:var(--ink-2); border-left:2px solid var(--clay); padding:2px 0 2px 12px;
+}
+.note b{ color:var(--ink); font-weight:500; }
+body.notes-off .note{ display:none; }
+
+/* Появление. Скрываем только если JS работает — иначе контент виден всегда. */
+.js .rv{ opacity:0; transform:translateY(10px); transition:opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1); }
+.js .rv.in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .js .rv{ opacity:1; transform:none; transition:none; }
+}
+
+/* ============================================================
+   ОБЛОЖКА
+   ============================================================ */
+.cover{ padding-top:clamp(36px,5vw,72px); padding-bottom:clamp(46px,6.5vw,90px); border-bottom:1px solid var(--line); }
+.cover__left{ grid-column:span 12; }
+.cover__right{ grid-column:span 12; }
+.cover h1{ font-size:clamp(50px,10vw,126px); line-height:.9; letter-spacing:-.035em; margin:14px 0 0; }
+.cover h1 em{ font-style:italic; font-weight:400; color:var(--forest); }
+.cover__sub{ font-family:var(--serif); font-size:clamp(17px,2.1vw,25px); line-height:1.42; color:var(--ink-2); max-width:23ch; margin-top:20px; }
+.cover__meta{ margin-top:28px; display:flex; flex-wrap:wrap; gap:8px 0; border-top:1px solid var(--line); padding-top:14px; }
+.cover__meta div{ flex:1 1 130px; padding-right:14px; }
+.cover__meta strong{ display:block; font-family:var(--serif); font-weight:400; font-size:19px; margin-top:4px; }
+
+.plot{ width:100%; height:auto; display:block; }
+.plot .fill{ fill:rgba(36,70,47,.045); }
+.plot .edge{ fill:none; stroke:var(--forest); stroke-width:1; stroke-linejoin:round; opacity:.62; }
+.plot .vtx{ fill:var(--forest); }
+.plot .lbl{ font-family:var(--serif); }
+.plot .tick{ stroke:var(--line-2); stroke-width:1; }
+.plot .lbl{ font-family:var(--serif); font-size:10px; fill:var(--ink-2); letter-spacing:0; }
+.plot .dim{ stroke:var(--clay); stroke-width:.8; stroke-dasharray:2 3.5; opacity:.7; }
+
+.cover__three{
+  margin-top:clamp(34px,4.6vw,60px); padding-top:22px; border-top:1px solid var(--ink);
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:clamp(14px,3vw,44px);
+  font-family:var(--serif); font-size:clamp(26px,5.4vw,64px); line-height:1.05; letter-spacing:-.02em;
+}
+/* Фирменный разделитель — кусок межевой линии с поворотной точкой.
+   Заменяет любые ромбы, точки и звёздочки. */
+.sep{
+  flex:0 0 auto; display:block;
+  width:clamp(30px,4.4vw,60px); height:auto;
+  align-self:center;
+}
+.sep line{ stroke:var(--line); stroke-width:1; }
+.sep circle{ fill:var(--forest); }
+.sep--paper circle{ fill:var(--paper); }
+.sep--paper line{ stroke:rgba(246,243,236,.34); }
+
+
+/* ============================================================
+   РЕФЕРЕНСЫ
+   ============================================================ */
+.refs{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(14px,2vw,24px); }
+.ref{
+  grid-column:span 12;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card);
+  padding:16px; transition:border-color .3s ease, transform .3s ease;
+}
+.ref:hover{ border-color:var(--sage); }
+.ref__vis{ border-radius:var(--r-chip); overflow:hidden; background:var(--surface-2); height:118px; position:relative; }
+.ref h3{ font-size:17px; margin:13px 0 5px; }
+.ref p{ font-size:13px; line-height:1.5; color:var(--ink-2); }
+.ref__src{ display:block; margin-top:9px; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sage); }
+
+/* мини-схемы референсов */
+.d-hero{ position:absolute; inset:0; background:linear-gradient(to bottom,rgba(22,35,25,.55),rgba(22,35,25,.1) 60%,rgba(22,35,25,.45)),radial-gradient(120% 90% at 65% 25%,#A8C08F 0%,#6E8C5C 42%,#3E5F3C 78%,#294530 100%); }
+.d-hero::after{ content:""; position:absolute; left:14px; bottom:22px; width:58%; height:9px; background:rgba(255,255,255,.9); border-radius:3px; box-shadow:0 -15px 0 rgba(255,255,255,.9), 0 15px 0 rgba(255,255,255,.45); }
+
+.d-tiles{ position:absolute; inset:0; display:flex; align-items:center; gap:8px; padding:0 14px; }
+.d-tiles i{ display:block; flex:1 1 0; height:62px; border-radius:var(--r-chip); background:var(--surface); border:1px solid var(--line-2); }
+.d-tiles i:nth-child(odd){ background:var(--tint); border-color:transparent; }
+
+.d-overlap{ position:absolute; inset:0; }
+.d-overlap i{ position:absolute; border-radius:var(--r-chip); }
+.d-overlap i:nth-child(1){ left:14px; top:14px; width:52%; height:78%; background:linear-gradient(160deg,#7E9A6B,#3F6040); }
+.d-overlap i:nth-child(2){ left:44%; top:38%; width:40%; height:54%; background:linear-gradient(160deg,#A8C08F,#5C7F52); border:3px solid var(--surface); }
+
+.d-steps{ position:absolute; inset:0; display:flex; align-items:center; justify-content:space-around; padding:0 10px; }
+.d-steps i{ display:block; width:34px; height:34px; border-radius:50%; background:var(--tint); position:relative; }
+.d-steps i::after{ content:""; position:absolute; inset:11px; border:1.6px solid var(--forest); border-radius:3px; }
+
+.d-italic{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 16px; }
+.d-italic b{ font-family:var(--serif); font-weight:400; font-size:22px; line-height:1.06; letter-spacing:-.02em; }
+.d-italic em{ font-family:var(--serif); font-style:italic; color:var(--forest); font-size:24px; }
+
+.d-foot{ position:absolute; inset:0; background:var(--forest-dp); display:flex; gap:12px; padding:16px; }
+.d-foot i{ display:block; height:6px; border-radius:3px; background:rgba(246,243,236,.35); }
+.d-foot div{ flex:1 1 0; display:flex; flex-direction:column; gap:7px; }
+.d-foot div i:first-child{ background:rgba(246,243,236,.85); width:70%; }
+
+.refs__no{
+  grid-column:span 12;
+  border:1px dashed var(--line); border-radius:var(--r-card);
+  padding:18px; background:var(--surface-2);
+}
+.refs__no ul{ margin:11px 0 0; padding:0; list-style:none; }
+.refs__no li{ font-size:13.5px; color:var(--ink-2); padding:7px 0 7px 22px; position:relative; border-bottom:1px solid var(--line-2); }
+.refs__no li:last-child{ border-bottom:0; }
+.refs__no li::before{ content:"×"; position:absolute; left:5px; top:6px; font-family:var(--mono); color:var(--clay); }
+
+/* ============================================================
+   ПАЛИТРА
+   ============================================================ */
+.ratio{ display:flex; height:56px; border-radius:var(--r-chip); overflow:hidden; border:1px solid var(--line); margin-bottom:10px; }
+.ratio span{ display:block; position:relative; }
+.ratio span::after{ content:attr(data-w); position:absolute; left:9px; bottom:6px; font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:rgba(246,243,236,.8); }
+.ratio span.on-light::after{ color:var(--ink-3); }
+.ratio__cap{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:clamp(24px,3.6vw,44px); }
+
+.swatches{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(12px,1.6vw,20px); }
+.sw{
+  grid-column:span 12;
+  border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden;
+  background:var(--surface); display:flex; flex-direction:column; min-height:196px;
+  transition:border-color .3s ease;
+}
+.sw:hover{ border-color:var(--sage); }
+.sw__chip{ flex:1 1 auto; min-height:96px; position:relative; }
+.sw__chip::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(23,27,24,.05); }
+.sw__body{ padding:13px 15px 15px; border-top:1px solid var(--line-2); }
+.sw__hex{ font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--ink); display:block; }
+.sw__role{ font-family:var(--serif); font-size:17px; margin-top:2px; display:block; }
+.sw__use{ font-size:13px; line-height:1.5; color:var(--ink-2); margin-top:6px; }
+
+/* ============================================================
+   ТИПОГРАФИКА
+   ============================================================ */
+.spec{ grid-column:span 12; }
+.spec__glyph{ font-family:var(--serif); font-size:clamp(104px,19vw,220px); line-height:.78; letter-spacing:-.05em; color:var(--ink); margin:0; }
+.spec__glyph--sans{ font-family:var(--sans); font-weight:600; letter-spacing:-.045em; color:var(--forest); }
+.spec__name{ font-family:var(--serif); font-size:clamp(21px,2.6vw,30px); margin-top:12px; }
+.spec__set{ font-size:14px; color:var(--ink-2); border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
+.spec__set span{ font-family:var(--mono); font-size:12px; }
+
+.scale{ grid-column:span 12; }
+.scale__row{ display:grid; grid-template-columns:78px 1fr; gap:14px; align-items:baseline; padding:12px 0; border-bottom:1px solid var(--line-2); }
+.scale__row:first-child{ border-top:1px solid var(--line); }
+.scale__k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+.scale__v{ min-width:0; }
+.t-display{ font-family:var(--serif); font-size:clamp(30px,4.6vw,52px); line-height:1; letter-spacing:-.03em; }
+.t-display em{ font-style:italic; color:var(--forest); }
+.t-h2{ font-family:var(--serif); font-size:clamp(23px,3vw,34px); line-height:1.1; letter-spacing:-.02em; }
+.t-h3{ font-family:var(--serif); font-size:20px; line-height:1.25; }
+.t-lead{ font-size:18px; line-height:1.55; color:var(--ink-2); }
+.t-body{ font-size:16px; }
+.t-small{ font-size:13px; color:var(--ink-2); }
+.t-mono{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+.t-num{ font-family:var(--mono); font-size:clamp(24px,3.4vw,38px); color:var(--slate); }
+
+.measure{ grid-column:span 12; border-top:1px solid var(--ink); padding-top:18px; }
+.measure p{ font-family:var(--serif); font-size:17px; line-height:1.7; max-width:62ch; }
+.measure p + p{ margin-top:.9em; }
+
+/* ============================================================
+   ФОРМА И РАДИУСЫ
+   ============================================================ */
+.shape{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(14px,2vw,24px); }
+.shape__card{
+  grid-column:span 12; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-card); padding:20px;
+}
+.shape__demo{ height:104px; display:flex; align-items:center; justify-content:center; gap:12px; background:var(--surface-2); border-radius:var(--r-chip); margin-bottom:14px; }
+.shape__card h3{ font-size:18px; margin-bottom:5px; }
+.shape__card p{ font-size:13px; line-height:1.5; color:var(--ink-2); }
+.shape__val{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--clay); display:block; margin-top:8px; }
+
+.box-a{ width:88px; height:62px; background:var(--tint); border-radius:var(--r-card); }
+.box-b{ width:88px; height:62px; background:linear-gradient(160deg,#7E9A6B,#3F6040); border-radius:var(--r-img); }
+.pill-demo{ padding:12px 24px; border-radius:var(--r-pill); background:var(--forest); color:#fff; font-size:13.5px; font-weight:500; }
+.fld-demo{ width:150px; height:42px; border-radius:var(--r-fld); border:1px solid var(--line); background:var(--surface); }
+.ico-demo{ width:46px; height:46px; border-radius:50%; background:var(--tint); display:flex; align-items:center; justify-content:center; }
+
+/* Наложение снимков — сигнатурный приём */
+.overlap{
+  grid-column:span 12;
+  position:relative; padding:0 0 22px;
+}
+.overlap__a{
+  width:74%; aspect-ratio:4/3; border-radius:var(--r-img);
+  background:linear-gradient(165deg,#8FA97A 0%,#5A7B4E 45%,#2F4C36 100%);
+  position:relative; overflow:hidden;
+}
+.overlap__a::after{ content:""; position:absolute; left:0; right:0; top:34%; height:1px; background:rgba(255,255,255,.28); }
+.overlap__b{
+  position:absolute; right:0; bottom:0; width:44%; aspect-ratio:1/1.12;
+  border-radius:var(--r-img); border:5px solid var(--paper);
+  background:linear-gradient(150deg,#B7CBA0 0%,#6E8C5C 55%,#3E5F3C 100%);
+}
+.overlap__b::after{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,.9);
+  box-shadow:inset 0 0 0 1px rgba(23,27,24,.08);
+}
+
+/* ============================================================
+   ПРИЁМ — язык межевого плана
+   ============================================================ */
+.device{ background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.device .grid{ align-items:start; }
+
+/* Лист плана в рамке */
+.sheet{ grid-column:span 12; background:#fff; border:1px solid var(--ink); padding:12px; }
+.sheet__plan{ display:block; width:100%; height:auto; }
+.sheet__scale{
+  text-align:center; font-family:var(--serif); font-size:12.5px;
+  margin-top:10px; border-top:1px solid var(--ink); padding-top:9px; color:var(--ink);
+}
+.sheet__stamp{
+  position:absolute; left:14px; top:14px;
+  border:1px solid var(--ink); background:#fff; padding:6px 9px;
+  font-family:var(--mono); font-size:8.5px; line-height:1.6; color:var(--ink-2); letter-spacing:.04em;
+}
+.sheet__wrap{ position:relative; }
+
+/* Схема: слои */
+.pl-zone-a{ fill:#DCE7EE; opacity:.85; }
+.pl-zone-b{ fill:#C9D8CB; opacity:.7; }
+.pl-zone-c{ fill:#D9D5CB; opacity:.75; }
+.pl-parcel{ fill:#C6CCC4; opacity:.85; }
+.pl-edge{ fill:none; stroke:#1B1F1C; stroke-width:1; stroke-linejoin:round; }
+.pl-dash{ fill:none; stroke:#5A625A; stroke-width:1; stroke-dasharray:5 4; }
+.pl-town{ fill:none; stroke:#2F5FA8; stroke-width:2.2; stroke-dasharray:9 6; stroke-linecap:round; }
+.pl-road{ fill:none; stroke:#9A93B5; stroke-width:1; }
+.pl-dot{ fill:#1B1F1C; }
+.pl-lbl{ font-family:var(--serif); font-size:9px; fill:#1B1F1C; }
+.pl-ghost{ font-family:var(--serif); font-size:26px; fill:#1B1F1C; opacity:.17; letter-spacing:.02em; }
+.pl-ghost--sm{ font-size:15px; opacity:.22; }
+.pl-tag{ font-family:var(--serif); font-size:9px; fill:#1B1F1C; }
+.pl-tagbox{ fill:#fff; stroke:#1B1F1C; stroke-width:.8; }
+
+/* Условные обозначения */
+.legend{ grid-column:span 12; background:#fff; border:1px solid var(--ink); padding:16px 18px; }
+.legend h3{ font-size:16px; margin-bottom:4px; }
+.legend__sub{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px; display:block; }
+.legend__row{ display:grid; grid-template-columns:66px 1fr; gap:12px; align-items:center; padding:9px 0; border-bottom:1px solid var(--line-2); }
+.legend__row:last-child{ border-bottom:0; }
+.legend__row svg{ display:block; width:66px; height:16px; }
+.legend__row span{ font-size:12.5px; line-height:1.45; color:var(--ink-2); }
+.legend__row b{ color:var(--ink); font-weight:500; }
+
+/* Карточки элементов */
+.dev3{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(14px,2vw,26px); margin-top:clamp(24px,3.4vw,42px); }
+.dev{
+  grid-column:span 12; background:#fff; border:1px solid var(--line);
+  border-radius:var(--r-card); padding:18px; transition:border-color .3s ease;
+}
+.dev:hover{ border-color:var(--sage); }
+.dev h3{ font-size:18px; margin:14px 0 6px; }
+.dev p{ font-size:13.5px; line-height:1.6; color:var(--ink-2); }
+.dev__stage{ height:126px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line-2); padding-bottom:14px; }
+
+.dline .edge{ fill:none; stroke:var(--ink); stroke-width:1; stroke-linejoin:round; }
+.dline .dot{ fill:var(--ink); }
+.dline .accent{ stroke:var(--clay); stroke-width:1.2; fill:none; }
+.dline .ph{ fill:#C6CCC4; opacity:.7; }
+.dline .num{ font-family:var(--mono); font-size:24px; fill:var(--ink); }
+.dline .cap{ font-family:var(--serif); font-size:9px; fill:var(--ink-3); }
+.dline .town{ fill:none; stroke:#2F5FA8; stroke-width:2; stroke-dasharray:8 5; stroke-linecap:round; }
+
+/* Тёмная полоса: те же марки на фото */
+.oninv{
+  grid-column:span 12; margin-top:clamp(20px,2.8vw,32px);
+  border-radius:var(--r-card); overflow:hidden;
+  background:
+    linear-gradient(to bottom, rgba(19,30,21,.55), rgba(19,30,21,.72)),
+    radial-gradient(120% 90% at 62% 22%, #A8C08F 0%, #6E8C5C 38%, #3E5F3C 72%, #26402C 100%);
+  padding:clamp(18px,3vw,30px);
+  display:grid; grid-template-columns:1fr; gap:18px; align-items:center;
+}
+.oninv h3{ color:#fff; font-size:19px; margin-bottom:6px; }
+.oninv p{ color:rgba(255,255,255,.78); font-size:13.5px; line-height:1.6; }
+.oninv svg{ display:block; width:100%; height:auto; max-width:340px; }
+.oninv .edge{ fill:none; stroke:#fff; stroke-width:1; stroke-linejoin:round; }
+.oninv .dot{ fill:#fff; }
+.oninv .lbl{ font-family:var(--serif); font-size:9px; fill:rgba(255,255,255,.85); }
+
+/* --- Фактуры: рельеф, вода, угодья --- */
+.tex3{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(14px,2vw,26px); margin-top:clamp(20px,2.8vw,32px); }
+.tex{ grid-column:span 12; position:relative; background:#fff; border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; }
+.tex__vis{ height:150px; position:relative; border-bottom:1px solid var(--line-2); position:relative; overflow:hidden; }
+.tex__vis svg{ display:block; width:100%; height:100%; }
+.tex__body{ padding:16px 18px 18px; }
+.tex__body h3{ font-size:18px; margin-bottom:6px; }
+.tex__body p{ font-size:13.5px; line-height:1.55; color:var(--ink-2); }
+.tex__use{ display:block; margin-top:10px; font-family:var(--mono); font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--sage); }
+
+.iso{ fill:none; stroke:var(--sage); stroke-width:1; }
+.iso--far{ opacity:.35; } .iso--mid{ opacity:.55; } .iso--near{ opacity:.8; }
+.iso-mark{ font-family:var(--serif); font-size:9px; fill:var(--ink-3); }
+
+.riv{ fill:none; stroke:#2F5FA8; stroke-width:1.6; stroke-linecap:round; opacity:.85; }
+.riv-band{ fill:none; stroke:var(--sky-2); stroke-width:16; opacity:.6; stroke-linecap:round; }
+.riv-edge{ fill:none; stroke:#2F5FA8; stroke-width:.8; stroke-dasharray:4 4; opacity:.55; }
+
+.fld{ stroke:var(--sage); stroke-width:.9; opacity:.5; }
+.fld-box{ fill:none; stroke:var(--ink); stroke-width:1; }
+
+/* Демонстрация: фактура под блоком сайта */
+.texdemo{
+  grid-column:span 12; margin-top:clamp(20px,2.8vw,32px);
+  border:1px solid var(--line); border-radius:var(--r-card);
+  background:var(--paper); position:relative; overflow:hidden;
+  padding:clamp(24px,4vw,46px) clamp(20px,3.4vw,40px);
+}
+.texdemo__bg{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.texdemo__in{ position:relative; z-index:2; max-width:52ch; }
+.texdemo h3{ font-size:clamp(20px,2.8vw,28px); margin-bottom:10px; }
+.texdemo h3 em{ font-style:italic; color:var(--forest); }
+.texdemo p{ font-size:14.5px; line-height:1.6; color:var(--ink-2); }
+
+/* ============================================================
+   ФОТО
+   ============================================================ */
+.photos{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.2vw,30px); }
+.ph{ grid-column:span 12; }
+.ph__frame{ position:relative; border-radius:var(--r-img); overflow:hidden; }
+.ph__cap{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-top:11px; }
+.ph__cap h3{ font-size:18px; }
+.ph__txt{ font-size:13.5px; color:var(--ink-2); margin-top:6px; line-height:1.55; }
+
+/* Герой на всю ширину — главный формат */
+.pz-hero{
+  aspect-ratio:16/7;
+  background:
+    linear-gradient(to bottom, rgba(19,30,21,.62) 0%, rgba(19,30,21,.14) 52%, rgba(19,30,21,.55) 100%),
+    radial-gradient(130% 95% at 68% 22%, #B3C79B 0%, #7E9A6B 34%, #4A6C45 66%, #2A4530 100%);
+  position:relative; display:flex; align-items:flex-end;
+  padding:clamp(16px,3vw,34px);
+}
+.pz-hero__txt{ position:relative; z-index:2; max-width:46ch; }
+.pz-hero__txt h4{ font-family:var(--serif); font-weight:400; color:#fff; font-size:clamp(20px,3.6vw,40px); line-height:1.06; letter-spacing:-.028em; margin:0; }
+.pz-hero__txt h4 em{ font-style:italic; color:#CFE0BC; }
+.pz-hero__txt p{ color:rgba(255,255,255,.86); font-size:clamp(12px,1.4vw,15px); margin-top:10px; max-width:40ch; }
+.pz-hero__bar{ display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+.pz-hero__bar i{ display:block; height:36px; width:132px; border-radius:var(--r-pill); background:#fff; }
+.pz-hero__bar i:last-child{ background:transparent; box-shadow:inset 0 0 0 1.4px rgba(255,255,255,.75); }
+
+.pz-doc{ aspect-ratio:4/3; background:var(--tint-deep); position:relative; display:flex; align-items:center; justify-content:center; }
+.pz-doc__sheet{
+  width:64%; aspect-ratio:1/1.28; background:var(--surface);
+  border-radius:6px; box-shadow:6px 9px 22px rgba(23,27,24,.12);
+  transform:rotate(-2.4deg); padding:11% 10%;
+  background-image:
+    repeating-linear-gradient(to right,  rgba(23,27,24,.05) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(to bottom, rgba(23,27,24,.05) 0 1px, transparent 1px 14px);
+}
+.pz-doc__sheet i{ display:block; height:5px; border-radius:3px; background:rgba(23,27,24,.16); margin-bottom:9px; }
+.pz-doc__sheet i:nth-child(1){ width:70%; background:var(--forest); }
+.pz-doc__sheet i:nth-child(2){ width:100%; }
+.pz-doc__sheet i:nth-child(3){ width:88%; }
+.pz-doc__sheet i:nth-child(4){ width:94%; }
+.pz-doc__sheet i:nth-child(5){ width:46%; background:var(--clay); }
+
+.pz-portrait{
+  aspect-ratio:3/4; position:relative; overflow:hidden;
+  background:
+    linear-gradient(to bottom, rgba(22,32,24,.06) 0%, rgba(22,32,24,.30) 100%),
+    linear-gradient(160deg,#DCE3D4 0%,#B9C6AC 46%,#7C8E6E 100%);
+}
+.pz-portrait::after{
+  content:""; position:absolute; left:0; right:0; top:58%;
+  height:1px; background:rgba(255,255,255,.30);
+}
+
+.pz-detail{ aspect-ratio:16/9; background:linear-gradient(105deg,#7A7159 0%,#8D8567 42%,#6A6350 100%); position:relative; overflow:hidden; }
+.pz-detail::before{ content:""; position:absolute; left:34%; top:12%; width:9px; height:70%; border-radius:3px; background:var(--surface); transform:rotate(6deg); box-shadow:2px 0 0 rgba(23,27,24,.16); }
+.pz-detail::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:26%; background:linear-gradient(to top,rgba(23,27,24,.34),transparent); }
+
+.ph__no{ grid-column:span 12; border:1px dashed var(--line); border-radius:var(--r-card); padding:18px; background:var(--surface-2); }
+.ph__no ul{ margin:11px 0 0; padding:0; list-style:none; }
+.ph__no li{ font-size:13.5px; color:var(--ink-2); padding:7px 0 7px 22px; position:relative; border-bottom:1px solid var(--line-2); }
+.ph__no li:last-child{ border-bottom:0; }
+.ph__no li::before{ content:"×"; position:absolute; left:5px; top:6px; font-family:var(--mono); color:var(--clay); }
+
+/* ============================================================
+   ИНТЕРФЕЙС
+   ============================================================ */
+.ui-panel{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); padding:clamp(18px,2.6vw,30px); }
+.ui-panel + .ui-panel{ margin-top:clamp(14px,2vw,24px); }
+.ui-panel h3{ font-size:19px; margin-bottom:16px; padding-bottom:9px; border-bottom:1px solid var(--line-2); }
+.ui-row{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+
+.btn{
+  font-family:var(--sans); font-size:14.5px; font-weight:500;
+  padding:13px 26px; border:1.4px solid var(--forest);
+  background:var(--forest); color:#fff; cursor:pointer;
+  border-radius:var(--r-pill);
+  transition:background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+.btn:hover{ background:var(--forest-dp); border-color:var(--forest-dp); }
+.btn--sec{ background:transparent; color:var(--forest); }
+.btn--sec:hover{ background:var(--tint); color:var(--forest-dp); border-color:var(--forest-dp); }
+.btn--ghost{ background:transparent; border-color:var(--line); color:var(--ink-2); }
+.btn--ghost:hover{ border-color:var(--ink-2); color:var(--ink); background:transparent; }
+.btn--sm{ font-size:13px; padding:10px 19px; }
+
+.field{ max-width:420px; }
+.field label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px; }
+.field input,.field textarea{
+  width:100%; font-family:var(--sans); font-size:15.5px; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-fld);
+  padding:12px 15px; transition:border-color .25s ease, background-color .25s ease;
+}
+.field textarea{ min-height:88px; resize:vertical; }
+.field input:focus,.field textarea:focus{ outline:none; border-color:var(--forest); background:var(--surface); }
+
+.consent{ display:flex; gap:11px; align-items:flex-start; margin-top:16px; max-width:520px; }
+.consent input{
+  appearance:none; -webkit-appearance:none; flex:0 0 auto;
+  width:18px; height:18px; margin:3px 0 0;
+  border:1.4px solid var(--ink-2); border-radius:4px; background:var(--surface);
+  cursor:pointer; position:relative; transition:background-color .2s ease, border-color .2s ease;
+}
+.consent input:checked{ background:var(--forest); border-color:var(--forest); }
+.consent input:checked::after{ content:""; position:absolute; left:5.5px; top:1.5px; width:5px; height:10px; border:solid #fff; border-width:0 1.8px 1.8px 0; transform:rotate(43deg); }
+.consent span{ font-size:12.5px; line-height:1.5; color:var(--ink-2); }
+
+/* Салатовые плитки со статистикой */
+.tiles{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(10px,1.4vw,16px); }
+.tile{
+  grid-column:span 6; border-radius:var(--r-card); padding:18px 16px;
+  background:var(--surface-2); border:1px solid var(--line-2);
+}
+.tile--land{ background:var(--tint); border-color:transparent; }
+.tile--data{ background:var(--sky); border-color:transparent; }
+.tile span{ display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+.tile b{ display:block; font-family:var(--mono); font-weight:500; font-size:clamp(20px,2.6vw,28px); margin-top:6px; letter-spacing:-.02em; }
+.tile b.clay{ color:var(--clay); }
+.tile b.slate{ color:var(--slate); }
+
+/* Шаги с иконками */
+.steps{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(14px,2vw,22px); }
+.step{ grid-column:span 12; }
+.step__ic{ width:48px; height:48px; border-radius:50%; background:var(--tint); display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+.step__ic--data{ background:var(--sky); }
+.step__n{ font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--clay); }
+.step h4{ font-size:18px; margin:5px 0 5px; }
+.step p{ font-size:13.5px; line-height:1.55; color:var(--ink-2); }
+
+.pricerow{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:14px 0; border-bottom:1px solid var(--line-2); }
+.pricerow:first-of-type{ border-top:1px solid var(--line); }
+.pricerow b{ font-family:var(--serif); font-weight:400; font-size:17px; }
+.pricerow span{ font-family:var(--mono); font-size:14px; color:var(--ink-2); white-space:nowrap; }
+
+/* ============================================================
+   НОСИТЕЛИ
+   ============================================================ */
+.switch{
+  position:sticky; top:var(--bar); z-index:40;
+  display:flex; margin-bottom:clamp(20px,2.8vw,34px);
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-pill); overflow:auto; scrollbar-width:none; padding:4px;
+}
+.switch::-webkit-scrollbar{ display:none; }
+.switch button{
+  flex:1 1 auto; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; border:0; border-radius:var(--r-pill);
+  padding:11px 16px; cursor:pointer; white-space:nowrap;
+  transition:background-color .25s ease, color .25s ease;
+}
+.switch button:hover{ color:var(--ink); }
+.switch button.is-on{ background:var(--forest); color:#fff; }
+
+.stage{ display:none; }
+.stage.is-on{ display:block; animation:fade .4s ease both; }
+@keyframes fade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
+@media (prefers-reduced-motion:reduce){ .stage.is-on{ animation:none; } }
+
+.stagegrid{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.2vw,30px); align-items:start; }
+.stagegrid__vis{ grid-column:span 12; }
+.stagegrid__txt{ grid-column:span 12; }
+.stagegrid__txt h3{ font-size:clamp(21px,2.6vw,28px); margin-bottom:10px; }
+.rules-list{ margin:14px 0 0; padding:0; list-style:none; }
+.rules-list li{ font-size:13.5px; line-height:1.55; color:var(--ink-2); padding:8px 0 8px 20px; border-bottom:1px solid var(--line-2); position:relative; }
+.rules-list li::before{ content:""; position:absolute; left:2px; top:16px; width:7px; height:7px; border-radius:50%; background:var(--sage); }
+
+/* макет: сайт */
+.mk{ border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface); overflow:hidden; }
+.mk-site__bar{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 18px; border-bottom:1px solid var(--line-2); }
+.mk-site__logo{ display:flex; align-items:center; gap:7px; }
+.mk-site__logo b{ font-family:var(--serif); font-size:13px; font-weight:500; }
+.mk-site__nav{ display:flex; gap:13px; }
+.mk-site__nav i{ display:block; height:5px; width:34px; border-radius:3px; background:rgba(23,27,24,.15); }
+.mk-site__cta{ height:26px; width:98px; border-radius:var(--r-pill); background:var(--forest); flex:0 0 auto; }
+
+.mk-site__body{ padding:clamp(12px,2vw,18px); }
+.mk-site__stats{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+.mk-site__stats div{ flex:1 1 110px; border-radius:var(--r-chip); padding:13px 14px; background:var(--surface-2); border:1px solid var(--line-2); }
+.mk-site__stats div:nth-child(odd){ background:var(--tint); border-color:transparent; }
+.mk-site__stats span{ display:block; font-family:var(--mono); font-size:8.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); }
+.mk-site__stats b{ display:block; font-family:var(--mono); font-weight:500; font-size:17px; margin-top:4px; }
+
+.mk-site__split{ display:grid; grid-template-columns:1fr; gap:16px; margin-top:16px; align-items:center; }
+.mk-site__split h5{ font-family:var(--serif); font-weight:400; font-size:clamp(17px,2.6vw,24px); line-height:1.1; letter-spacing:-.02em; margin:6px 0 8px; }
+.mk-site__split p{ font-size:12.5px; color:var(--ink-2); }
+
+.mk-site__foot{ margin-top:16px; background:var(--forest-dp); border-radius:var(--r-card); padding:20px; display:flex; flex-wrap:wrap; gap:18px; }
+.mk-site__foot div{ flex:1 1 120px; display:flex; flex-direction:column; gap:7px; }
+.mk-site__foot i{ display:block; height:5px; border-radius:3px; background:rgba(246,243,236,.32); }
+.mk-site__foot i:first-child{ background:rgba(246,243,236,.9); width:64%; height:6px; }
+
+/* макет: PDF */
+.mk-pdf{
+  background:var(--surface); aspect-ratio:1/1.414; max-width:520px; margin:0 auto;
+  padding:7% 8%; display:flex; flex-direction:column;
+  border-radius:6px; box-shadow:0 10px 30px rgba(23,27,24,.1);
+}
+.mk-pdf__head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }
+.mk-pdf__head b{ font-family:var(--serif); font-size:clamp(13px,2.4vw,17px); font-weight:500; }
+.mk-pdf__ttl{ font-family:var(--serif); font-size:clamp(17px,3.6vw,26px); line-height:1.12; letter-spacing:-.02em; margin:16px 0 4px; }
+.mk-pdf__ttl em{ font-style:italic; color:var(--forest); }
+.mk-pdf__cols{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; flex:1 1 auto; }
+.mk-pdf__cols i{ display:block; height:4px; border-radius:2px; background:rgba(23,27,24,.13); margin-bottom:7px; }
+.mk-pdf__cols i.s{ width:62%; }
+.mk-pdf__cols i.a{ background:var(--forest); width:44%; height:5px; margin-bottom:10px; }
+.mk-pdf__tbl{ border-top:1px solid var(--ink); background:var(--sky); border-radius:4px; padding:0 8px; }
+.mk-pdf__tbl div{ display:flex; justify-content:space-between; gap:8px; padding:5px 0; border-bottom:1px solid var(--line-2); font-family:var(--mono); font-size:clamp(8px,1.7vw,10px); color:var(--ink-2); }
+.mk-pdf__foot{ margin-top:auto; padding-top:9px; border-top:1px solid var(--line); font-family:var(--mono); font-size:clamp(7px,1.5vw,9px); letter-spacing:.08em; color:var(--ink-3); display:flex; justify-content:space-between; gap:10px; }
+
+/* макет: email */
+.mk-mail{ max-width:440px; margin:0 auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; }
+.mk-mail__head{ padding:16px 22px; border-bottom:1px solid var(--line-2); display:flex; align-items:center; gap:8px; }
+.mk-mail__head b{ font-family:var(--serif); font-size:14px; font-weight:500; }
+.mk-mail__body{ padding:22px; }
+.mk-mail__body h4{ font-family:var(--serif); font-weight:400; font-size:clamp(18px,3.6vw,24px); line-height:1.18; letter-spacing:-.02em; margin:0 0 12px; }
+.mk-mail__body h4 em{ font-style:italic; color:var(--forest); }
+.mk-mail__body p{ font-size:13.5px; line-height:1.6; color:var(--ink-2); }
+.mk-mail__btn{ display:inline-block; margin-top:16px; background:var(--forest); color:#fff; font-size:13.5px; font-weight:500; padding:12px 24px; border-radius:var(--r-pill); text-decoration:none; }
+.mk-mail__foot{ padding:14px 22px 18px; border-top:1px solid var(--line-2); font-family:var(--mono); font-size:9.5px; line-height:1.7; letter-spacing:.06em; color:var(--ink-3); }
+
+/* макет: соцсети */
+.mk-social{ display:grid; grid-template-columns:1fr; gap:clamp(14px,2vw,22px); justify-items:center; }
+.mk-post{
+  width:100%; max-width:340px; aspect-ratio:1; border-radius:var(--r-img);
+  background:var(--surface); border:1px solid var(--line);
+  padding:clamp(18px,4.4vw,26px);
+  display:grid; grid-template-rows:auto 1fr auto; gap:12px;
+  position:relative; overflow:hidden;
+}
+.mk-post h4{
+  font-family:var(--serif); font-weight:var(--h-weight);
+  font-size:clamp(19px,4.6vw,28px); line-height:1.14; letter-spacing:-.022em;
+  margin:0; align-self:start;
+  /* страховка: фраза длиннее трёх строк не выпадет за край */
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.mk-post h4 em{ font-style:italic; color:var(--forest); }
+/* Служебная строка: подпись слева, фрагмент плана справа. Наехать на текст не может. */
+.mk-post__sig{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; }
+.mk-post__sig span{ font-family:var(--mono); font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+.mk-post__art{ width:74px; height:auto; flex:0 0 auto; opacity:.9; }
+
+.mk-story{
+  width:100%; max-width:214px; aspect-ratio:9/16; border-radius:var(--r-img);
+  background:
+    linear-gradient(to bottom, rgba(19,30,21,.42) 0%, rgba(19,30,21,.62) 52%, rgba(19,30,21,.9) 100%),
+    radial-gradient(120% 70% at 60% 18%, #7E9A6B 0%, #40603C 55%, #1B3524 100%);
+  padding:20px 18px; display:grid; grid-template-rows:auto 1fr auto; gap:14px;
+  position:relative; overflow:hidden;
+}
+.mk-story h4{
+  font-family:var(--serif); font-weight:var(--h-weight); color:#fff;
+  font-size:clamp(17px,4.4vw,21px); line-height:1.16; letter-spacing:-.02em; margin:0; align-self:start;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.mk-story__foot{ display:flex; flex-direction:column; gap:9px; }
+.mk-story__num{
+  font-family:var(--mono); font-size:clamp(17px,4.6vw,21px); color:#fff;
+  white-space:nowrap; letter-spacing:-.01em;
+}
+.mk-story__num b{
+  display:block; font-family:var(--mono); font-weight:400; font-size:8.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.62); margin-bottom:6px;
+}
+.mk-story__art{ width:100%; height:auto; opacity:.75; }
+
+/* ============================================================
+   ЗНАК И СИМВОЛЫ
+   Правило цвета: рамка — хвоя, буквы — тушь.
+   ============================================================ */
+.regs{ display:flex; flex-direction:column; gap:clamp(30px,4.6vw,58px); }
+.reg__head{
+  display:grid; grid-template-columns:1fr; gap:10px; align-items:end;
+  padding-bottom:14px; border-bottom:1px solid var(--line);
+  margin-bottom:clamp(16px,2.4vw,28px);
+}
+.reg__head h3{ font-size:clamp(23px,3.2vw,32px); margin-top:5px; }
+.reg__head p{ font-size:14px; line-height:1.6; color:var(--ink-2); max-width:64ch; margin:0; }
+.reg__row{ display:grid; grid-template-columns:1fr; gap:clamp(14px,2vw,24px); }
+
+.mkcard{
+  background:#fff; border:1px solid var(--line); border-radius:var(--r-card);
+  overflow:hidden; transition:border-color .3s ease;
+}
+.mkcard:hover{ border-color:var(--sage); }
+.mkcard__stage{
+  height:214px; display:flex; align-items:center; justify-content:center;
+  background:var(--surface-2); border-bottom:1px solid var(--line-2); padding:18px;
+}
+.mkcard__stage svg{ max-height:164px; width:auto; max-width:100%; display:block; }
+.mkcard__b{ padding:15px 17px; }
+.mkcard__b h4{ font-size:17px; margin-bottom:5px; }
+.mkcard__b p{ font-size:13px; line-height:1.5; color:var(--ink-2); margin:0; }
+.mkcard__try{
+  display:flex; gap:18px; align-items:flex-end;
+  padding:14px 17px; border-top:1px solid var(--line-2);
+}
+.mkcard__try figure{ margin:0; display:flex; flex-direction:column; align-items:center; gap:7px; }
+.mkcard__try figcaption{
+  font-family:var(--mono); font-size:8.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.tile16{ display:block; width:16px; height:16px; }
+.tile16 svg,.tile16 .ligature{ width:16px; height:16px; display:block; }
+.tile-dark{
+  display:flex; align-items:center; justify-content:center;
+  background:var(--forest-dp); border-radius:8px; padding:11px;
+  min-width:104px; min-height:58px;
+}
+.tile-dark svg{ width:76px; height:auto; max-height:44px; display:block; }
+
+/* Надписи внутри штампов */
+.st-big{ font-family:var(--serif); font-weight:600; font-size:26px; letter-spacing:.18em; fill:var(--ink); }
+.st-big--inv{ fill:var(--paper); }
+.st-arc{ font-family:var(--serif); font-weight:500; font-size:13px; letter-spacing:.26em; fill:var(--ink); }
+.st-arc--sm{ font-size:8.5px; letter-spacing:.2em; fill:var(--ink-2); }
+.st-mono{ font-family:var(--serif); font-weight:600; font-size:30px; letter-spacing:.12em; fill:var(--ink); }
+.st-tiny{ font-family:var(--mono); font-size:7.5px; letter-spacing:.2em; fill:var(--ink-2); }
+
+/* Наборная марка */
+.wordmark{ display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+.wordmark b{
+  font-family:var(--serif); font-weight:400; font-size:clamp(19px,3.2vw,29px);
+  letter-spacing:.38em; text-indent:.38em; color:var(--ink); line-height:1;
+}
+.wordmark__rule{ display:block; width:min(200px,70%); height:1px; background:var(--ink); }
+.wordmark i{
+  font-family:var(--sans); font-style:normal; font-size:9.5px;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--ink-3);
+}
+.wordmark--inv b{ color:var(--paper); }
+.wordmark--inv .wordmark__rule{ background:rgba(246,243,236,.55); }
+.wordmark--inv i{ color:rgba(246,243,236,.6); }
+.tile-dark .wordmark b{ font-size:13px; letter-spacing:.28em; text-indent:.28em; }
+.tile-dark .wordmark i{ font-size:6.5px; }
+.tile-dark .wordmark{ gap:6px; }
+
+/* Лигатура */
+.ligature{
+  display:flex; align-items:baseline; font-family:var(--serif); font-weight:400;
+  font-size:clamp(64px,11vw,104px); line-height:1; color:var(--ink); letter-spacing:-.05em;
+}
+.ligature span:last-child{ margin-left:-.09em; }
+.ligature--sm{ font-size:15px; letter-spacing:-.04em; }
+.ligature--inv{ color:var(--paper); font-size:38px; }
+
+/* Способ 1 — номера */
+.numlist{ display:grid; grid-template-columns:1fr; border-top:1px solid var(--ink); }
+.numlist__i{
+  display:grid; grid-template-columns:70px 1fr; gap:6px 18px;
+  padding:18px 0; border-bottom:1px solid var(--line-2); align-items:start;
+}
+.numlist__i b{
+  grid-row:1 / span 2; font-family:var(--serif); font-weight:400;
+  font-size:clamp(30px,4vw,44px); line-height:.86; color:var(--clay);
+}
+.numlist__i h4{ grid-column:2; font-size:19px; }
+.numlist__i p{ grid-column:2; font-size:13.5px; line-height:1.55; color:var(--ink-2); margin:0; }
+
+/* Способ 2 — штампы-марки */
+.stamps{ display:grid; grid-template-columns:1fr; gap:clamp(12px,1.8vw,18px); }
+.stampi{ background:#fff; border:1px solid var(--line); border-radius:var(--r-card); padding:17px; }
+.stampi__m{
+  display:inline-block; font-family:var(--serif); font-weight:500; font-size:13.5px;
+  letter-spacing:.2em; text-indent:.2em; color:var(--ink);
+  border:2.6px solid var(--forest); padding:5px 12px; margin-bottom:12px;
+  transform:rotate(-1.4deg);
+}
+.stampi__m--data{ border-color:var(--slate); }
+.stampi__m--clay{ border-color:var(--clay); }
+.stampi b{ display:block; font-family:var(--sans); font-weight:500; font-size:14.5px; }
+.stampi i{ display:block; font-style:normal; font-size:13px; line-height:1.45; color:var(--ink-2); margin-top:3px; }
+
+/* Способ 3 — фрагменты чертежа */
+.frags{ display:grid; grid-template-columns:1fr; border-top:1px solid var(--ink); }
+.frag{
+  display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center;
+  padding:13px 0; border-bottom:1px solid var(--line-2);
+}
+.frag svg{ width:96px; height:auto; display:block; }
+.frag b{ display:block; font-family:var(--sans); font-weight:500; font-size:14.5px; }
+.frag i{ display:block; font-style:normal; font-size:13px; line-height:1.45; color:var(--ink-2); margin-top:2px; }
+.fr-lbl{ font-family:var(--serif); font-size:8px; fill:#171B18; }
+
+@media (min-width:640px){
+  .stamps{ grid-template-columns:1fr 1fr; }
+}
+@media (min-width:768px){
+  .reg__head{ grid-template-columns:.85fr 1.5fr; gap:clamp(20px,3vw,40px); }
+  .reg__row{ grid-template-columns:1fr 1fr; }
+  .frags{ grid-template-columns:1fr 1fr; column-gap:clamp(20px,3vw,44px); }
+}
+@media (min-width:1024px){
+  .stamps{ grid-template-columns:repeat(3,1fr); }
+  .numlist{ grid-template-columns:1fr 1fr; column-gap:clamp(24px,3.4vw,48px); }
+}
+
+/* ============================================================
+   ПРАВИЛА
+   ============================================================ */
+.rules{ display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(16px,2.2vw,30px); }
+.rules__col{ grid-column:span 12; }
+.rules__col h3{ font-size:22px; padding-bottom:10px; border-bottom:1px solid var(--ink); margin-bottom:4px; }
+.rules__col ol{ margin:0; padding:0; list-style:none; counter-reset:r; }
+.rules__col li{ counter-increment:r; font-size:14.5px; line-height:1.55; color:var(--ink-2); padding:13px 0 13px 34px; border-bottom:1px solid var(--line-2); position:relative; }
+.rules__col li::before{ content:counter(r,decimal-leading-zero); position:absolute; left:0; top:14px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--clay); }
+.rules__col li b{ color:var(--ink); font-weight:500; }
+
+.bans{ margin-top:clamp(24px,3.4vw,42px); }
+.bans__wrap{ display:flex; flex-wrap:wrap; gap:9px; margin-top:14px; }
+.ban{
+  font-family:var(--mono); font-size:11.5px; color:var(--ink-3);
+  border:1px solid var(--line); border-radius:var(--r-pill); padding:8px 15px;
+  text-decoration:line-through; text-decoration-color:var(--clay); background:var(--surface);
+}
+
+/* ============================================================
+   ПОДВАЛ
+   ============================================================ */
+.foot{ background:var(--forest-dp); padding:38px var(--pad) 44px; }
+.foot__in{ max-width:var(--maxw); margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 26px; }
+.foot .mono{ color:rgba(246,243,236,.55); }
+
+/* ============================================================
+   АДАПТАЦИЯ
+   ============================================================ */
+@media (min-width:768px){
+  .sheet{ grid-column:span 7; }
+  .legend{ grid-column:span 5; }
+  .dev{ grid-column:span 4; }
+  .tex{ grid-column:span 6; }
+  .texdemo{ grid-column:span 12; }
+  .mark{ grid-column:span 6; }
+  .lockups{ grid-template-columns:1fr 1fr; }
+  .oninv{ grid-template-columns:1.15fr .85fr; gap:26px; }
+
+  .shead__idx{ grid-column:span 2; }
+  .shead__ttl{ grid-column:span 6; }
+  .shead__note{ grid-column:span 4; }
+
+  .ref{ grid-column:span 6; }
+  .refs__no{ grid-column:span 12; }
+
+  .sw{ grid-column:span 6; }
+  .spec{ grid-column:span 6; }
+  .scale{ grid-column:span 6; }
+  .measure{ grid-column:span 12; }
+
+  .shape__card{ grid-column:span 6; }
+  .overlap{ grid-column:span 12; }
+
+  .dev{ grid-column:span 4; }
+
+  .ph{ grid-column:span 6; }
+  .ph--wide{ grid-column:span 12; }
+  .ph__no{ grid-column:span 12; }
+
+  .tile{ grid-column:span 3; }
+  .step{ grid-column:span 6; }
+
+  .stagegrid__vis{ grid-column:span 7; }
+  .stagegrid__txt{ grid-column:span 5; }
+
+  .rules__col{ grid-column:span 6; }
+
+  .mk-social{ grid-template-columns:auto auto; align-items:start; }
+  .mk-site__split{ grid-template-columns:1.1fr .9fr; }
+}
+
+@media (min-width:1024px){
+  .cover__left{ grid-column:span 7; }
+  .cover__right{ grid-column:9 / span 4; padding-top:36px; }
+
+  .ref{ grid-column:span 4; }
+
+  .sw{ grid-column:span 3; }
+  .spec{ grid-column:span 4; }
+  .scale{ grid-column:7 / span 6; }
+  .measure{ grid-column:span 8; }
+
+  .shape__card{ grid-column:span 3; }
+  .overlap{ grid-column:span 7; }
+
+  .ph--a{ grid-column:span 12; }
+  .ph--b{ grid-column:span 5; }
+  .ph--c{ grid-column:7 / span 3; }
+  .ph--d{ grid-column:span 7; }
+
+  .step{ grid-column:span 3; }
+
+  .stagegrid__vis{ grid-column:span 8; }
+  .stagegrid__txt{ grid-column:10 / span 3; }
+
+  .tex{ grid-column:span 4; }
+  .mark{ grid-column:span 4; }
+  .rules__col--a{ grid-column:span 5; }
+  .rules__col--b{ grid-column:7 / span 6; }
+}
+
+@media (min-width:1440px){
+  :root{ --maxw:1340px; }
+  .cover h1{ font-size:126px; }
+}
+
+@media (max-width:430px){
+  :root{ --pad:18px; --bar:54px; }
+  .brand b{ display:none; }
+  .notes-btn{ padding:8px 12px; }
+  .notes-btn .lbl-on,.notes-btn .lbl-off{ display:none; }
+  body.notes-off .notes-btn .lbl-off{ display:none; }
+  .notes-btn::after{ content:"ПОЯСН."; }
+  .cover__three{ font-size:30px; gap:12px; }
+  .scale__row{ grid-template-columns:1fr; gap:4px; }
+  .mk-site__nav{ display:none; }
+  .ratio__cap{ flex-direction:column; gap:6px; }
+  .tile{ grid-column:span 6; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.className += " js";</script>
+
+<!-- ============================ ПАНЕЛЬ ============================ -->
+<header class="topbar">
+  <a class="brand" href="#cover" aria-label="Terra Nova, в начало">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <polygon points="3,19 6,6 17,3 21,11 15,21" fill="rgba(36,70,47,.1)" stroke="#24462F" stroke-width="1.3" stroke-linejoin="round"/>
+      <rect x="1.4" y="17.4" width="3.2" height="3.2" rx=".6" fill="#F6F3EC" stroke="#24462F" stroke-width="1.2"/>
+      <rect x="15.4" y="1.4" width="3.2" height="3.2" rx=".6" fill="#F6F3EC" stroke="#24462F" stroke-width="1.2"/>
+    </svg>
+    <b>Terra&nbsp;Nova</b>
+  </a>
+
+  <div class="navwrap">
+    <nav class="nav" id="nav" aria-label="Разделы мудборда">
+      <a href="#refs">Референсы</a>
+      <a href="#palette">Палитра</a>
+      <a href="#type">Типографика</a>
+      <a href="#shape">Форма</a>
+      <a href="#device">Приём</a>
+      <a href="#photo">Фото</a>
+      <a href="#ui">Интерфейс</a>
+      <a href="#media">Носители</a>
+      <a href="#mark">Знак</a>
+      <a href="#symbols">Символы</a>
+      <a href="#rules">Правила</a>
+    </nav>
+  </div>
+
+  <div class="fontsel">
+    <span>Шрифт</span>
+    <select id="fontSel" aria-label="Шрифтовая пара">
+      <option value="1">Alegreya + Golos</option>
+      <option value="2">Prata + Golos</option>
+      <option value="3">Golos + Golos</option>
+      <option value="4">PT Serif + PT Sans</option>
+      <option value="5">Spectral + Commissioner</option>
+      <option value="6">Cormorant + Jost</option>
+    </select>
+  </div>
+
+  <button class="notes-btn" id="notesBtn" type="button" aria-pressed="true">
+    <i class="dot" aria-hidden="true"></i>
+    <span class="lbl-on">Скрыть пояснения</span>
+    <span class="lbl-off">Показать пояснения</span>
+  </button>
+</header>
+
+<main>
+
+<!-- ============================ ОБЛОЖКА ============================ -->
+<section class="section cover" id="cover">
+  <div class="inner">
+    <div class="grid">
+
+      <div class="cover__left rv">
+        <span class="mono">Визуальная система · версия 1.1 · сентябрь 2026</span>
+        <h1>Кадастровый<br><em>лист</em></h1>
+        <p class="cover__sub">Точность землеустроительного документа и воздух современного лендинга.</p>
+
+        <div class="cover__meta">
+          <div><span class="mono">Проект</span><strong>Terra&nbsp;Nova</strong></div>
+          <div><span class="mono">Владелец</span><strong>Ольга Грошева</strong></div>
+          <div><span class="mono">Носители</span><strong>Сайт · PDF · Email · Соцсети</strong></div>
+        </div>
+      </div>
+
+      <div class="cover__right rv">
+        <svg class="plot" viewBox="0 0 320 280" role="img" aria-label="Схема контура участка с поворотными точками">
+          <line class="tick" x1="0" y1="70"  x2="320" y2="70"/>
+          <line class="tick" x1="0" y1="140" x2="320" y2="140"/>
+          <line class="tick" x1="0" y1="210" x2="320" y2="210"/>
+          <line class="tick" x1="80"  y1="0" x2="80"  y2="280"/>
+          <line class="tick" x1="160" y1="0" x2="160" y2="280"/>
+          <line class="tick" x1="240" y1="0" x2="240" y2="280"/>
+          <polygon class="fill" points="42,232 66,74 196,40 282,112 244,246"/>
+          <polygon class="edge" points="42,232 66,74 196,40 282,112 244,246"/>
+          <line class="dim" x1="66" y1="74" x2="196" y2="40"/>
+          <circle class="vtx" cx="42"  cy="232" r="3.6"/>
+          <circle class="vtx" cx="66"  cy="74"  r="3.6"/>
+          <circle class="vtx" cx="196" cy="40"  r="3.6"/>
+          <circle class="vtx" cx="282" cy="112" r="3.6"/>
+          <circle class="vtx" cx="244" cy="246" r="3.6"/>
+          <text class="lbl" x="26" y="248">н1</text>
+          <text class="lbl" x="52" y="66">н2</text>
+          <text class="lbl" x="188" y="30">н3</text>
+          <text class="lbl" x="291" y="106">н4</text>
+          <text class="lbl" x="250" y="262">н5</text>
+        </svg>
+        <p class="note" style="margin-top:14px"><b>Главный графический приём.</b> Ломаная участка с поворотными точками «н1…н5» — язык межевого плана. Обводит кадр, подчёркивает число, режет полосу. Четвёртой роли нет.</p>
+      </div>
+
+    </div>
+
+    <div class="cover__three rv">
+      <span>честный</span>
+      <svg class="sep" viewBox="0 0 60 14" aria-hidden="true"><line x1="0" y1="7" x2="22" y2="7"/><line x1="38" y1="7" x2="60" y2="7"/><circle cx="30" cy="7" r="3.2"/></svg>
+      <span>экспертный</span>
+      <svg class="sep" viewBox="0 0 60 14" aria-hidden="true"><line x1="0" y1="7" x2="22" y2="7"/><line x1="38" y1="7" x2="60" y2="7"/><circle cx="30" cy="7" r="3.2"/></svg>
+      <span>тёплый</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ РЕФЕРЕНСЫ ============================ -->
+<section class="section" id="refs">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">01 / Основа</span></div>
+      <div class="shead__ttl"><h2>Что взято <em>из ваших</em> референсов</h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Версия 1.1.</b> Шесть приёмов из подборки владельца вошли в систему. Три правила версии 1.0 из-за этого изменены: введены скругления, разрешены иконки в кругах, карточки стали белыми на тёплом фоне.</p>
+      </div>
+    </div>
+
+    <div class="refs">
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-hero"></div></div>
+        <h3>Фото на всю ширину</h3>
+        <p>Первый экран — крупный кадр участка, текст поверх по нижнему краю, затемнение сверху и снизу. Никакой белой плашки под заголовком.</p>
+        <span class="ref__src">Gauent · WANDER · ПУТЬ</span>
+      </div>
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-tiles"><i></i><i></i><i></i><i></i></div></div>
+        <h3>Салатовые плитки</h3>
+        <p>Строка цифр — чередование мягкой зелёной заливки и светлой. Так статистика читается спокойно, без рамок и линеек.</p>
+        <span class="ref__src">Gauent</span>
+      </div>
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-overlap"><i></i><i></i></div></div>
+        <h3>Наложение снимков</h3>
+        <p>Второй кадр заходит на первый и отбит полем цвета фона. Сигнатурный приём разделов «обо мне» и «как проходит работа».</p>
+        <span class="ref__src">Gauent</span>
+      </div>
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-steps"><i></i><i></i><i></i><i></i></div></div>
+        <h3>Шаги с иконками</h3>
+        <p>Нумерованные этапы, у каждого линейная иконка в бледно-зелёном круге. Только там, где иконка объясняет шаг.</p>
+        <span class="ref__src">ПУТЬ · Regenerative Agriculture</span>
+      </div>
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-italic"><b>Земля, которая</b><em>остаётся</em></div></div>
+        <h3>Курсивное слово</h3>
+        <p>В заголовке ровно одно слово курсивом и цветом хвои. Даёт теплоту без рукописных шрифтов и завитков.</p>
+        <span class="ref__src">Restore Nature · Waveture</span>
+      </div>
+
+      <div class="ref rv">
+        <div class="ref__vis"><div class="d-foot"><div><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div><div><i></i><i></i><i></i></div></div></div>
+        <h3>Тёмно-зелёный подвал</h3>
+        <p>Подвал — плотный блок цвета хвои с колонками ссылок и реквизитами. Закрывает страницу и держит бренд.</p>
+        <span class="ref__src">Gauent</span>
+      </div>
+
+      <div class="refs__no rv">
+        <span class="mono mono--clay">Из подборки не берём — и вот почему</span>
+        <ul>
+          <li><b>Золотые акценты, завитки, рваная бумага, рукописный шрифт</b> (Restore Nature) — ровно тот декор, который вы сами вычеркнули из брифа</li>
+          <li><b>Стоковые лаборанты в перчатках и плотная сетка из сорока иконок</b> (Biotechnology) — против «честный» и «без перегруза»</li>
+          <li><b>Коралловые кнопки на бирюзе</b> (Waveture) — чужая температура: у нас единственный тёплый акцент глиняный</li>
+          <li><b>Карусели и слайдеры направлений</b> (WANDER, ПУТЬ) — прячут содержание, а у вас каждый экран должен читаться сразу</li>
+          <li><b>Синие корпоративные панели</b> (Biotechnology) — уводят из земли в фарм-презентацию</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ПАЛИТРА ============================ -->
+<section class="section" id="palette">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">02 / Цвет</span></div>
+      <div class="shead__ttl"><h2>Хвоя, бумага <em>и салат</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Правило пропорций.</b> Светлые поверхности — больше половины композиции. Хвоя работает крупными плотными блоками: первый экран, полоса цифр, подвал. Глина — акцент до 6 %: только числа, метки, пунктир.</p>
+      </div>
+    </div>
+
+    <div class="rv">
+      <div class="ratio" aria-label="Пропорции использования цвета">
+        <span class="on-light" style="width:40%;background:#F6F3EC" data-w="40%"></span>
+        <span class="on-light" style="width:12%;background:#E7EFE2" data-w="12%"></span>
+        <span style="width:23%;background:#24462F" data-w="23%"></span>
+        <span class="on-light" style="width:9%;background:#E2ECF1" data-w="9%"></span>
+        <span style="width:5%;background:#6F97AE" data-w="5%"></span>
+        <span style="width:4%;background:#7E8C6E" data-w="4%"></span>
+        <span style="width:4%;background:#24384F" data-w="4%"></span>
+        <span style="width:3%;background:#A75D3C" data-w="3%"></span>
+      </div>
+      <div class="ratio__cap">
+        <span class="mono">Земля: бумага → салат → хвоя → полынь &nbsp;·&nbsp; Данные: небо → вода → грифель &nbsp;·&nbsp; Акцент: глина</span>
+        <span class="mono mono--clay">Синяя семья ≤ 18 % · глина ≤ 4 %</span>
+      </div>
+
+      <div class="ui-panel rv" style="margin-bottom:clamp(24px,3.6vw,44px)">
+        <h3>Две семьи цвета</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-2);max-width:70ch">
+          Зелёная семья говорит о земле и действии: первый экран, кнопки, подвал, блоки про участок и сделку.
+          Синяя — о данных и проверке: выписка, категория, ВРИ, обременения, таблицы, цифры, отчёт PDF.
+          Посетитель начинает различать разделы раньше, чем прочтёт заголовок.
+        </p>
+        <p class="note" style="margin-top:14px"><b>Жёсткие ограничения синего.</b> Вода&nbsp;#6F97AE — только заливки, иконки и линии: на бумаге у неё контраст 2,6:1, для текста этого мало. Синий текст — только грифель&nbsp;#24384F. Кнопок синего цвета в системе нет: целевое действие всегда хвоя. Голубой не появляется на первом экране — там земля.</p>
+      </div>
+    </div>
+
+    <div class="swatches rv">
+      <div class="sw">
+        <div class="sw__chip" style="background:#24462F"></div>
+        <div class="sw__body"><span class="sw__hex">#24462F</span><span class="sw__role">Хвоя</span><p class="sw__use">Основной. Кнопки, подвал, тёмные полосы, крупные плоскости.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#F6F3EC"></div>
+        <div class="sw__body"><span class="sw__hex">#F6F3EC</span><span class="sw__role">Бумага</span><p class="sw__use">Фон страницы. Тёплый, никогда не чисто белый.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#E7EFE2"></div>
+        <div class="sw__body"><span class="sw__hex">#E7EFE2</span><span class="sw__role">Салат</span><p class="sw__use">Плитки статистики, круги под иконки, активная вкладка.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#FFFFFF"></div>
+        <div class="sw__body"><span class="sw__hex">#FFFFFF</span><span class="sw__role">Карточка</span><p class="sw__use">Поверхность карточек и панелей поверх бумаги.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#171B18"></div>
+        <div class="sw__body"><span class="sw__hex">#171B18</span><span class="sw__role">Тушь</span><p class="sw__use">Весь основной текст. Тёплый почти-чёрный, не #000.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#7E8C6E"></div>
+        <div class="sw__body"><span class="sw__hex">#7E8C6E</span><span class="sw__role">Полынь</span><p class="sw__use">Маркеры списков, подписи, неактивные состояния.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#E2ECF1"></div>
+        <div class="sw__body"><span class="sw__hex">#E2ECF1</span><span class="sw__role">Небо</span><p class="sw__use">Плитки с данными, круги под иконки проверки, подложка таблиц.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#6F97AE"></div>
+        <div class="sw__body"><span class="sw__hex">#6F97AE</span><span class="sw__role">Вода</span><p class="sw__use">Иконки, линии, марки, границы блоков проверки. Никогда не текст.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#24384F"></div>
+        <div class="sw__body"><span class="sw__hex">#24384F</span><span class="sw__role">Грифель</span><p class="sw__use">Синий текст и числа: множители, таблицы, кадастровые номера.</p></div>
+      </div>
+      <div class="sw">
+        <div class="sw__chip" style="background:#A75D3C"></div>
+        <div class="sw__body"><span class="sw__hex">#A75D3C</span><span class="sw__role">Глина</span><p class="sw__use">Единственный тёплый акцент: прибыль, метка, пунктир. Не кнопка.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ТИПОГРАФИКА ============================ -->
+<section class="section" id="type">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">03 / Шрифт</span></div>
+      <div class="shead__ttl"><h2>Книга плюс <em>документ</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Пара и служебный третий.</b> Антиква — голос человека, Golos&nbsp;Text — голос текста, JetBrains&nbsp;Mono — голос данных. Подписи поворотных точек набираются антиквой мелким кеглем, как в межевом плане. Пару выбираем переключателем вверху.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="spec rv">
+        <p class="spec__glyph">Аа</p>
+        <p class="spec__name" id="specSerif">Alegreya</p>
+        <p class="spec__set" id="specSerifSet">Заголовки, крупные фразы, названия услуг, курсивный акцент.<br><span>400 · 500 · 600 · 400/500 italic</span></p>
+      </div>
+
+      <div class="spec rv">
+        <p class="spec__glyph spec__glyph--sans">Аа</p>
+        <p class="spec__name" id="specSans">Golos Text</p>
+        <p class="spec__set">Основной текст, интерфейс, кнопки, формы. Сделан «Паратайпом» под русский язык.<br><span>400 · 500 · 600 · 700</span></p>
+      </div>
+
+      <div class="scale rv">
+        <div class="scale__row"><div class="scale__k">Display</div><div class="scale__v"><span class="t-display">Земля, которая <em>остаётся</em></span></div></div>
+        <div class="scale__row"><div class="scale__k">H2</div><div class="scale__v"><span class="t-h2">Сопровождение сделки</span></div></div>
+        <div class="scale__row"><div class="scale__k">H3</div><div class="scale__v"><span class="t-h3">Проверка участка перед покупкой</span></div></div>
+        <div class="scale__row"><div class="scale__k">Lead</div><div class="scale__v"><span class="t-lead">Объясняю простым языком и работаю по договору</span></div></div>
+        <div class="scale__row"><div class="scale__k">Body</div><div class="scale__v"><span class="t-body">Проверяю категорию, ВРИ, зоны и обременения</span></div></div>
+        <div class="scale__row"><div class="scale__k">Small</div><div class="scale__v"><span class="t-small">Результаты прошлых сделок не гарантируют будущих</span></div></div>
+        <div class="scale__row"><div class="scale__k">Mono</div><div class="scale__v"><span class="t-mono">Кадастровый номер · 00:00:0000000:000</span></div></div>
+        <div class="scale__row"><div class="scale__k">Цифра</div><div class="scale__v"><span class="t-num">+688 000 ₽ · ×7,1</span></div></div>
+      </div>
+
+      <div class="measure rv">
+        <p>Земля — единственный актив, который нельзя произвести заново. Зато его можно проверить до последней координаты: категорию, вид разрешённого использования, зоны с особыми условиями, обременения. Поэтому я говорю не о доходности, а о проверке.</p>
+        <p class="note" style="margin-top:16px"><b>Мера строки.</b> Основной текст не шире 62 знаков, интерлиньяж 1,7. Разрядка заголовков от −0,02 до −0,035 em. Курсив — ровно одно слово во фразе, цветом хвои.</p>
+        <p class="note" style="margin-top:12px" id="fontNote"><b>Пара 1 — Alegreya + Golos Text.</b> Тёплая книжная антиква с живым характером плюс гротеск, нарисованный под русский язык. Рекомендую: даёт «тёплый» и «экспертный» одновременно и не выглядит шаблоном. Переключатель «Шрифт» в верхней панели меняет пару на всей странице.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ФОРМА ============================ -->
+<section class="section" id="shape">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">04 / Форма</span></div>
+      <div class="shead__ttl"><h2>Скругления <em>и наложения</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Изменение против версии 1.0.</b> Прямые углы отменены — во всех референсах владельца форма мягкая. Радиусы фиксированы четырьмя значениями, промежуточных не бывает. Тени только у листа PDF и всплывающего снимка.</p>
+      </div>
+    </div>
+
+    <div class="shape">
+      <div class="shape__card rv">
+        <div class="shape__demo"><div class="box-a"></div></div>
+        <h3>Карточки и панели</h3>
+        <p>Плитки, панели, блоки услуг, вкладки-контейнеры.</p>
+        <span class="shape__val">radius 14 px</span>
+      </div>
+      <div class="shape__card rv">
+        <div class="shape__demo"><div class="box-b"></div></div>
+        <h3>Изображения</h3>
+        <p>Любая фотозона и её плейсхолдер. Первый экран — без скругления, во всю ширину.</p>
+        <span class="shape__val">radius 16 px</span>
+      </div>
+      <div class="shape__card rv">
+        <div class="shape__demo"><span class="pill-demo">Записаться</span></div>
+        <h3>Кнопки</h3>
+        <p>Всегда пилюля. Три вида: залитая, контурная, призрачная.</p>
+        <span class="shape__val">radius 999 px</span>
+      </div>
+      <div class="shape__card rv">
+        <div class="shape__demo"><div class="fld-demo"></div><div class="ico-demo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#24462F" stroke-width="1.6" aria-hidden="true"><path d="M12 3 L20 8 V17 L12 21 L4 17 V8 Z"/></svg></div></div>
+        <h3>Поля и иконки</h3>
+        <p>Поля ввода 10 px. Иконка — линейная, в круге салата, только в шагах и фактах.</p>
+        <span class="shape__val">radius 10 px · круг 48 px</span>
+      </div>
+
+      <div class="overlap rv">
+        <div class="overlap__a"></div>
+        <div class="overlap__b"></div>
+      </div>
+
+      <div class="shape__card rv" style="grid-column:span 12">
+        <h3>Наложение снимков</h3>
+        <p>Второй кадр перекрывает первый на четверть и отбит рамкой цвета фона в 5&nbsp;px. Приём применяется не чаще двух раз на странице: в разделе «Кто я» и в «Как проходит работа».</p>
+        <p class="note" style="margin-top:12px"><b>Ограничение.</b> На ширине меньше 768&nbsp;px наложение распадается на две отдельные карточки — перекрытие на мобильном режет содержание.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ПРИЁМ ============================ -->
+<section class="section device" id="device">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">05 / Графика</span></div>
+      <div class="shead__ttl"><h2>Язык <em>межевого плана</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Взято из ваших схем.</b> Поворотная точка — залитый кружок с подписью рядом. Типы линий различаются по смыслу. Зоны накладываются полупрозрачными заливками. Номер лежит крупно и очень светло прямо на поле. Все номера в макетах обезличены.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="sheet rv">
+        <div class="sheet__wrap">
+          <svg class="sheet__plan" viewBox="0 0 620 330" role="img" aria-label="Схема расположения земельного участка">
+            <!-- зоны -->
+            <path class="pl-zone-a" d="M0 0 H620 V150 C520 176 430 120 330 148 C232 176 120 132 0 168 Z"/>
+            <path class="pl-zone-b" d="M470 0 H620 V206 C566 196 512 160 470 118 Z"/>
+            <path class="pl-zone-c" d="M96 214 L232 186 L288 268 L152 300 Z"/>
+            <!-- дорога -->
+            <path class="pl-road" d="M20 118 C140 150 260 232 340 300"/>
+            <path class="pl-road" d="M30 110 C150 142 270 224 350 292"/>
+            <!-- граница населённого пункта -->
+            <path class="pl-town" d="M540 4 C556 60 528 96 546 150 C562 198 540 244 556 300"/>
+            <!-- образуемая часть границы -->
+            <path class="pl-dash" d="M262 106 L214 62"/>
+            <!-- участок -->
+            <polygon class="pl-parcel" points="262,106 350,74 428,126 340,166"/>
+            <polygon class="pl-edge"   points="262,106 350,74 428,126 340,166"/>
+            <!-- поворотные точки -->
+            <circle class="pl-dot" cx="262" cy="106" r="3.2"/>
+            <circle class="pl-dot" cx="350" cy="74"  r="3.2"/>
+            <circle class="pl-dot" cx="428" cy="126" r="3.2"/>
+            <circle class="pl-dot" cx="340" cy="166" r="3.2"/>
+            <text class="pl-lbl" x="243" y="102">н1</text>
+            <text class="pl-lbl" x="345" y="66">н2</text>
+            <text class="pl-lbl" x="436" y="124">н3</text>
+            <text class="pl-lbl" x="332" y="182">н4</text>
+            <!-- обозначение образуемого участка -->
+            <rect class="pl-tagbox" x="316" y="112" width="46" height="15" />
+            <text class="pl-tag" x="325" y="123">ЗУ1</text>
+            <!-- крупный светлый номер и мелкие обозначения -->
+            <text class="pl-ghost" x="24" y="216">00:00:0000000</text>
+            <text class="pl-ghost pl-ghost--sm" x="96" y="258">:00</text>
+            <text class="pl-ghost pl-ghost--sm" x="470" y="240">:00</text>
+          </svg>
+          <div class="sheet__stamp">
+            Кадастровый квартал: 00:00:0000000<br>
+            Система координат: не указана
+          </div>
+        </div>
+        <div class="sheet__scale">Масштаб 1:1 000</div>
+      </div>
+
+      <div class="legend rv">
+        <h3>Условные обозначения</h3>
+        <span class="legend__sub">Набор линий и марок системы</span>
+
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><line x1="2" y1="8" x2="64" y2="8" stroke="#1B1F1C" stroke-width="1"/></svg>
+          <span><b>Граница участка.</b> Сплошная волосяная линия, тушь.</span>
+        </div>
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><line x1="2" y1="8" x2="64" y2="8" stroke="#5A625A" stroke-width="1" stroke-dasharray="5 4"/></svg>
+          <span><b>Образуемая часть границы.</b> Пунктир, тон полыни.</span>
+        </div>
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><line x1="2" y1="8" x2="64" y2="8" stroke="#2F5FA8" stroke-width="2.2" stroke-dasharray="9 6" stroke-linecap="round"/></svg>
+          <span><b>Граница населённого пункта.</b> Синий пунктир — единственное место, где синий работает линией.</span>
+        </div>
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><rect x="2" y="3" width="30" height="11" fill="#DCE7EE"/><rect x="26" y="3" width="30" height="11" fill="#C9D8CB" opacity=".8"/></svg>
+          <span><b>Зоны.</b> Полупрозрачные заливки внахлёст, 70–85 %.</span>
+        </div>
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><line x1="2" y1="11" x2="30" y2="5" stroke="#1B1F1C" stroke-width="1"/><line x1="38" y1="5" x2="64" y2="10" stroke="#1B1F1C" stroke-width="1"/><circle cx="34" cy="5" r="3.2" fill="#1B1F1C"/><text x="26" y="15" font-family="Georgia,serif" font-size="7" fill="#1B1F1C">н1</text></svg>
+          <span><b>Поворотная точка.</b> Залитый кружок 3–4 px с подписью рядом. Главная марка бренда.</span>
+        </div>
+        <div class="legend__row">
+          <svg viewBox="0 0 66 16" aria-hidden="true"><rect x="12" y="2" width="42" height="12" fill="#fff" stroke="#1B1F1C" stroke-width=".8"/><text x="20" y="11" font-family="Georgia,serif" font-size="7.5" fill="#1B1F1C">ЗУ1</text></svg>
+          <span><b>Обозначение объекта.</b> Подпись в тонкой рамке поверх схемы.</span>
+        </div>
+        <p class="note" style="margin-top:12px"><b>Как читать.</b> Легенда — не украшение раздела, а рабочий приём: тем же способом собирается блок «что входит в проверку участка». Слева образец, справа объяснение человеческим языком.</p>
+      </div>
+
+    </div>
+
+    <div class="dev3">
+      <div class="dev rv">
+        <div class="dev__stage">
+          <svg class="dline" viewBox="0 0 200 130" role="img" aria-label="Контур обводит фотографию">
+            <rect class="ph" x="26" y="20" width="140" height="92" rx="8"/>
+            <polygon class="edge" points="20,112 34,26 128,14 178,44 158,120"/>
+            <circle class="dot" cx="20"  cy="112" r="3"/>
+            <circle class="dot" cx="34"  cy="26"  r="3"/>
+            <circle class="dot" cx="128" cy="14"  r="3"/>
+            <circle class="dot" cx="178" cy="44"  r="3"/>
+            <circle class="dot" cx="158" cy="120" r="3"/>
+            <text class="cap" x="36" y="22">н2</text>
+            <text class="cap" x="182" y="42">н4</text>
+          </svg>
+        </div>
+        <h3>Обводка кадра</h3>
+        <p>Контур ложится поверх снимка участка и выходит за края. Фото становится объектом на плане, а не иллюстрацией.</p>
+      </div>
+
+      <div class="dev rv">
+        <div class="dev__stage">
+          <svg class="dline" viewBox="0 0 200 130" role="img" aria-label="Контур подчёркивает число">
+            <text class="num" x="18" y="62">+688 000 ₽</text>
+            <path class="accent" d="M18 76 L52 82 L104 72 L152 80 L182 74"/>
+            <text class="cap" x="18" y="104">ЧИСТАЯ ПРИБЫЛЬ · КЕЙС 01</text>
+          </svg>
+        </div>
+        <h3>Подчёркивание числа</h3>
+        <p>Ломаная глиной под суммой — вместо жирного шрифта и восклицательного знака. Единственный способ выделить цифру.</p>
+      </div>
+
+      <div class="dev rv">
+        <div class="dev__stage">
+          <svg class="dline" viewBox="0 0 200 130" role="img" aria-label="Контур как разделитель">
+            <line class="edge" x1="0" y1="42" x2="200" y2="42"/>
+            <path class="edge" d="M56 42 L74 26 L104 34 L128 20 L146 42"/>
+            <circle class="dot" cx="74"  cy="26" r="2.8"/>
+            <circle class="dot" cx="104" cy="34" r="2.8"/>
+            <circle class="dot" cx="128" cy="20" r="2.8"/>
+            <text class="cap" x="0" y="76">Разделитель секций</text>
+            <path class="town" d="M0 96 H200"/>
+            <text class="cap" x="0" y="118">Граница зоны — синий пунктир</text>
+          </svg>
+        </div>
+        <h3>Разделитель</h3>
+        <p>Горизонталь с одним изломом вместо декоративной волны. Синий пунктир отделяет блоки проверки — как граница зоны на схеме.</p>
+      </div>
+    </div>
+
+    <div class="oninv rv">
+      <div>
+        <span class="mono" style="color:rgba(255,255,255,.55)">Поверх фотографии</span>
+        <h3>Белая марка на снимке</h3>
+        <p>На тёмном кадре контур и точки становятся белыми, подписи — полупрозрачными. Толщина линии не меняется: 1&nbsp;px остаётся 1&nbsp;px, иначе марка начинает выглядеть нарисованной поверх, а не снятой вместе с землёй.</p>
+      </div>
+      <svg viewBox="0 0 300 150" role="img" aria-label="Контур с поворотными точками поверх фотографии">
+        <polygon class="edge" points="34,126 58,34 186,18 268,62 232,138"/>
+        <circle class="dot" cx="34"  cy="126" r="3.2"/>
+        <circle class="dot" cx="58"  cy="34"  r="3.2"/>
+        <circle class="dot" cx="186" cy="18"  r="3.2"/>
+        <circle class="dot" cx="268" cy="62"  r="3.2"/>
+        <circle class="dot" cx="232" cy="138" r="3.2"/>
+        <text class="lbl" x="18"  y="122">н1</text>
+        <text class="lbl" x="42"  y="30">н2</text>
+        <text class="lbl" x="182" y="12">н3</text>
+        <text class="lbl" x="276" y="60">н4</text>
+        <text class="lbl" x="238" y="152">н5</text>
+      </svg>
+    </div>
+
+    <div class="tex3">
+
+      <div class="tex rv">
+        <div class="tex__vis">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+            <path class="iso iso--far" d="M-10 128 C60 96 108 130 168 100 C226 72 262 96 310 74"/>
+            <path class="iso iso--far" d="M-10 110 C58 80 110 112 168 84 C228 56 264 78 310 58"/>
+            <path class="iso iso--mid" d="M-10 92 C56 64 112 94 168 68 C230 40 266 60 310 42"/>
+            <path class="iso iso--mid" d="M-10 74 C54 48 114 76 168 52 C232 24 268 42 310 26"/>
+            <path class="iso iso--near" d="M-10 56 C52 32 116 58 168 36 C234 8 270 24 310 10"/>
+          </svg>
+          <svg viewBox="0 0 300 150" style="position:absolute;inset:0" aria-hidden="true">
+            <circle r="2.6" cx="168" cy="52" fill="#4B534B"/>
+            <text class="iso-mark" x="176" y="49">142,6</text>
+          </svg>
+        </div>
+        <div class="tex__body">
+          <h3>Рельеф</h3>
+          <p>Горизонтали — вложенные кривые с отметкой высоты. Не «горы», а изолинии топосъёмки: показывают уклон, а уклон на участке решает, можно ли строить.</p>
+          <span class="tex__use">Фон крупных светлых блоков · 100 % ширины</span>
+        </div>
+      </div>
+
+      <div class="tex rv">
+        <div class="tex__vis">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+            <path class="riv-band" d="M-6 22 C70 54 92 96 158 108 C214 118 250 138 306 132"/>
+            <path class="riv-edge" d="M-6 6 C74 40 96 82 162 94 C218 104 252 124 306 118"/>
+            <path class="riv-edge" d="M-6 40 C66 70 88 112 154 124 C210 134 248 154 306 148"/>
+            <path class="riv" d="M-6 22 C70 54 92 96 158 108 C214 118 250 138 306 132"/>
+          </svg>
+        </div>
+        <div class="tex__body">
+          <h3>Вода и охранная зона</h3>
+          <p>Линия реки и полоса ограничения вдоль неё. Это не пейзаж, а ЗОУИТ: прибрежная защитная полоса режет участок и запрещает застройку — то, что вы проверяете первым делом.</p>
+          <span class="tex__use">Блоки про риски и проверку · разделитель</span>
+        </div>
+      </div>
+
+      <div class="tex rv">
+        <div class="tex__vis">
+          <svg viewBox="0 0 300 150" aria-hidden="true">
+            <defs>
+              <pattern id="hatch" width="9" height="9" patternTransform="rotate(38)" patternUnits="userSpaceOnUse">
+                <line class="fld" x1="0" y1="0" x2="0" y2="9"/>
+              </pattern>
+            </defs>
+            <rect x="26" y="20" width="150" height="106" fill="url(#hatch)"/>
+            <rect class="fld-box" x="26" y="20" width="150" height="106"/>
+            <rect x="150" y="46" width="124" height="70" fill="url(#hatch)" opacity=".55"/>
+            <rect class="fld-box" x="150" y="46" width="124" height="70" opacity=".45"/>
+          </svg>
+        </div>
+        <div class="tex__body">
+          <h3>Угодья</h3>
+          <p>Штриховка под углом — обозначение сельскохозяйственных угодий. Работает подложкой там, где речь о категории земель и переводе ВРИ.</p>
+          <span class="tex__use">Подложка блоков о категории · заливка карточек</span>
+        </div>
+      </div>
+
+      <div class="texdemo rv">
+        <svg class="texdemo__bg" viewBox="0 0 900 260" preserveAspectRatio="none" aria-hidden="true">
+          <path class="iso iso--far" d="M-10 214 C180 164 320 220 500 168 C680 116 790 158 910 122"/>
+          <path class="iso iso--far" d="M-10 186 C176 138 322 192 500 140 C684 88 792 128 910 94"/>
+          <path class="iso iso--mid" d="M-10 158 C172 112 324 164 500 112 C688 60 794 98 910 66"/>
+          <path class="iso iso--mid" d="M-10 130 C168 86 326 136 500 84 C692 32 796 68 910 38"/>
+          <path class="iso iso--near" d="M-10 102 C164 60 328 108 500 56 C696 4 798 38 910 10"/>
+        </svg>
+        <div class="texdemo__in">
+          <span class="mono">Так фактура работает на странице</span>
+          <h3>Уклон, вода и категория — <em>это и есть проверка</em></h3>
+          <p>Горизонтали лежат за текстом с непрозрачностью 35–80 % и не мешают читать. На экране допускается одна фактура, а не три сразу: рельеф под рассказом о подборе, вода — под блоком рисков, штриховка — под категорией земель.</p>
+          <p class="note" style="margin-top:14px"><b>Ограничения.</b> Фактура никогда не ложится под мелкий текст и под формы. На первом экране её нет — там фотография. Силуэтов гор в системе не существует: это пейзажная картинка из туристического лендинга, она врёт о продукте и противоречит запрету на лишний декор.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ ФОТО ============================ -->
+<section class="section" id="photo">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">06 / Съёмка</span></div>
+      <div class="shead__ttl"><h2>Своё, <em>а не сток</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Плейсхолдеры нарисованы средствами CSS.</b> Это задание фотографу и самой Ольге. Ни одного изображения из интернета в системе нет и не будет.</p>
+      </div>
+    </div>
+
+    <div class="photos">
+
+      <div class="ph ph--a rv">
+        <div class="ph__frame" style="border-radius:0">
+          <div class="pz-hero">
+            <div class="pz-hero__txt">
+              <h4>Земля, которая <em>остаётся</em></h4>
+              <p>Подбираю, проверяю и веду сделку до регистрации собственности. По всей России.</p>
+              <div class="pz-hero__bar"><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="ph__cap"><h3>Первый экран</h3><span class="mono">16:7 · во всю ширину</span></div>
+        <p class="ph__txt">Главный формат из ваших референсов. Реальный участок в реальную погоду, затемнение сверху и снизу, текст по нижнему краю. Пасмурно — можно: честнее золотого заката. Горизонт в верхней трети.</p>
+      </div>
+
+      <div class="ph ph--b rv">
+        <div class="ph__frame"><div class="pz-doc"><div class="pz-doc__sheet"><i></i><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="ph__cap"><h3>Документ на столе</h3><span class="mono">4:3</span></div>
+        <p class="ph__txt">Выписка, межевой план, договор. Съёмка сверху при дневном свете, без реквизита вроде очков и кофе. Персональные данные обязательно закрыты.</p>
+      </div>
+
+      <div class="ph ph--c rv">
+        <div class="ph__frame"><div class="pz-portrait"></div></div>
+        <div class="ph__cap"><h3>Портрет</h3><span class="mono">3:4</span></div>
+        <p class="ph__txt">Ольга на выезде или за документами. Спокойное лицо, взгляд в камеру, без широкой улыбки и скрещённых рук. Один портрет на весь сайт.</p>
+      </div>
+
+      <div class="ph ph--d rv">
+        <div class="ph__frame"><div class="pz-detail"></div></div>
+        <div class="ph__cap"><h3>Деталь</h3><span class="mono">16:9</span></div>
+        <p class="ph__txt">Межевой знак, колышек, край дороги, срез грунта. Крупно, с малой глубиной резкости. Такие кадры разбавляют текст лучше любых иконок.</p>
+      </div>
+
+      <div class="ph__no rv">
+        <span class="mono mono--clay">Не снимаем и не берём никогда</span>
+        <ul>
+          <li>Улыбающиеся люди в костюмах, рукопожатия, «команда профессионалов»</li>
+          <li>Золотые ключи, монеты, растущие графики, стрелки вверх</li>
+          <li>Рендеры коттеджей вместо реальных участков</li>
+          <li>Оранжево-бирюзовая цветокоррекция и вытянутая насыщенность</li>
+          <li>Любое изображение из фотобанка, даже «просто поле»</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ИНТЕРФЕЙС ============================ -->
+<section class="section" id="ui">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">07 / Элементы</span></div>
+      <div class="shead__ttl"><h2>Кнопки, плитки <em>и формы</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Одно залитое действие на экран.</b> Заливка хвоей — только «записаться на созвон». Контурная — второстепенные переходы. Призрачная — бот и чек-лист.</p>
+      </div>
+    </div>
+
+    <div class="ui-panel rv">
+      <h3>Кнопки</h3>
+      <div class="ui-row">
+        <button class="btn" type="button">Записаться на созвон</button>
+        <button class="btn btn--sec" type="button">Смотреть услуги</button>
+        <button class="btn btn--ghost" type="button">Получить чек-лист</button>
+        <button class="btn btn--sm" type="button">Оплатить проверку</button>
+      </div>
+    </div>
+
+    <div class="ui-panel rv">
+      <h3>Плитки с цифрами</h3>
+      <div class="tiles">
+        <div class="tile tile--land"><span>Вложено</span><b>112 000 ₽</b></div>
+        <div class="tile tile--land"><span>Продано</span><b>800 000 ₽</b></div>
+        <div class="tile tile--data"><span>Чистая прибыль</span><b class="clay">+688 000 ₽</b></div>
+        <div class="tile tile--data"><span>Рост капитала</span><b class="slate">×7,1</b></div>
+      </div>
+      <p class="note" style="margin-top:16px"><b>Правило числа.</b> Суммы моноширинным, с неразрывным пробелом в разрядах. Прибыль глиной, множитель грифелем. Рядом обязательна строка о том, что это личные сделки Ольги, и мелкий дисклеймер. <b>TODO:</b> добавить срок сделки в месяцах, когда данные будут.</p>
+    </div>
+
+    <div class="ui-panel rv">
+      <h3>Шаги работы</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step__ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#24462F" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16M4 12h10M4 19h13"/></svg></div>
+          <span class="step__n">01</span>
+          <h4>Созвон</h4>
+          <p>20–30 минут о вашей задаче. Бесплатно, без продажи в лоб.</p>
+        </div>
+        <div class="step">
+          <div class="step__ic step__ic--data"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#24384F" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></div>
+          <span class="step__n">02</span>
+          <h4>Смета до старта</h4>
+          <p>Прозрачный расчёт и порядок оплаты по этапам.</p>
+        </div>
+        <div class="step">
+          <div class="step__ic step__ic--data"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#24384F" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></div>
+          <span class="step__n">03</span>
+          <h4>Проверка и подбор</h4>
+          <p>Категория, ВРИ, зоны, обременения. Отчёт понятным языком.</p>
+        </div>
+        <div class="step">
+          <div class="step__ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#24462F" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3 L20 8 V17 L12 21 L4 17 V8 Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <span class="step__n">04</span>
+          <h4>Сделка</h4>
+          <p>Сопровождение до записи о собственности в реестре.</p>
+        </div>
+      </div>
+      <p class="note" style="margin-top:16px"><b>Отступление от версии 1.0.</b> Иконки были запрещены. Здесь они разрешены, потому что кодируют этап, а не украшают. Стиль строго линейный, толщина 1,6, круг салата 48&nbsp;px. Вне шагов и фактов иконок нет.</p>
+    </div>
+
+    <div class="ui-panel rv">
+      <h3>Форма заявки</h3>
+      <div class="field"><label for="f-name">Как к вам обращаться</label><input id="f-name" type="text" placeholder="Имя"></div>
+      <div class="field" style="margin-top:16px"><label for="f-contact">Телефон или Telegram</label><input id="f-contact" type="text" placeholder="+7 ··· или @никнейм"></div>
+      <div class="field" style="margin-top:16px"><label for="f-task">Задача в двух фразах</label><textarea id="f-task" placeholder="Что хотите купить и зачем"></textarea></div>
+      <label class="consent"><input type="checkbox"><span>Согласен на обработку персональных данных и ознакомлен с политикой конфиденциальности</span></label>
+      <div class="ui-row" style="margin-top:18px"><button class="btn" type="button">Отправить</button></div>
+      <p class="note" style="margin-top:16px"><b>Обязательно.</b> Чекбокс отдельный, не отмечен заранее, отправка без него заблокирована. Полей ровно три — каждое лишнее стоит заявок.</p>
+    </div>
+
+    <div class="ui-panel rv">
+      <h3>Строка прайса</h3>
+      <div class="pricerow"><b>Консультация «Земля под твою задачу»</b><span>бесплатно</span></div>
+      <div class="pricerow"><b>Проверка участка или лота</b><span>от 20 000 ₽</span></div>
+      <div class="pricerow"><b>Сопровождение на банкротных торгах</b><span>от 30 000 ₽ · 5–15 %</span></div>
+      <div class="pricerow"><b>Сопровождение сделки под ключ</b><span>от 35 000 ₽ · 3–10 %</span></div>
+      <p class="note" style="margin-top:16px"><b>Никаких «выгодно» и «всего».</b> Цена фактом, справа, моноширинным. Зачёркнутых старых цен в системе не существует.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ НОСИТЕЛИ ============================ -->
+<section class="section" id="media">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">08 / Носители</span></div>
+      <div class="shead__ttl"><h2>Одна система, <em>четыре формы</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Проверка на прочность.</b> Если убрать логотип, носитель всё равно опознаётся по хвое, бумаге, контуру и паре шрифтов. Переключайте вкладки.</p>
+      </div>
+    </div>
+
+    <div class="switch" id="switch" role="tablist" aria-label="Предпросмотр носителей">
+      <button type="button" role="tab" class="is-on" data-view="site" aria-selected="true">Сайт</button>
+      <button type="button" role="tab" data-view="pdf" aria-selected="false">PDF</button>
+      <button type="button" role="tab" data-view="email" aria-selected="false">Email</button>
+      <button type="button" role="tab" data-view="social" aria-selected="false">Соцсети</button>
+    </div>
+
+    <!-- САЙТ -->
+    <div class="stage is-on" data-panel="site" role="tabpanel">
+      <div class="stagegrid">
+        <div class="stagegrid__vis rv">
+          <div class="mk">
+            <div class="mk-site__bar">
+              <div class="mk-site__logo">
+                <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3,19 6,6 17,3 21,11 15,21" fill="none" stroke="#24462F" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <b>Terra Nova</b>
+              </div>
+              <div class="mk-site__nav"><i></i><i></i><i></i><i></i></div>
+              <div class="mk-site__cta"></div>
+            </div>
+
+            <div class="pz-hero" style="aspect-ratio:16/6.4">
+              <div class="pz-hero__txt">
+                <h4>Земля, которая <em>остаётся</em></h4>
+                <p>Проверяю документы и риски, подбираю участок под задачу, веду сделку до регистрации собственности.</p>
+                <div class="pz-hero__bar"><i></i><i></i></div>
+              </div>
+            </div>
+
+            <div class="mk-site__body">
+              <div class="mk-site__stats">
+                <div><span>Своих сделок</span><b>5</b></div>
+                <div><span>География</span><b>вся Россия</b></div>
+                <div><span>Статус</span><b>ИП · договор</b></div>
+                <div><span>Первый шаг</span><b>бесплатно</b></div>
+              </div>
+
+              <div class="mk-site__split">
+                <div>
+                  <span class="mono" style="font-size:9px">Как проходит работа</span>
+                  <h5>Смета до старта, оплата по этапам</h5>
+                  <p>Вы всегда знаете, что сделано и что дальше. Никаких скрытых доплат в середине сделки.</p>
+                </div>
+                <div style="position:relative;padding-bottom:14px">
+                  <div style="width:76%;aspect-ratio:4/3;border-radius:12px;background:linear-gradient(165deg,#8FA97A,#3B5B3C)"></div>
+                  <div style="position:absolute;right:0;bottom:0;width:46%;aspect-ratio:1/1.1;border-radius:12px;border:4px solid #fff;background:linear-gradient(150deg,#B7CBA0,#5C7F52)"></div>
+                </div>
+              </div>
+
+              <div class="mk-site__foot">
+                <div><i></i><i></i><i></i></div>
+                <div><i></i><i></i><i></i></div>
+                <div><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stagegrid__txt rv">
+          <h3>Сайт</h3>
+          <p class="t-small">Лендинг: крупный кадр, салатовые плитки, чередование текста и снимков, тёмный подвал.</p>
+          <ul class="rules-list">
+            <li>Первый экран — фото во всю ширину, текст поверх, без белой плашки</li>
+            <li>Ширина контента до 1320 px, поля от 64 px на десктопе</li>
+            <li>Плитки статистики чередуют салат и светлую поверхность</li>
+            <li>Наложение снимков — не чаще двух раз на странице</li>
+            <li>Подвал — плотный блок хвои с колонками и реквизитами ИП</li>
+            <li>Ни счётчиков, ни таймеров, ни всплывающих окон</li>
+            <li>На мобильном закреплённая кнопка внизу — единственный элемент поверх контента</li>
+          </ul>
+          <p class="note" style="margin-top:16px"><b>Проверка:</b> две залитые кнопки на одном экране — экран собран неверно.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF -->
+    <div class="stage" data-panel="pdf" role="tabpanel">
+      <div class="stagegrid">
+        <div class="stagegrid__vis rv">
+          <div class="mk-pdf">
+            <div class="mk-pdf__head">
+              <b>Terra Nova</b>
+              <span class="mono" style="font-size:9px">Отчёт о проверке · 04.09.2026</span>
+            </div>
+            <h4 class="mk-pdf__ttl">Проверка участка<br><em>перед покупкой</em></h4>
+            <span class="mono" style="font-size:9px">Кадастровый номер 00:00:0000000:000</span>
+
+            <svg viewBox="0 0 300 40" style="width:100%;height:auto;margin-top:12px" role="img" aria-label="Разделитель-контур">
+              <line x1="0" y1="26" x2="300" y2="26" stroke="#171B18" stroke-width="1"/>
+              <path d="M92 26 L118 8 L162 16 L196 4 L222 26" fill="none" stroke="#24462F" stroke-width="1.3" stroke-linejoin="round"/>
+              <circle cx="117.5" cy="7.5" r="2.9" fill="#24462F"/>
+              <circle cx="161.5" cy="15.5" r="2.9" fill="#24462F"/>
+              <circle cx="195.5" cy="3.5" r="2.9" fill="#24462F"/>
+            </svg>
+
+            <div class="mk-pdf__cols">
+              <div><i class="a"></i><i></i><i></i><i></i><i class="s"></i><i class="a"></i><i></i><i></i><i class="s"></i></div>
+              <div>
+                <div class="mk-pdf__tbl">
+                  <div><span>Категория</span><span>Земли нас. пунктов</span></div>
+                  <div><span>ВРИ</span><span>ИЖС</span></div>
+                  <div><span>Обременения</span><span>не выявлены</span></div>
+                  <div><span>Зоны ЗОУИТ</span><span>охранная зона ЛЭП</span></div>
+                  <div><span>Вывод</span><span>покупка возможна</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mk-pdf__foot">
+              <span>ИП Грошева О. · ИНН ···</span>
+              <span>Стр. 1 / 6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stagegrid__txt rv">
+          <h3>PDF</h3>
+          <p class="t-small">Отчёт о проверке, коммерческое предложение, чек-лист. A4, вертикально.</p>
+          <ul class="rules-list">
+            <li>Поля 20 мм со всех сторон, колонтитул отбит линией 1 px</li>
+            <li>Шапка: название слева, тип документа и дата справа, снизу линия 1,5 px тушью</li>
+            <li>Контур-разделитель — один раз, под заголовком первой страницы</li>
+            <li>Скруглений в печати нет, кроме поворотных точек контура</li>
+            <li>Таблицы только линиями, без заливки строк</li>
+            <li>В колонтитуле каждой страницы реквизиты ИП и нумерация «стр. N / N»</li>
+            <li>Сетка на печати усиливается до 6 %, иначе исчезает</li>
+          </ul>
+          <p class="note" style="margin-top:16px"><b>TODO:</b> ИНН и ОГРНИП подставляются из реквизитов владельца, в макетах остаются многоточием.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="stage" data-panel="email" role="tabpanel">
+      <div class="stagegrid">
+        <div class="stagegrid__vis rv">
+          <div class="mk-mail">
+            <div class="mk-mail__head">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3,19 6,6 17,3 21,11 15,21" fill="none" stroke="#24462F" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <b>Terra Nova</b>
+            </div>
+            <div class="mk-mail__body">
+              <span class="mono" style="font-size:9.5px">Дайджест лотов · выпуск 12</span>
+              <h4>Три участка недели и один, <em>от которого я отказалась</em></h4>
+              <p>В подборке два лота с торгов и один прямой продавец. По каждому написала, что проверила и где риск. Четвёртый разбирать не стала: охранная зона режет половину площади.</p>
+              <a class="mk-mail__btn" href="#media">Читать разбор</a>
+            </div>
+            <div class="mk-mail__foot">
+              ИП Грошева О. · ИНН ···<br>
+              Вы получили письмо, потому что подписались на дайджест Terra Nova.<br>
+              Отписаться · Политика конфиденциальности
+            </div>
+          </div>
+        </div>
+
+        <div class="stagegrid__txt rv">
+          <h3>Email</h3>
+          <p class="t-small">Дайджест лотов и письма после заявки. Вёрстка простая — письма читают в десятках клиентов.</p>
+          <ul class="rules-list">
+            <li>Ширина 600 px, одна колонка, поля 22 px</li>
+            <li>Кнопка-пилюля заливкой хвои, ширина по содержанию</li>
+            <li>Шрифты с запасными: Georgia вместо Literata, Arial вместо Plex</li>
+            <li>Скругления задаются картинкой-подложкой либо опускаются — часть клиентов их не поддерживает</li>
+            <li>Никаких фоновых изображений и таблиц глубже двух уровней</li>
+            <li>Подвал обязателен: реквизиты, причина письма, отписка, ссылка на политику</li>
+          </ul>
+          <p class="note" style="margin-top:16px"><b>Отступление от системы.</b> Единственный носитель без контура — он рассыпается в почтовых клиентах. Опознаваемость держат хвоя, шрифтовая пара и подпись.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- СОЦСЕТИ -->
+    <div class="stage" data-panel="social" role="tabpanel">
+      <div class="stagegrid">
+        <div class="stagegrid__vis rv">
+          <div class="mk-social">
+            <div class="mk-post">
+              <span class="mono" style="font-size:9px">Разбор лота · 04.09</span>
+              <h4>Дешевле рынка втрое. <em>Так не бывает</em></h4>
+              <div class="mk-post__sig">
+                <span>terra nova · земля</span>
+                <svg class="mk-post__art" viewBox="0 0 74 34" aria-hidden="true">
+                  <polyline points="2,30 16,8 44,3 62,14 72,31" fill="none" stroke="#24462F" stroke-width="1" stroke-linejoin="round"/>
+                  <circle cx="16" cy="8"  r="2.6" fill="#24462F"/>
+                  <circle cx="44" cy="3"  r="2.6" fill="#24462F"/>
+                  <circle cx="62" cy="14" r="2.6" fill="#24462F"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="mk-story">
+              <span class="mono mono--paper" style="font-size:9px">Кейс 01</span>
+              <h4>Переуступка прав</h4>
+              <div class="mk-story__foot">
+                <svg class="mk-story__art" viewBox="0 0 178 30" aria-hidden="true">
+                  <polyline points="2,26 30,7 78,14 122,4 176,22" fill="none" stroke="#F6F3EC" stroke-width="1" stroke-linejoin="round" opacity=".8"/>
+                  <circle cx="30"  cy="7"  r="2.6" fill="#F6F3EC"/>
+                  <circle cx="78"  cy="14" r="2.6" fill="#F6F3EC"/>
+                  <circle cx="122" cy="4"  r="2.6" fill="#F6F3EC"/>
+                </svg>
+                <div class="mk-story__num"><b>Чистая прибыль</b>+688&nbsp;000&nbsp;₽</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stagegrid__txt rv">
+          <h3>Соцсети</h3>
+          <p class="t-small">Пост 1:1 для ленты и история 9:16 для канала. Обложка — это фраза, а не картинка.</p>
+          <ul class="rules-list">
+            <li>Крупная фраза Literata не длиннее трёх строк</li>
+            <li>Курсивом — одно слово или короткая связка, никогда вся строка</li>
+            <li>Контур уходит за край композиции, прозрачность 35–50 %</li>
+            <li>Подпись «terra nova · земля» в нижнем углу моноширинным</li>
+            <li>Тёмная история на фото — под цифру кейса, светлый пост — под мысль</li>
+            <li>Восклицательных знаков, эмодзи и стрелок в обложках нет</li>
+          </ul>
+          <p class="note" style="margin-top:16px"><b>Проверка:</b> обложка должна читаться с превью 150 px. Не читается — фраза длинная.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ ЗНАК ============================ -->
+<section class="section" id="mark">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">09 / Знак</span></div>
+      <div class="shead__ttl"><h2>Три манеры, <em>а не три картинки</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Что было не так.</b> Прошлые знаки я рисовала тонкой линией в 1,5&nbsp;px — это дефолтная манера любого ИИ-конструктора, и содержание её не спасает. Ниже три принципиально разных способа исполнения. Выбираем сначала манеру, потом внутри неё доводим форму.</p>
+      </div>
+    </div>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <filter id="ink2" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="n2"/>
+          <feDisplacementMap in="SourceGraphic" in2="n2" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <pattern id="engrA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(42)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#24462F" stroke-width="1.5"/>
+        </pattern>
+        <pattern id="engrB" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(42)">
+          <line x1="0" y1="0" x2="0" y2="4" stroke="#24462F" stroke-width="1.2"/>
+        </pattern>
+        <pattern id="engrC" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#24462F" stroke-width="1"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <div class="regs">
+
+      <!-- ------------ РЕГИСТР 1 ------------ -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Манера 1</span>
+            <h3>Оттиск</h3>
+          </div>
+          <p>Знак как штамп на документе: плотная форма, буквы внутри рамки, край слегка рваный — краска легла неровно. Ни одной тонкой линии-иконки. Читается мгновенно и не путается ни с чем: так выглядят отметки на бумагах, которые вы проверяете.</p>
+        </div>
+
+        <div class="reg__row">
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <svg viewBox="0 0 230 110" role="img" aria-label="Прямоугольный штамп Terra Nova">
+                <g filter="url(#ink)">
+                  <rect x="5" y="5" width="220" height="100" fill="none" stroke="#24462F" stroke-width="5"/>
+                  <rect x="14" y="14" width="202" height="82" fill="none" stroke="#24462F" stroke-width="1.6"/>
+                  <text class="st-big" x="115" y="56" text-anchor="middle">TERRA</text>
+                  <text class="st-big" x="115" y="82" text-anchor="middle">NOVA</text>
+                </g>
+              </svg>
+            </div>
+            <div class="mkcard__b">
+              <h4>1А. Прямоугольный штамп</h4>
+              <p>Двойная рамка, имя в две строки вразрядку. Самый «канцелярский» и самый узнаваемый.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><svg viewBox="0 0 230 110" aria-hidden="true"><g filter="url(#ink)"><rect x="5" y="5" width="220" height="100" fill="none" stroke="#24462F" stroke-width="9"/><text class="st-big" x="115" y="72" text-anchor="middle" style="font-size:52px">TN</text></g></svg></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><svg viewBox="0 0 230 110" aria-hidden="true"><g filter="url(#ink)"><rect x="5" y="5" width="220" height="100" fill="none" stroke="#F6F3EC" stroke-width="5"/><rect x="14" y="14" width="202" height="82" fill="none" stroke="#F6F3EC" stroke-width="1.6"/><text class="st-big st-big--inv" x="115" y="56" text-anchor="middle">TERRA</text><text class="st-big st-big--inv" x="115" y="82" text-anchor="middle">NOVA</text></g></svg></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <svg viewBox="0 0 150 150" role="img" aria-label="Круглая печать Terra Nova">
+                <defs>
+                  <path id="arcT" d="M25 75 A50 50 0 0 1 125 75"/>
+                  <path id="arcB" d="M28 75 A47 47 0 0 0 122 75"/>
+                </defs>
+                <g filter="url(#ink2)">
+                  <circle cx="75" cy="75" r="70" fill="none" stroke="#24462F" stroke-width="4.5"/>
+                  <circle cx="75" cy="75" r="60" fill="none" stroke="#24462F" stroke-width="1.4"/>
+                  <text class="st-arc"><textPath href="#arcT" startOffset="50%" text-anchor="middle">TERRA NOVA</textPath></text>
+                  <text class="st-arc st-arc--sm"><textPath href="#arcB" startOffset="50%" text-anchor="middle">ЗЕМЕЛЬНЫЙ КАПИТАЛ</textPath></text>
+                  <text class="st-mono" x="75" y="70" text-anchor="middle">TN</text>
+                  <line x1="52" y1="86" x2="98" y2="86" stroke="#24462F" stroke-width="1.6"/>
+                  <text class="st-tiny" x="75" y="100" text-anchor="middle">н1</text>
+                </g>
+              </svg>
+            </div>
+            <div class="mkcard__b">
+              <h4>1Б. Круглая печать</h4>
+              <p>Текст по окружности, монограмма в центре, поворотная точка под чертой. Хорош для PDF и водяного знака на схемах.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><svg viewBox="0 0 150 150" aria-hidden="true"><g filter="url(#ink2)"><circle cx="75" cy="75" r="68" fill="none" stroke="#24462F" stroke-width="10"/><text class="st-mono" x="75" y="95" text-anchor="middle" style="font-size:64px">TN</text></g></svg></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><svg viewBox="0 0 150 150" aria-hidden="true"><g filter="url(#ink2)"><circle cx="75" cy="75" r="70" fill="none" stroke="#F6F3EC" stroke-width="4.5"/><circle cx="75" cy="75" r="60" fill="none" stroke="#F6F3EC" stroke-width="1.4"/><text class="st-mono st-big--inv" x="75" y="88" text-anchor="middle">TN</text></g></svg></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------ РЕГИСТР 2 ------------ -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Манера 2</span>
+            <h3>Гравюра межевания</h3>
+          </div>
+          <p>Плотная штриховка вместо линии — как на планах Генерального межевания XVIII века. Форма набирает вес и фактуру, знак выглядит старым и основательным. Требует крупного размера: в 16&nbsp;px штриховка сливается в пятно, поэтому нужна упрощённая версия для вкладки.</p>
+        </div>
+
+        <div class="reg__row">
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Участок в гравюрной штриховке">
+                <polygon points="18,128 34,30 128,14 186,58 158,140" fill="url(#engrA)"/>
+                <polygon points="18,128 34,30 128,14 186,58 158,140" fill="none" stroke="#24462F" stroke-width="2.6"/>
+                <polygon points="60,96 104,44 150,74 124,116" fill="url(#engrB)" opacity=".9"/>
+                <polygon points="60,96 104,44 150,74 124,116" fill="none" stroke="#24462F" stroke-width="1.6"/>
+                <circle cx="34" cy="30" r="4.5" fill="#24462F"/>
+                <circle cx="186" cy="58" r="4.5" fill="#24462F"/>
+              </svg>
+            </div>
+            <div class="mkcard__b">
+              <h4>2А. Участок в штриховке</h4>
+              <p>Внешний контур редкой штриховкой, внутренний — плотной. Так на старых планах различали угодья.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><svg viewBox="0 0 200 150" aria-hidden="true"><polygon points="18,128 34,30 128,14 186,58 158,140" fill="#24462F"/></svg></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><svg viewBox="0 0 200 150" aria-hidden="true"><polygon points="18,128 34,30 128,14 186,58 158,140" fill="none" stroke="#F6F3EC" stroke-width="2.6"/><polygon points="60,96 104,44 150,74 124,116" fill="#F6F3EC" opacity=".28"/><circle cx="34" cy="30" r="4.5" fill="#F6F3EC"/><circle cx="186" cy="58" r="4.5" fill="#F6F3EC"/></svg></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Картуш с монограммой в гравюрной манере">
+                <rect x="24" y="24" width="152" height="102" fill="url(#engrC)" opacity=".55"/>
+                <rect x="24" y="24" width="152" height="102" fill="none" stroke="#24462F" stroke-width="3"/>
+                <rect x="34" y="34" width="132" height="82" fill="#FBF9F5"/>
+                <rect x="34" y="34" width="132" height="82" fill="none" stroke="#24462F" stroke-width="1.2"/>
+                <text class="st-big" x="100" y="82" text-anchor="middle" style="font-size:40px">TN</text>
+                <text class="st-tiny" x="100" y="104" text-anchor="middle">ЗЕМЕЛЬНЫЙ КАПИТАЛ</text>
+              </svg>
+            </div>
+            <div class="mkcard__b">
+              <h4>2Б. Картуш</h4>
+              <p>Монограмма в двойной рамке на штрихованном поле — как заголовочная плашка на старинном плане.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="24" y="24" width="152" height="102" fill="none" stroke="#24462F" stroke-width="12"/><text class="st-big" x="100" y="96" text-anchor="middle" style="font-size:58px">TN</text></svg></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="24" y="24" width="152" height="102" fill="none" stroke="#F6F3EC" stroke-width="3"/><rect x="34" y="34" width="132" height="82" fill="none" stroke="#F6F3EC" stroke-width="1.2" opacity=".6"/><text class="st-big st-big--inv" x="100" y="82" text-anchor="middle" style="font-size:40px">TN</text></svg></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------ РЕГИСТР 3 ------------ -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Манера 3</span>
+            <h3>Только буквы</h3>
+          </div>
+          <p>Знака-картинки нет вообще. Работает набор: имя вразрядку между линейками, монограмма-лигатура, подпись мелким кеглем. Самый строгий и самый «дорогой» путь — так подписываются бюро и издательства. Минус: во вкладке браузера и в аватарке канала нужен отдельный компактный вариант.</p>
+        </div>
+
+        <div class="reg__row">
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <div class="wordmark">
+                <span class="wordmark__rule"></span>
+                <b>TERRA NOVA</b>
+                <span class="wordmark__rule"></span>
+                <i>земельный капитал</i>
+              </div>
+            </div>
+            <div class="mkcard__b">
+              <h4>3А. Наборная марка</h4>
+              <p>Имя антиквой вразрядку, две линейки, подпись строчными. Ничего лишнего вообще.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><svg viewBox="0 0 100 100" aria-hidden="true"><text class="st-big" x="50" y="72" text-anchor="middle" style="font-size:62px">TN</text></svg></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><div class="wordmark wordmark--inv"><span class="wordmark__rule"></span><b>TERRA NOVA</b><span class="wordmark__rule"></span><i>земельный капитал</i></div></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="mkcard">
+            <div class="mkcard__stage">
+              <div class="ligature"><span>T</span><span>N</span></div>
+            </div>
+            <div class="mkcard__b">
+              <h4>3Б. Лигатура TN</h4>
+              <p>Две литеры, у которых перекладина T переходит в стойку N. Крупная антиква без обводок и рамок.</p>
+            </div>
+            <div class="mkcard__try">
+              <figure><span class="tile16"><div class="ligature ligature--sm"><span>T</span><span>N</span></div></span><figcaption>16 px</figcaption></figure>
+              <figure><span class="tile-dark"><div class="ligature ligature--inv"><span>T</span><span>N</span></div></span><figcaption>на тёмном</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="lockups rv">
+      <div class="lockup">
+        <svg viewBox="0 0 230 110" style="width:64px" aria-hidden="true"><g filter="url(#ink)"><rect x="5" y="5" width="220" height="100" fill="none" stroke="#24462F" stroke-width="5"/><text class="st-big" x="115" y="72" text-anchor="middle" style="font-size:52px">TN</text></g></svg>
+        <span class="lockup__txt"><b>Terra Nova</b><span>Земельный капитал</span></span>
+      </div>
+      <div class="lockup lockup--dark">
+        <svg viewBox="0 0 230 110" style="width:64px" aria-hidden="true"><g filter="url(#ink)"><rect x="5" y="5" width="220" height="100" fill="none" stroke="#F6F3EC" stroke-width="5"/><text class="st-big st-big--inv" x="115" y="72" text-anchor="middle" style="font-size:52px">TN</text></g></svg>
+        <span class="lockup__txt"><b>Terra Nova</b><span>Земельный капитал</span></span>
+      </div>
+      <p class="note"><b>Как выбирать.</b> Оттиск — если хотите, чтобы бренд звучал как документ и мгновенно узнавался. Гравюра — если важна основательность и старина, но готовы держать отдельную упрощённую версию для мелких размеров. Только буквы — если бренд строится на строгости и вы не хотите картинки в принципе. Скажите номер — доведу выбранный до конца и поставлю во все макеты.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ СИМВОЛЫ ============================ -->
+<section class="section" id="symbols">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">10 / Символы</span></div>
+      <div class="shead__ttl"><h2>Чем помечать <em>пункты и услуги</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Иконки в бледных кружках убраны.</b> Это дефолт нейросетевых макетов, и никакое содержание его не спасает. Ниже три способа обойтись без них. Выбранный должен совпасть по манере со знаком: штампу подходит штамп, гравюре — фрагмент чертежа, наборной марке — чистая типографика.</p>
+      </div>
+    </div>
+
+    <div class="regs">
+
+      <!-- Способ 1 -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Способ 1</span>
+            <h3>Только типографика</h3>
+          </div>
+          <p>Никаких значков. Пункт держат крупный номер антиквой и линейка. Работает всегда, не устаревает, не требует рисования новых иконок под каждую новую услугу.</p>
+        </div>
+
+        <div class="numlist">
+          <div class="numlist__i"><b>01</b><h4>Созвон</h4><p>20–30 минут о вашей задаче. Бесплатно, без продажи в лоб.</p></div>
+          <div class="numlist__i"><b>02</b><h4>Смета до старта</h4><p>Прозрачный расчёт и порядок оплаты по этапам.</p></div>
+          <div class="numlist__i"><b>03</b><h4>Проверка и подбор</h4><p>Категория, ВРИ, зоны, обременения. Отчёт понятным языком.</p></div>
+          <div class="numlist__i"><b>04</b><h4>Сделка</h4><p>Сопровождение до записи о собственности в реестре.</p></div>
+        </div>
+      </div>
+
+      <!-- Способ 2 -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Способ 2</span>
+            <h3>Штампы-марки</h3>
+          </div>
+          <p>Вместо картинки — короткая метка в рамке, как отметка на документе. Читается сразу и без расшифровки: специалист узнаёт аббревиатуру, а новичок видит подпись рядом.</p>
+        </div>
+
+        <div class="stamps">
+          <div class="stampi"><span class="stampi__m">ЕГРН</span><b>Выписка из реестра</b><i>что записано о участке</i></div>
+          <div class="stampi"><span class="stampi__m">ВРИ</span><b>Вид использования</b><i>что можно строить</i></div>
+          <div class="stampi"><span class="stampi__m stampi__m--data">ЗОУИТ</span><b>Зона с ограничениями</b><i>охранные полосы</i></div>
+          <div class="stampi"><span class="stampi__m stampi__m--data">ОБРЕМ.</span><b>Обременение</b><i>залог, аренда, сервитут</i></div>
+          <div class="stampi"><span class="stampi__m">ТОРГИ</span><b>Банкротные лоты</b><i>сопровождение на площадке</i></div>
+          <div class="stampi"><span class="stampi__m stampi__m--clay">ЗУ1</span><b>Образуемый участок</b><i>формирование из муниципальной земли</i></div>
+        </div>
+      </div>
+
+      <!-- Способ 3 -->
+      <div class="reg rv">
+        <div class="reg__head">
+          <div>
+            <span class="mono">Способ 3</span>
+            <h3>Фрагменты чертежа</h3>
+          </div>
+          <p>Помечаем пункт куском настоящей схемы — так же, как устроены условные обозначения в ваших документах. Слева образец линии или заливки, справа человеческое объяснение. Это единственный способ, который прямо цитирует вашу профессию.</p>
+        </div>
+
+        <div class="frags">
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><polyline points="4,34 26,10 62,18 86,6" fill="none" stroke="#171B18" stroke-width="1.2"/><circle cx="26" cy="10" r="3.4" fill="#171B18"/><text x="30" y="8" class="fr-lbl">н2</text></svg>
+            <div><b>Граница закреплена</b><i>поворотные точки вынесены в натуру</i></div>
+          </div>
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><polygon points="8,34 14,10 62,6 82,20 70,36" fill="#C6CCC4" opacity=".8"/><polygon points="8,34 14,10 62,6 82,20 70,36" fill="none" stroke="#171B18" stroke-width="1.2"/></svg>
+            <div><b>Участок в реестре</b><i>стоит на кадастровом учёте</i></div>
+          </div>
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><polyline points="4,30 20,12 54,26 86,10" fill="none" stroke="#5A625A" stroke-width="1.2" stroke-dasharray="5 4"/></svg>
+            <div><b>Образуемая граница</b><i>участок ещё формируется</i></div>
+          </div>
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><path d="M2 12 C24 20 30 32 52 34 C70 35 78 30 88 30" fill="none" stroke="#C9DCE6" stroke-width="13" opacity=".7" stroke-linecap="round"/><path d="M2 12 C24 20 30 32 52 34 C70 35 78 30 88 30" fill="none" stroke="#2F5FA8" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <div><b>Водоохранная зона</b><i>строить в полосе нельзя</i></div>
+          </div>
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><rect x="6" y="8" width="78" height="26" fill="url(#engrC)" opacity=".5"/><rect x="6" y="8" width="78" height="26" fill="none" stroke="#171B18" stroke-width="1.2"/></svg>
+            <div><b>Сельхозугодья</b><i>категория ограничивает застройку</i></div>
+          </div>
+          <div class="frag">
+            <svg viewBox="0 0 90 40" aria-hidden="true"><polygon points="6,32 12,10 48,6 56,32" fill="none" stroke="#171B18" stroke-width="1.2"/><polygon points="48,6 84,4 86,30 56,32" fill="none" stroke="#171B18" stroke-width="1.2" stroke-dasharray="4 3"/><circle cx="48" cy="6" r="3.2" fill="#171B18"/></svg>
+            <div><b>Прирезка</b><i>увеличение площади к существующему</i></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="note rv" style="margin-top:clamp(20px,2.8vw,30px)"><b>Совместимость.</b> Способы 1 и 3 сочетаются между собой: номер держит шаг, фрагмент чертежа помечает пункт проверки. Способ 2 самодостаточен и не смешивается с остальными — марки начинают спорить с номерами. Ни один способ не ставится рядом с заголовком и внутри кнопки.</p>
+  </div>
+</section>
+
+<!-- ============================ ПРАВИЛА ============================ -->
+<section class="section" id="rules">
+  <div class="inner">
+    <div class="shead rv">
+      <div class="shead__idx"><span class="mono">11 / Свод</span></div>
+      <div class="shead__ttl"><h2>Что можно <em>и чего нельзя</em></h2></div>
+      <div class="shead__note">
+        <p class="note"><b>Свод действует на все последующие макеты проекта.</b> Отступление допускается только вслух: назвать правило, объяснить причину, предложить замену.</p>
+      </div>
+    </div>
+
+    <div class="rules">
+
+      <div class="rules__col rules__col--a rv">
+        <h3>Правила системы</h3>
+        <ol>
+          <li><b>Бумага, а не белый.</b> Фон страницы #F6F3EC, белый — только карточки и лист PDF.</li>
+          <li><b>Четыре радиуса.</b> 14 карточка, 16 изображение, 10 поле, пилюля кнопка. Промежуточных нет.</li>
+          <li><b>Первый экран — фото во всю ширину.</b> Текст поверх снимка, без белой подложки.</li>
+          <li><b>Одно залитое действие на экран.</b> Остальные кнопки контурные или призрачные.</li>
+          <li><b>Цифры моноширинным.</b> Прибыль глиной, множители грифелем, рядом дисклеймер.</li>
+          <li><b>Две семьи цвета.</b> Зелёная — земля и действие, синяя — данные и проверка. Смешивать в одном блоке нельзя.</li>
+          <li><b>Синий не кнопка и не текст.</b> Вода — только заливки, иконки и линии; синий текст — только грифель.</li>
+          <li><b>Контур в трёх ролях.</b> Обводка кадра, подчёркивание числа, разделитель.</li>
+          <li><b>Иконки только несущие.</b> Линейные, в круге салата, в шагах и фактах. Украшать ими нельзя.</li>
+          <li><b>Заголовок серифом, текст гротеском.</b> Обратный порядок ломает характер бренда.</li>
+          <li><b>Курсив — одно слово.</b> Цветом хвои, максимум один раз на заголовок.</li>
+          <li><b>Согласие отдельным чекбоксом.</b> Не отмечен заранее, отправка без него заблокирована.</li>
+        </ol>
+      </div>
+
+      <div class="rules__col rules__col--b rv">
+        <h3>Тон и слова</h3>
+        <ol>
+          <li><b>Говорим фактом.</b> «Проверка участка от 20 000 ₽», а не «выгодное предложение».</li>
+          <li><b>Не обещаем доходность.</b> Показываем прошлые сделки и всегда помечаем их как личные.</li>
+          <li><b>Объясняем термин при первом появлении.</b> ВРИ, ЗОУИТ, обременение — простыми словами в скобках.</li>
+          <li><b>Отказ — часть экспертизы.</b> Блок «с чем не работаю» обязателен и не сокращается.</li>
+          <li><b>Никакого давления.</b> Ни «осталось два места», ни «успейте», ни обратного отсчёта.</li>
+          <li><b>Заголовок произносим вслух.</b> Неловко сказать на созвоне — не идёт в макет.</li>
+        </ol>
+
+        <div class="bans">
+          <span class="mono mono--clay">Запрещено в системе</span>
+          <div class="bans__wrap">
+            <span class="ban">таймер обратного отсчёта</span>
+            <span class="ban">золотой градиент</span>
+            <span class="ban">стоковые улыбки</span>
+            <span class="ban">«заработай на земле»</span>
+            <span class="ban">всплывающее окно</span>
+            <span class="ban">эмодзи в заголовке</span>
+            <span class="ban">неоновые акценты</span>
+            <span class="ban">зачёркнутая старая цена</span>
+            <span class="ban">параллакс</span>
+            <span class="ban">карусель направлений</span>
+            <span class="ban">иконки-украшения</span>
+            <span class="ban">рукописный шрифт</span>
+            <span class="ban">рваная бумага</span>
+            <span class="ban">«осталось 2 места»</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <span class="mono">Terra Nova · визуальная система «Кадастровый лист» · v1.1</span>
+    <span class="mono">Мудборд · сентябрь 2026 · до текстов и вёрстки сайта</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Скрытие технических пояснений */
+  var notesBtn = document.getElementById('notesBtn');
+  notesBtn.addEventListener('click', function () {
+    var off = document.body.classList.toggle('notes-off');
+    notesBtn.setAttribute('aria-pressed', off ? 'false' : 'true');
+  });
+
+  /* Переключатель шрифтовых пар */
+  var fontSel = document.getElementById('fontSel');
+  var specSerif = document.getElementById('specSerif');
+  var specSerifSet = document.getElementById('specSerifSet');
+  var specSans = document.getElementById('specSans');
+  var fontNote = document.getElementById('fontNote');
+
+  var PAIRS = {
+    '1': {
+      serif: 'Alegreya',
+      sans: 'Golos Text',
+      set: 'Заголовки, крупные фразы, названия услуг, курсивный акцент.<br><span>400 · 500 · 600 · 400/500 italic</span>',
+      note: '<b>Пара 1 — Alegreya + Golos Text.</b> Тёплая книжная антиква с живым характером плюс гротеск, нарисованный под русский язык. Рекомендую: даёт «тёплый» и «экспертный» одновременно и не выглядит шаблоном.'
+    },
+    '2': {
+      serif: 'Prata',
+      sans: 'Golos Text',
+      set: 'Только заголовки. Одно начертание, курсива нет — акцент делается цветом.<br><span>400</span>',
+      note: '<b>Пара 2 — Prata + Golos Text.</b> Контрастная антиква, строгая и премиальная. Холоднее первой пары и жёстче в наборе: у Prata одно начертание и нет курсива, поэтому правило «одно слово курсивом» здесь заменяется на «одно слово цветом».'
+    },
+    '3': {
+      serif: 'Golos Text',
+      sans: 'Golos Text',
+      set: 'Заголовки тем же гротеском, плотным начертанием — как в ваших референсах WANDER и ПУТЬ.<br><span>600 · 700</span>',
+      note: '<b>Пара 3 — только Golos Text.</b> Современно и ближе всего к WANDER и ПУТЬ. Минус: уходит книжная теплота, бренд звучит как сервис, а не как человек. Беру, если хотите максимально «сегодняшний» вид.'
+    },
+    '4': {
+      serif: 'PT Serif',
+      sans: 'PT Sans',
+      set: 'Заголовки и подписи поворотных точек. Курсив есть.<br><span>400 · 700 · 400 italic</span>',
+      note: '<b>Пара 4 — PT Serif + PT Sans.</b> Шрифты «Паратайпа», сделанные по государственной программе для официальных документов России. Тем же набором печатают бумаги, которые вы проверяете. Максимально «своё» для темы, в нейросетевых макетах не встречается вообще. Риск: строгость на грани сухости.'
+    },
+    '5': {
+      serif: 'Spectral',
+      sans: 'Commissioner',
+      set: 'Издательская антиква с острыми засечками. Заголовки и цитаты.<br><span>300 · 400 · 500 · 600 · 400 italic</span>',
+      note: '<b>Пара 5 — Spectral + Commissioner.</b> Голос качественного издания: острая редакционная антиква плюс современный нейтральный гротеск с широкой кириллицей. Звучит как аналитика и разбор, а не как продажа. Самая «взрослая» из шести.'
+    },
+    '6': {
+      serif: 'Cormorant Garamond',
+      sans: 'Jost',
+      set: 'Высококонтрастная антиква. Только крупный кегль — мелкий рассыпается.<br><span>400 · 500 · 600 · 400 italic</span>',
+      note: '<b>Пара 6 — Cormorant Garamond + Jost.</b> Тонкая контрастная антиква и геометрический гротеск в духе двадцатых. Самая дизайнерская и самая дорогая на вид. Риск: холодновата для «тёплого» и требует крупных кеглей — в мелком тексте Cormorant теряется.'
+    }
+  };
+
+  function applyFont(v) {
+    document.documentElement.setAttribute('data-font', v);
+    var p = PAIRS[v];
+    if (!p) return;
+    if (specSerif) specSerif.textContent = p.serif;
+    if (specSans) specSans.textContent = p.sans;
+    if (specSerifSet) specSerifSet.innerHTML = p.set;
+    if (fontNote) fontNote.innerHTML = p.note + ' Переключатель «Шрифт» в верхней панели меняет пару на всей странице.';
+    try { localStorage.setItem('tn-font', v); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('tn-font'); } catch (e) {}
+  if (saved && PAIRS[saved]) { fontSel.value = saved; applyFont(saved); }
+  else { applyFont('1'); }
+
+  fontSel.addEventListener('change', function () { applyFont(fontSel.value); });
+
+  /* Переключатель носителей */
+  var sw = document.getElementById('switch');
+  var tabs = sw.querySelectorAll('button');
+  var stages = document.querySelectorAll('.stage');
+
+  sw.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var view = btn.getAttribute('data-view');
+
+    for (var i = 0; i < tabs.length; i++) {
+      var on = tabs[i] === btn;
+      tabs[i].classList.toggle('is-on', on);
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+    }
+    for (var j = 0; j < stages.length; j++) {
+      var show = stages[j].getAttribute('data-panel') === view;
+      stages[j].classList.toggle('is-on', show);
+      if (show) revealAll(stages[j]);
+    }
+  });
+
+  /* Плавное появление */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealables = document.querySelectorAll('.rv');
+
+  function revealAll(scope) {
+    var items = scope.querySelectorAll('.rv');
+    for (var i = 0; i < items.length; i++) items[i].classList.add('in');
+  }
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < revealables.length; i++) revealables[i].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    for (var k = 0; k < revealables.length; k++) io.observe(revealables[k]);
+  }
+
+  /* Активный раздел в навигации */
+  var links = document.querySelectorAll('#nav a');
+  var map = {}, sections = [];
+
+  for (var n = 0; n < links.length; n++) {
+    var id = links[n].getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) { map[id] = links[n]; sections.push(el); }
+  }
+
+  function setActive(id) {
+    for (var key in map) {
+      if (Object.prototype.hasOwnProperty.call(map, key)) {
+        map[key].classList.toggle('is-active', key === id);
+      }
+    }
+  }
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var barH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bar'), 10) || 58;
+    var nav = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-' + (barH + 8) + 'px 0px -62% 0px', threshold: 0 });
+    for (var s = 0; s < sections.length; s++) nav.observe(sections[s]);
+  }
+})();
+</script>
+
+</body>
+</html>
