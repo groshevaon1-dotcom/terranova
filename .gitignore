@@ -41,3 +41,10 @@ desktop.ini
 tmp/
 temp/
 node_modules/
+
+# --- Исходники и рабочие файлы, не нужные в репозитории ---
+*.zip
+design/classes.txt
+design/facts.txt
+design/heads.txt
+design/.thumbnail

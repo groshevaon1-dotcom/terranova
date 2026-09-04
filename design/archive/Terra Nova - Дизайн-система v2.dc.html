@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/organic-cd71da81-b71e-4a83-b9c9-68f2a659b7af/styles.css">
+<script src="_ds/organic-cd71da81-b71e-4a83-b9c9-68f2a659b7af/_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:#E9EFF2;color:#16202A;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,p,figure{margin:0}
+  a{color:#8C491A;text-decoration:none;text-underline-offset:3px}
+  a:hover{color:#B2622D;text-decoration:underline}
+  *,*::before,*::after{box-sizing:border-box}
+  ::selection{background:rgba(214,127,72,.28)}
+  :focus{outline:none}
+  :focus-visible{outline:2px solid #B2622D;outline-offset:3px;border-radius:6px}
+  [data-notes="off"] [data-note]{display:none!important}
+  @keyframes tn-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:no-preference){[data-rise]{animation:tn-rise .5s cubic-bezier(.22,.61,.36,1) both}}
+  @media (max-width:900px){[data-navchips]{display:none!important}}
+  @page{size:A4;margin:0}
+  @media print{
+    body{background:#fff}
+    [data-noprint]{display:none!important}
+    [data-a4]{width:210mm;height:297mm;page-break-after:always;break-after:page;box-shadow:none!important;border:0!important;border-radius:0!important}
+    [data-rise]{animation:none!important}
+  }
+</style>
+</helmet>
+
+<div data-notes="{{ notesAttr }}" style="background:#E9EFF2;overflow-x:hidden">
+
+<nav data-noprint onClick="{{ navClick }}" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:18px;padding:10px clamp(14px,3vw,28px);background:rgba(233,239,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid #C9D5DB">
+  <div data-target="s1" style="display:flex;align-items:center;gap:9px;cursor:pointer;flex:none">
+    <svg viewBox="0 0 120 120" width="26" height="26" fill="none" style="flex:none"><path d="M14 14h62l30 30v62H14z" stroke="#12303F" stroke-width="8"/><circle cx="76" cy="44" r="12" fill="#B2622D"/></svg>
+    <span style="font:600 15px/1 Literata,Georgia,serif;letter-spacing:-.01em">Terra&nbsp;Nova</span>
+  </div>
+  <div data-navchips style="display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none">
+    <button data-target="s1a" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Знак</button>
+    <button data-target="s2" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">ДНК</button>
+    <button data-target="s3" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Цвет</button>
+    <button data-target="s4" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Шрифт</button>
+    <button data-target="s5" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Сетка</button>
+    <button data-target="s6" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Формы</button>
+    <button data-target="s7" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Свет</button>
+    <button data-target="s8" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Фото</button>
+    <button data-target="s9" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Иконки</button>
+    <button data-target="s10" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">UI</button>
+    <button data-target="s16" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Правила</button>
+    <button data-target="s17" style="flex:none;cursor:pointer;border:0;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#56646E;padding:8px 10px;border-radius:999px">Токены</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;flex:none;padding-left:12px;border-left:1px solid #C9D5DB">
+    <button data-target="s11" style="cursor:pointer;border:1px solid #C9D5DB;background:#F7F6F2;font:600 12px/1 'IBM Plex Sans';color:#16202A;padding:8px 11px;border-radius:999px">Сайт</button>
+    <button data-target="s12" style="cursor:pointer;border:1px solid #C9D5DB;background:#F7F6F2;font:600 12px/1 'IBM Plex Sans';color:#16202A;padding:8px 11px;border-radius:999px">PDF</button>
+    <button data-target="s13" style="cursor:pointer;border:1px solid #C9D5DB;background:#F7F6F2;font:600 12px/1 'IBM Plex Sans';color:#16202A;padding:8px 11px;border-radius:999px">Email</button>
+    <button data-target="s14" style="cursor:pointer;border:1px solid #C9D5DB;background:#F7F6F2;font:600 12px/1 'IBM Plex Sans';color:#16202A;padding:8px 11px;border-radius:999px">Соцсети</button>
+    <button onClick="{{ toggleNotes }}" style="cursor:pointer;border:1px solid #8C491A;background:transparent;font:600 12px/1 'IBM Plex Sans';color:#8C491A;padding:8px 11px;border-radius:999px;margin-left:4px">{{ notesLabel }}</button>
+  </div>
+</nav>
+<div data-progress style="position:fixed;top:0;left:0;height:2px;width:0;background:#B2622D;z-index:60"></div>
+
+<section id="s1" data-rise style="position:relative;background:#12303F;color:#E9EFF2;padding:clamp(120px,14vw,190px) clamp(20px,5vw,72px) clamp(60px,7vw,96px);overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(233,239,242,.07) 0 1px,transparent 1px 88px),repeating-linear-gradient(0deg,rgba(233,239,242,.07) 0 1px,transparent 1px 88px)"></div>
+  <div style="position:absolute;top:-60px;right:-40px;width:min(44vw,500px);height:min(62vw,700px);clip-path:polygon(0 0,calc(100% - 120px) 0,100% 120px,100% 100%,0 100%);background-image:linear-gradient(196deg,#2C6382,#12303F 78%)"></div>
+  <div style="position:absolute;top:calc(min(62vw,700px) * .28);right:clamp(20px,9vw,130px);width:min(22vw,230px);height:min(22vw,230px);border-radius:999px;background-image:radial-gradient(circle at 34% 26%,#BCD5E2,#3A7899 62%,#1B4257)"></div>
+  <div style="position:absolute;left:0;right:0;bottom:clamp(40px,6vw,80px);height:1px;background:#B2622D;opacity:.5"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <svg viewBox="0 0 48 48" width="46" height="46" fill="none" style="flex:none"><path d="M4 4h28l12 12v28H4z" stroke="#E9EFF2" stroke-width="2.2"/><path d="M32 4v12h12" stroke="#B2622D" stroke-width="2.2"/><circle cx="32" cy="16" r="3.4" fill="#B2622D"/><path d="M4 32h40" stroke="#8FB6CB" stroke-width="1.4"/></svg>
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.18em;text-transform:uppercase;color:#BCD5E2">Дизайн-система · версия 2.0 · сентябрь 2026</div>
+    </div>
+    <h1 style="font:400 clamp(46px,9.6vw,140px)/0.9 Literata,Georgia,serif;letter-spacing:-.035em;margin:clamp(18px,3vw,34px) 0 0;max-width:14ch">Terra<br><span style="color:#8FB6CB">Nova</span></h1>
+    <p style="font:400 clamp(19px,2.3vw,30px)/1.35 Literata,Georgia,serif;color:#D3E4EE;max-width:24ch;margin-top:clamp(14px,2vw,22px)">Земельный капитал с Ольгой Грошевой</p>
+    <p style="font:400 16px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.72);max-width:52ch;margin-top:22px">Подбор, проверка и сопровождение покупки участков — включая банкротные торги. Визуальный язык проекта: как выглядят сайт, PDF-материалы, письма, презентации и карточки для соцсетей.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,4vw,44px)">
+      <span style="font:600 13px/1 'IBM Plex Sans';letter-spacing:.02em;padding:11px 18px;border-radius:999px;background:#E9EFF2;color:#12303F">Северный кадастр</span>
+      <span style="font:600 13px/1 'IBM Plex Sans';padding:11px 18px;border-radius:999px;border:1px solid rgba(233,239,242,.34);color:#D3E4EE">честный</span>
+      <span style="font:600 13px/1 'IBM Plex Sans';padding:11px 18px;border-radius:999px;border:1px solid rgba(233,239,242,.34);color:#D3E4EE">экспертный</span>
+      <span style="font:600 13px/1 'IBM Plex Sans';padding:11px 18px;border-radius:999px;border:1px solid rgba(233,239,242,.34);color:#D3E4EE">тёплый</span>
+      <span style="font:600 13px/1 'IBM Plex Sans';padding:11px 18px;border-radius:999px;border:1px solid rgba(233,239,242,.34);color:#D3E4EE">без давления</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:rgba(233,239,242,.16);margin-top:clamp(48px,7vw,88px);border-radius:16px;overflow:hidden">
+      <div style="background:#12303F;padding:20px 22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#E9EFF2">18</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.66);margin-top:6px">разделов системы</div></div>
+      <div style="background:#12303F;padding:20px 22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#E9EFF2">15</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.66);margin-top:6px">цветов в палитре</div></div>
+      <div style="background:#12303F;padding:20px 22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#E9EFF2">2</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.66);margin-top:6px">шрифта, 3 начертания</div></div>
+      <div style="background:#12303F;padding:20px 22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#E9EFF2">5</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.66);margin-top:6px">форматов: сайт, PDF, письмо, презентация, соцсети</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s1a" style="background:#DCE6EB;border-bottom:1px solid #C9D5DB">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#12303F;color:#E9EFF2;font:400 18px/56px Literata,Georgia,serif;text-align:center;font-size:15px">1а</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Знак Terra Nova</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Три варианта на выбор. Все построены на одной идее — поворотная точка границы участка: угол снят, точка отмечена. Знак работает в 16 px (аватар канала) и в 400 px (обложка PDF), в одну краску и на тёмном фоне.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#12303F;border-radius:2px;padding:30px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8FB6CB">Вариант А</span><span style="font:600 11px/1 'IBM Plex Sans';color:#12303F;background:#B2622D;padding:6px 10px;border-radius:2px">рекомендую</span></div>
+      <svg viewBox="0 0 120 120" width="100%" height="150" fill="none"><path d="M14 14h62l30 30v62H14z" stroke="#E9EFF2" stroke-width="4"/><path d="M76 14v30h30" stroke="#B2622D" stroke-width="4"/><circle cx="76" cy="44" r="8" fill="#B2622D"/><path d="M14 78h92" stroke="#8FB6CB" stroke-width="2.5"/></svg>
+      <div>
+        <div style="font:400 20px/1.25 Literata,Georgia,serif;color:#E9EFF2">Поворотная точка</div>
+        <p style="font:400 14px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);margin-top:8px">Контур участка со снятым углом, точка на срезе и линия горизонта. Читается как план и как знак одновременно.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;border-top:1px solid rgba(233,239,242,.2);padding-top:16px">
+        <svg viewBox="0 0 120 120" width="40" height="40" fill="none"><path d="M14 14h62l30 30v62H14z" stroke="#E9EFF2" stroke-width="7"/><circle cx="76" cy="44" r="11" fill="#B2622D"/></svg>
+        <svg viewBox="0 0 120 120" width="22" height="22" fill="none"><path d="M14 14h62l30 30v62H14z" stroke="#E9EFF2" stroke-width="11"/><circle cx="76" cy="44" r="14" fill="#B2622D"/></svg>
+        <span style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.6)">40 px и 22 px — точка укрупняется, линия снимается</span>
+      </div>
+    </div>
+
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:2px;padding:30px;display:flex;flex-direction:column;gap:24px">
+      <span style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Вариант Б</span>
+      <svg viewBox="0 0 120 120" width="100%" height="150" fill="none"><path d="M10 20h100" stroke="#12303F" stroke-width="5"/><path d="M60 20v82" stroke="#12303F" stroke-width="5"/><path d="M60 102 20 44v58" stroke="#2C6382" stroke-width="5"/><circle cx="20" cy="44" r="7" fill="#B2622D"/></svg>
+      <div>
+        <div style="font:400 20px/1.25 Literata,Georgia,serif">Монограмма ТN</div>
+        <p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">T и N собраны из трёх линий одной толщины: горизонталь, стойка, диагональ. Диагональ — та же межевая линия, точка на её вершине.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;border-top:1px solid #C9D5DB;padding-top:16px">
+        <svg viewBox="0 0 120 120" width="40" height="40" fill="none"><path d="M10 20h100M60 20v82" stroke="#12303F" stroke-width="9"/><path d="M60 102 20 44v58" stroke="#2C6382" stroke-width="9"/></svg>
+        <svg viewBox="0 0 120 120" width="22" height="22" fill="none"><path d="M10 20h100M60 20v82" stroke="#12303F" stroke-width="14"/><path d="M60 102 20 44v58" stroke="#2C6382" stroke-width="14"/></svg>
+        <span style="font:400 12px/1.5 'IBM Plex Sans';color:#56646E">Работает в один цвет, но требует воздуха вокруг</span>
+      </div>
+    </div>
+
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:2px;padding:30px;display:flex;flex-direction:column;gap:24px">
+      <span style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Вариант В</span>
+      <svg viewBox="0 0 120 120" width="100%" height="150" fill="none"><circle cx="60" cy="60" r="46" stroke="#12303F" stroke-width="4"/><path d="M18 68c14-9 26-9 42 0s28 9 42 0" stroke="#2C6382" stroke-width="4"/><path d="M60 14v34" stroke="#12303F" stroke-width="4"/><rect x="50" y="42" width="20" height="20" fill="#B2622D"/></svg>
+      <div>
+        <div style="font:400 20px/1.25 Literata,Georgia,serif">Ладожский знак</div>
+        <p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Круг с линией воды и квадратом-репером — отсылка к геодезическому знаку и к северной воде. Самый «картографический» из трёх.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;border-top:1px solid #C9D5DB;padding-top:16px">
+        <svg viewBox="0 0 120 120" width="40" height="40" fill="none"><circle cx="60" cy="60" r="44" stroke="#12303F" stroke-width="8"/><rect x="46" y="38" width="28" height="28" fill="#B2622D"/></svg>
+        <svg viewBox="0 0 120 120" width="22" height="22" fill="none"><circle cx="60" cy="60" r="42" stroke="#12303F" stroke-width="13"/><rect x="42" y="34" width="36" height="36" fill="#B2622D"/></svg>
+        <span style="font:400 12px/1.5 'IBM Plex Sans';color:#56646E">В мелком размере линия воды убирается</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:2px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Построение варианта А</div>
+      <div style="position:relative;margin-top:18px;background-image:repeating-linear-gradient(90deg,#C9D5DB 0 1px,transparent 1px 25%),repeating-linear-gradient(0deg,#C9D5DB 0 1px,transparent 1px 25%);border:1px solid #C9D5DB;aspect-ratio:1">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none" style="position:absolute;inset:0"><path d="M14 14h62l30 30v62H14z" stroke="#12303F" stroke-width="4"/><path d="M76 14v30h30" stroke="#B2622D" stroke-width="3"/><circle cx="76" cy="44" r="8" fill="#B2622D"/><path d="M14 78h92" stroke="#2C6382" stroke-width="2.5"/></svg>
+      </div>
+      <p style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:14px">Сетка 4×4. Контур занимает 3 модуля, срез — один. Точка на пересечении среза с контуром, линия горизонта — на третьем шаге сетки.</p>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:2px;padding:26px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Знак со словом</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap">
+          <svg viewBox="0 0 120 120" width="44" height="44" fill="none" style="flex:none"><path d="M14 14h62l30 30v62H14z" stroke="#12303F" stroke-width="5"/><circle cx="76" cy="44" r="9" fill="#B2622D"/></svg>
+          <div><div style="font:400 26px/1 Literata,Georgia,serif;letter-spacing:-.02em">Terra Nova</div><div style="font:500 11px/1.3 'IBM Plex Sans';letter-spacing:.2em;text-transform:uppercase;color:#56646E;margin-top:5px">земельный капитал</div></div>
+        </div>
+        <div style="height:1px;background:#C9D5DB;margin:20px 0"></div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#12303F;padding:16px;border-radius:2px">
+          <svg viewBox="0 0 120 120" width="36" height="36" fill="none" style="flex:none"><path d="M14 14h62l30 30v62H14z" stroke="#E9EFF2" stroke-width="6"/><circle cx="76" cy="44" r="10" fill="#B2622D"/></svg>
+          <div><div style="font:400 22px/1 Literata,Georgia,serif;color:#E9EFF2">Terra Nova</div><div style="font:500 10px/1.3 'IBM Plex Sans';letter-spacing:.2em;text-transform:uppercase;color:#8FB6CB;margin-top:5px">земельный капитал</div></div>
+        </div>
+      </div>
+      <div style="background:#F2E2D0;border-radius:2px;padding:26px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#4A3A2C">Правила знака</div>
+        <ul style="list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px;font:400 14px/1.55 'IBM Plex Sans';color:#4A3A2C">
+          <li>Свободное поле вокруг — не меньше высоты среза</li>
+          <li>Минимальный размер 16 px; ниже — только точка в контуре</li>
+          <li>Допустимые цвета: графит, дымка, Ладога, латунь. Не выворачивать в градиент</li>
+          <li>Знак не наклоняется, не растягивается и не обводится второй линией</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ </div>
+</section>
+
+<section id="s2" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">02</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em;max-width:20ch">Визуальная ДНК бренда</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:60ch;margin-top:14px;text-wrap:pretty">Земля — медленный актив. Дизайн говорит так же: ровным голосом, с воздухом, без спешки. Ощущение — как разговор с человеком, который уже проверил документы и спокойно объясняет, что там написано.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:clamp(34px,5vw,56px)">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px 22px"><div style="font:400 26px/1 Literata,Georgia,serif;color:#B2622D">01</div><h4 style="font:600 17px/1.3 Literata,Georgia,serif;margin-top:12px">Ладожская палитра</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Вода, лёд, торф и латунь. Синий держит документальность, тёплый акцент не даёт ей стать сухой.</p></div>
+    <div style="background:#12303F;color:#E9EFF2;border-radius:28px;padding:24px 22px"><div style="font:400 26px/1 Literata,Georgia,serif;color:#8FB6CB">02</div><h4 style="font:600 17px/1.3 Literata,Georgia,serif;margin-top:12px">Редакционная вёрстка</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);margin-top:8px">Крупный заголовок, длинная строка текста, флаговое выравнивание влево. Похоже на разворот книги, а не на лендинг-конструктор.</p></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px 22px"><div style="font:400 26px/1 Literata,Georgia,serif;color:#B2622D">03</div><h4 style="font:600 17px/1.3 Literata,Georgia,serif;margin-top:12px">Срез как знак</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Угол блока, снятый под 45° — так на планах отмечают поворотную точку границы. Появляется 1–2 раза на экран, не чаще.</p></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px 22px"><div style="font:400 26px/1 Literata,Georgia,serif;color:#B2622D">04</div><h4 style="font:600 17px/1.3 Literata,Georgia,serif;margin-top:12px">Документальная точность</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Цифры, сроки, кадастровые номера и ВРИ показаны как факт — таблицей и моноритмом, без восклицаний.</p></div>
+    <div style="background:#F2E2D0;border-radius:28px;padding:24px 22px"><div style="font:400 26px/1 Literata,Georgia,serif;color:#8C491A">05</div><h4 style="font:600 17px/1.3 Literata,Georgia,serif;margin-top:12px">Тепло без сюсюканья</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#4A3A2C;margin-top:8px">Латунный акцент, тёплая бумага карточек, живой свет на фото. Но формулировки взрослые: «расскажу, что нашла в выписке».</p></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,3vw,40px);margin-top:clamp(40px,5vw,64px)">
+    <div>
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Шкалы характера</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:22px">
+        <div>
+          <div style="display:flex;justify-content:space-between;font:600 13px/1.3 'IBM Plex Sans';color:#56646E"><span>Минимализм</span><span>Декоративность</span></div>
+          <div style="position:relative;height:6px;border-radius:999px;background:#C9D5DB;margin-top:9px"><span style="position:absolute;left:0;top:0;bottom:0;width:28%;background:#2C6382;border-radius:999px"></span><span style="position:absolute;left:28%;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:999px;background:#F7F6F2;border:3px solid #2C6382"></span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font:600 13px/1.3 'IBM Plex Sans';color:#56646E"><span>Мягкость</span><span>Строгость</span></div>
+          <div style="position:relative;height:6px;border-radius:999px;background:#C9D5DB;margin-top:9px"><span style="position:absolute;left:0;top:0;bottom:0;width:55%;background:#2C6382;border-radius:999px"></span><span style="position:absolute;left:55%;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:999px;background:#F7F6F2;border:3px solid #2C6382"></span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font:600 13px/1.3 'IBM Plex Sans';color:#56646E"><span>Натуральность</span><span>Технологичность</span></div>
+          <div style="position:relative;height:6px;border-radius:999px;background:#C9D5DB;margin-top:9px"><span style="position:absolute;left:0;top:0;bottom:0;width:34%;background:#2C6382;border-radius:999px"></span><span style="position:absolute;left:34%;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:999px;background:#F7F6F2;border:3px solid #2C6382"></span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font:600 13px/1.3 'IBM Plex Sans';color:#56646E"><span>Редакционность</span><span>Утилитарность</span></div>
+          <div style="position:relative;height:6px;border-radius:999px;background:#C9D5DB;margin-top:9px"><span style="position:absolute;left:0;top:0;bottom:0;width:44%;background:#2C6382;border-radius:999px"></span><span style="position:absolute;left:44%;top:-5px;width:16px;height:16px;margin-left:-8px;border-radius:999px;background:#F7F6F2;border:3px solid #2C6382"></span></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:clamp(22px,3vw,34px)">
+      <div style="display:grid;gap:18px">
+        <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Эмоция</div><p style="font:400 16px/1.6 'IBM Plex Sans';margin-top:7px">Спокойная уверенность. «Мне объяснили, я понимаю, что покупаю».</p></div>
+        <div style="height:1px;background:#C9D5DB"></div>
+        <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Уровень премиальности</div><p style="font:400 16px/1.6 'IBM Plex Sans';margin-top:7px">Средний+, «тихая дорогая простота». Материалы, а не золото.</p></div>
+        <div style="height:1px;background:#C9D5DB"></div>
+        <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Темп коммуникации</div><p style="font:400 16px/1.6 'IBM Plex Sans';margin-top:7px">Медленный. Один смысл на экран, никаких таймеров и мельканий.</p></div>
+        <div style="height:1px;background:#C9D5DB"></div>
+        <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Степень декоративности</div><p style="font:400 16px/1.6 'IBM Plex Sans';margin-top:7px">Низкая: арка, тонкая линия межи, номер раздела. Всё остальное — типографика и воздух.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s3" style="background:#DCE6EB;border-top:1px solid #C9D5DB;border-bottom:1px solid #C9D5DB">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#12303F;color:#E9EFF2;font:400 18px/56px Literata,Georgia,serif;text-align:center">03</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Цветовая система</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Пятнадцать цветов: холодные светлые фоны, глубокая Ладога для акцентных полос, латунь как единственный активный акцент. Чистый белый и чистый чёрный не используются нигде.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-top:clamp(32px,4vw,52px)">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#E9EFF2;border-bottom:1px solid #C9D5DB"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Дымка — фон основной</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#E9EFF2 · rgb(233 239 242)<br>Основной фон сайта, PDF, письма.<br>С графитом, Ладогой, латунью.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#DCE6EB;border-bottom:1px solid #C9D5DB"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Наледь — фон дополнительный</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#DCE6EB · rgb(220 230 235)<br>Чередование секций, подложка форм.<br>С бумагой карточек и графитом.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#F7F6F2;border-bottom:1px solid #C9D5DB"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Бумага — поверхность карточек</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#F7F6F2 · rgb(247 246 242)<br>Карточки, поля ввода, таблицы.<br>Всегда с линией #C9D5DB.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#12303F"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Ладога — опорный 1</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#12303F · rgb(18 48 63)<br>Тёмные полосы, футер, обложки.<br>Текст на нём — дымка (11,2:1).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#2C6382"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Вода — опорный 2</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#2C6382 · rgb(44 99 130)<br>Индикаторы, графики, шкалы, теги.<br>С дымкой и полыньёй.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#BCD5E2"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Полынья — опорный 3</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#BCD5E2 · rgb(188 213 226)<br>Мягкие заливки, номера, выделения.<br>Текст на ней — только Ладога.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#4A3A2C"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Торф — опорный 4</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#4A3A2C · rgb(74 58 44)<br>Обложки PDF, крупные цитаты.<br>С дымкой и латунью.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#16202A"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Графит — текст основной</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#16202A · rgb(22 32 42)<br>Заголовки и основной текст.<br>На дымке — 14,0:1 (AAA).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#56646E"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Сланец — текст вторичный</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#56646E · rgb(86 100 110)<br>Подписи, лиды, метаданные.<br>На дымке — 4,8:1 (AA).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#C9D5DB"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Межа — тонкие линии</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#C9D5DB · rgb(201 213 219)<br>Границы карточек, разделители, таблицы.<br>Толщина 1 px, никогда как фон текста.</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#B2622D"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Латунь — главный акцент</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#B2622D · rgb(178 98 45)<br>Заливка кнопок, иконки, активные состояния.<br>Текст на ней — дымка (4,5:1).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#8C491A"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Обжиг — hover и акцентный текст</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#8C491A · rgb(140 73 26)<br>Hover кнопок и ссылок, надзаголовки.<br>На дымке — 6,9:1 (AA).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#F2E2D0"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Глина — мягкая заливка</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#F2E2D0 · rgb(242 226 208)<br>Инфоблоки, выноски, подсветка цитат.<br>Текст на ней — торф (8,6:1).</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#2F6B5C"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Тростник — успех</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#2F6B5C · rgb(47 107 92)<br>Успешная отправка, «проверено».<br>Приглушённый, не «светофорный».</div></div></div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden"><div style="height:92px;background:#9E3B26"></div><div style="padding:14px 16px"><div style="font:700 14px/1.3 'IBM Plex Sans'">Суглинок — ошибка</div><div style="font:400 12px/1.65 'IBM Plex Sans';color:#56646E;margin-top:5px">#9E3B26 · rgb(158 59 38)<br>Ошибки полей, предупреждения о риске.<br>Кирпичный, а не чистый красный.</div></div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:clamp(28px,4vw,44px)">
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB">
+      <div style="background:#12303F;padding:26px 22px"><div style="font:400 22px/1.2 Literata,Georgia,serif;color:#E9EFF2">Ладога + дымка</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#BCD5E2;margin-top:8px">Основная тёмная пара. Обложки, футер, акцентные полосы.</p></div>
+      <div style="background:#F7F6F2;padding:12px 22px;font:600 12px/1.4 'IBM Plex Sans';color:#56646E">11,2:1 — AAA</div>
+    </div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB">
+      <div style="background:#E9EFF2;padding:26px 22px"><div style="font:400 22px/1.2 Literata,Georgia,serif;color:#16202A">Дымка + графит</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Основная светлая пара: весь длинный текст на сайте и в PDF.</p></div>
+      <div style="background:#F7F6F2;padding:12px 22px;font:600 12px/1.4 'IBM Plex Sans';color:#56646E">14,0:1 — AAA</div>
+    </div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB">
+      <div style="background:#B2622D;padding:26px 22px"><div style="font:400 22px/1.2 Literata,Georgia,serif;color:#E9EFF2">Латунь + дымка</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#F2E2D0;margin-top:8px">Только кнопки и крупный текст от 19 px. Мелкий текст — «Обжиг».</p></div>
+      <div style="background:#F7F6F2;padding:12px 22px;font:600 12px/1.4 'IBM Plex Sans';color:#56646E">4,5:1 — AA</div>
+    </div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB">
+      <div style="background:#BCD5E2;padding:26px 22px"><div style="font:400 22px/1.2 Literata,Georgia,serif;color:#12303F">Полынья + Ладога</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#1B4257;margin-top:8px">Мягкие блоки: цитаты, чек-листы, номера шагов.</p></div>
+      <div style="background:#F7F6F2;padding:12px 22px;font:600 12px/1.4 'IBM Plex Sans';color:#56646E">8,6:1 — AAA</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:24px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Единственный градиент</div>
+      <div style="height:74px;border-radius:16px;margin-top:14px;background-image:linear-gradient(180deg,#1B4257,#12303F)"></div>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:10px">#1B4257 → #12303F, только вертикально, только на тёмных обложках. Других градиентов в системе нет.</p>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:24px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Пропорция на макете</div>
+      <div style="display:flex;height:74px;border-radius:16px;overflow:hidden;margin-top:14px"><span style="flex:60;background:#E9EFF2;border:1px solid #C9D5DB;border-right:0"></span><span style="flex:22;background:#12303F"></span><span style="flex:12;background:#BCD5E2"></span><span style="flex:6;background:#B2622D"></span></div>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:10px">60% светлых фонов · 22% синего · 12% мягких заливок · 6% акцента. Латунь никогда не заливает крупные плоскости.</p>
+    </div>
+  </div>
+  <p data-note style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: контраст считан по WCAG 2.1 для пар «текст / фон». Опорные оттенки взяты из тональных ramp-ов дизайн-системы Organic (neutral, accent, accent-2), «Всхожесть» и «Суглинок» выведены из тех же тонов сдвигом насыщенности.</p>
+ </div>
+</section>
+
+<section id="s4" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">04</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Типографическая система</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Два шрифта, три начертания. Literata держит заголовки и цифры — книжная антиква с крупным очком и заметными засечками. IBM Plex Sans отвечает за текст и интерфейс.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#12303F;color:#E9EFF2;border-radius:28px;padding:clamp(24px,3vw,36px)">
+      <div style="font:400 clamp(56px,9vw,104px)/0.9 Literata,Georgia,serif">Аа Бб Её</div>
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8FB6CB;margin-top:22px">Дисплейный шрифт</div>
+      <h3 style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:8px">Literata</h3>
+      <div style="font:400 14px/1.75 'IBM Plex Sans';color:rgba(233,239,242,.75);margin-top:12px">Роль: заголовки всех уровней, цифры, цитаты, номера разделов.<br>Начертания: Regular 400, SemiBold 600. Больше — нельзя.<br>Интерлиньяж 0,94–1,2 · трекинг −0,03…−0,015 em.<br>Не использовать в тексте длиннее двух строк и никогда в CAPS.<br>Fallback: Georgia, «Times New Roman», serif.</div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:clamp(24px,3vw,36px)">
+      <div style="font:600 clamp(56px,9vw,104px)/0.9 'IBM Plex Sans';letter-spacing:-.03em">Аа Бб Её</div>
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A;margin-top:22px">Текстовый шрифт</div>
+      <h3 style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:8px">'IBM Plex Sans'</h3>
+      <div style="font:400 14px/1.75 'IBM Plex Sans';color:#56646E;margin-top:12px">Роль: основной текст, интерфейс, подписи, таблицы, кнопки.<br>Начертания: Regular 400, SemiBold 600 (Bold 700 — только надзаголовки).<br>Интерлиньяж 1,55–1,7 · трекинг 0 (в надзаголовках +0,16 em).<br>Длина строки 60–75 знаков.<br>Fallback: «Helvetica Neue», Arial, sans-serif.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:clamp(34px,4vw,56px);border-top:1px solid #C9D5DB">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:0">
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:22px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Display XL<br>92/0,94/−0,03</div><div style="font:400 clamp(44px,7.4vw,92px)/0.94 Literata,Georgia,serif;letter-spacing:-.03em">Земля — актив</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:22px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Display<br>68/1,0/−0,025</div><div style="font:400 clamp(36px,5.6vw,68px)/1 Literata,Georgia,serif;letter-spacing:-.025em">Проверка участка до сделки</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:20px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">H1<br>48/1,05/−0,02</div><div style="font:400 clamp(30px,4vw,48px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Что я смотрю в выписке ЕГРН</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:20px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">H2<br>36/1,1/−0,02</div><div style="font:400 clamp(26px,3.2vw,36px)/1.1 Literata,Georgia,serif;letter-spacing:-.02em">Банкротные торги: как устроен допуск</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">H3<br>27/1,2/−0,015</div><div style="font:400 clamp(21px,2.4vw,27px)/1.2 Literata,Georgia,serif;letter-spacing:-.015em">Обременения и ЗОУИТ — где смотреть</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">H4<br>21/1,3/600</div><div style="font:600 21px/1.3 Literata,Georgia,serif">Категория земель и ВРИ</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Lead<br>21/1,55</div><div style="font:400 21px/1.55 'IBM Plex Sans';color:#2E3B45;max-width:44ch">Разберу вашу задачу, посчитаю бюджет и скажу прямо, стоит ли этот участок своих денег — или лучше подождать другой лот.</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Body Large<br>18/1,7</div><div style="font:400 18px/1.7 'IBM Plex Sans';max-width:66ch">Участок с видом «для сельхозпроизводства» нельзя застроить домом просто так — сначала меняют ВРИ, и это занимает от двух месяцев.</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Body<br>16/1,65</div><div style="font:400 16px/1.65 'IBM Plex Sans';max-width:70ch">Средний срок сопровождения сделки — 21 день с момента, когда лот отобран. Дальше регистрация права: до девяти рабочих дней через МФЦ.</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:16px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Body Small<br>14/1,6</div><div style="font:400 14px/1.6 'IBM Plex Sans';color:#2E3B45;max-width:74ch">Стоимость выкупа считается от кадастровой стоимости и ставки, установленной муниципалитетом, — ставки отличаются в разных районах области.</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:16px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Caption<br>13/1,55</div><div style="font:400 13px/1.55 'IBM Plex Sans';color:#56646E">Лот № 4-А, Всеволожский район, 12 соток — фото сделано 14 августа 2026 года</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:16px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Eyebrow<br>12/600/+0,16</div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Разбор лота · выпуск 14</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:16px 0;border-bottom:1px solid #C9D5DB;align-items:center"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Button<br>15/600/+0,01</div><div><span style="display:inline-block;font:600 15px/1 'IBM Plex Sans';letter-spacing:.01em;color:#E9EFF2;background:#B2622D;padding:15px 26px;border-radius:999px">Записаться на консультацию</span></div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Quote<br>26/1,4 Literata</div><div style="font:400 clamp(20px,2.4vw,26px)/1.4 Literata,Georgia,serif;max-width:34ch;border-left:2px solid #B2622D;padding-left:20px">«Мы дважды отказались от лота — и на третьем сэкономили 1,2 млн ₽. Ольга не торопила».</div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:18px 0;border-bottom:1px solid #C9D5DB;align-items:baseline"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Number<br>64/1,0 Literata</div><div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span style="font:400 clamp(40px,5.6vw,64px)/1 Literata,Georgia,serif;letter-spacing:-.02em">1,2 млн ₽</span><span style="font:400 14px/1.5 'IBM Plex Sans';color:#56646E">экономия на одном лоте</span></div></div>
+      <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(10px,2vw,28px);padding:16px 0;align-items:center"><div style="font:600 11px/1.5 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#56646E">Label<br>13/600</div><div><span style="display:inline-block;font:600 13px/1 'IBM Plex Sans';color:#1B4257;background:#BCD5E2;padding:8px 14px;border-radius:999px">Проверено · 9 пунктов</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s5" style="background:#12303F;color:#E9EFF2">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#E9EFF2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">05</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Сетка и композиция</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);max-width:62ch;margin-top:14px;text-wrap:pretty">Базовый модуль 8 px. Контент прижат влево, воздух — справа. Ни один блок не растягивается на всю ширину экрана.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:22px"><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Desktop 1440</div><div style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:10px">12 колонок</div><div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:8px">Контент 1240 px · gutter 24 px · поля 100 px. Текст — максимум 8 колонок.</div><div style="display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:14px">{{ col12 }}</div></div>
+    <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:22px"><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Laptop 1024</div><div style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:10px">8 колонок</div><div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:8px">Контент 944 px · gutter 20 px · поля 40 px. Карточки по три в ряд.</div><div style="display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-top:14px">{{ col8 }}</div></div>
+    <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:22px"><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Tablet 768</div><div style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:10px">6 колонок</div><div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:8px">Gutter 16 px · поля 32 px. Карточки по две, тёмные полосы во всю ширину.</div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:14px">{{ col6 }}</div></div>
+    <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:22px"><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Mobile 390</div><div style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:10px">4 колонки</div><div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:8px">Gutter 12 px · поля 20 px. Одна колонка контента, кнопки на всю ширину.</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:14px">{{ col4 }}</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#1B4257;border-radius:20px;padding:24px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#BCD5E2">Шкала отступов</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;font:400 13px/1 'IBM Plex Sans'">
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-xxs · 4</span><span style="height:10px;width:4px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-xs · 8</span><span style="height:10px;width:8px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-sm · 16</span><span style="height:10px;width:16px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-md · 24</span><span style="height:10px;width:24px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-lg · 40</span><span style="height:10px;width:40px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-xl · 64</span><span style="height:10px;width:64px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-2xl · 96</span><span style="height:10px;width:96px;background:#8FB6CB;border-radius:2px"></span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:112px;color:rgba(233,239,242,.7)">--space-3xl · 144</span><span style="height:10px;width:144px;background:#8FB6CB;border-radius:2px"></span></div>
+      </div>
+      <p style="font:400 13px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:16px">Вертикальный ритм: между секциями 96–144 px, между блоком и его заголовком 24 px, внутри карточки 16 px. Между абзацами — 12 px.</p>
+    </div>
+    <div style="display:grid;gap:14px">
+      <div style="border:1px solid rgba(143,182,203,.5);border-radius:20px;padding:20px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#BCD5E2">Так — асимметрия и воздух</div>
+        <div style="display:grid;grid-template-columns:7fr 5fr;gap:12px;margin-top:14px;align-items:start">
+          <div><div style="height:14px;width:82%;background:#E9EFF2;border-radius:4px"></div><div style="height:14px;width:58%;background:#E9EFF2;border-radius:4px;margin-top:7px"></div><div style="height:7px;width:92%;background:rgba(233,239,242,.34);border-radius:4px;margin-top:14px"></div><div style="height:7px;width:86%;background:rgba(233,239,242,.34);border-radius:4px;margin-top:6px"></div><div style="height:26px;width:44%;background:#B2622D;border-radius:999px;margin-top:16px"></div></div>
+          <div style="height:132px;border-radius:3px;clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%);background-image:linear-gradient(180deg,#3A7899,#1B4257)"></div>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(158,59,38,.6);border-radius:20px;padding:20px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#E3A08F">Не так — симметрия и плотность</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:14px">
+          <div style="height:70px;border-radius:8px;background:rgba(233,239,242,.28)"></div><div style="height:70px;border-radius:8px;background:rgba(233,239,242,.28)"></div><div style="height:70px;border-radius:8px;background:rgba(233,239,242,.28)"></div>
+          <div style="height:8px;border-radius:4px;background:rgba(233,239,242,.28)"></div><div style="height:8px;border-radius:4px;background:rgba(233,239,242,.28)"></div><div style="height:8px;border-radius:4px;background:rgba(233,239,242,.28)"></div>
+        </div>
+        <p style="font:400 13px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:12px">Три одинаковые карточки по центру, всё выровнено по осевой, отступы меньше 16 px — так система не выглядит.</p>
+      </div>
+    </div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.62);margin-top:18px;max-width:70ch">Техническое пояснение: безопасные поля — 20 px на мобильном и 40 px на планшете; интерактивные элементы не ближе 8 px друг к другу и не меньше 44×44 px. Соотношение текста и воздуха на первом экране — не более 45% занятой площади.</p>
+ </div>
+</section>
+<section id="s6" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">06</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Формы и геометрия</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Характерный приём один — срез: верхний правый угол блока снят под 45°, как поворотная точка на межевом плане. На экране появляется один раз, максимум два.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:22px">
+      <div style="height:150px;border-radius:3px;clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%);background-image:linear-gradient(180deg,#3A7899,#1B4257)"></div>
+      <h4 style="font:600 16px/1.3 Literata,Georgia,serif;margin-top:16px">Срез-фото</h4>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:6px">Главное изображение первого экрана и обложек PDF. Срез 34–96 px по длинной стороне.</p>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:22px">
+      <div style="height:150px;display:flex;align-items:center;justify-content:center"><span style="width:104px;height:104px;border-radius:999px;background:#F2E2D0;display:flex;align-items:center;justify-content:center;font:400 34px/1 Literata,Georgia,serif;color:#8C491A">04</span></div>
+      <h4 style="font:600 16px/1.3 Literata,Georgia,serif;margin-top:16px">Круг-номер</h4>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:6px">Нумерация шагов и разделов. Диаметр 104 / 72 / 44 px в зависимости от уровня.</p>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:22px">
+      <div style="height:150px;display:flex;flex-direction:column;justify-content:center;gap:16px">
+        <div style="height:1px;background:#C9D5DB"></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="height:1px;flex:1;background:#C9D5DB"></span><span style="width:7px;height:7px;border-radius:999px;background:#B2622D"></span><span style="height:1px;flex:1;background:#C9D5DB"></span></div>
+        <div style="border-top:1px dashed #C9D5DB"></div>
+      </div>
+      <h4 style="font:600 16px/1.3 Literata,Georgia,serif;margin-top:16px">Линия межи</h4>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:6px">Разделители: сплошной 1 px, с точкой по центру для смены темы, пунктир — «дальше по документам».</p>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:22px">
+      <div style="height:150px;display:flex;align-items:center;justify-content:center"><span style="width:120px;height:120px;background:#BCD5E2;border-radius:2px;clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%)"></span></div>
+      <h4 style="font:600 16px/1.3 Literata,Georgia,serif;margin-top:16px">Надел</h4>
+      <p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:6px">Мягкая подложка для цитат и врезок в PDF и соцсетях. Не под текстом длиннее трёх строк.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#DCE6EB;border-radius:8px;padding:22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#B2622D">8 px</div><div style="font:600 14px/1.4 'IBM Plex Sans';margin-top:10px">--radius-sm</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Теги, ячейки таблиц, мелкие плашки, чекбокс.</p></div>
+    <div style="background:#DCE6EB;border-radius:16px;padding:22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#B2622D">16 px</div><div style="font:600 14px/1.4 'IBM Plex Sans';margin-top:10px">--radius-md</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Поля ввода, изображения в тексте, инфоблоки.</p></div>
+    <div style="background:#DCE6EB;border-radius:28px;padding:22px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#B2622D">28 px</div><div style="font:600 14px/1.4 'IBM Plex Sans';margin-top:10px">--radius-lg</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Карточки, секции-контейнеры, превью материалов.</p></div>
+    <div style="background:#DCE6EB;border-radius:999px;padding:22px 28px"><div style="font:400 30px/1 Literata,Georgia,serif;color:#B2622D">999 px</div><div style="font:600 14px/1.4 'IBM Plex Sans';margin-top:10px">--radius-pill</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Кнопки, лейблы, переключатели, верх арки.</p></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Система карточек</div>
+      <div style="display:grid;gap:12px;margin-top:16px">
+        <div style="background:#E9EFF2;border:1px solid #C9D5DB;border-radius:16px;padding:16px 18px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Обычная — контур 1 px, без тени</div><div style="font:400 13px/1.55 'IBM Plex Sans';color:#56646E;margin-top:4px">Списки услуг, справочные блоки.</div></div>
+        <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:16px;padding:16px 18px;box-shadow:0 3px 10px rgba(18,40,55,.16)"><div style="font:600 14px/1.3 'IBM Plex Sans'">Приподнятая — мягкая тень</div><div style="font:400 13px/1.55 'IBM Plex Sans';color:#56646E;margin-top:4px">Карточка лота, ключевое предложение.</div></div>
+        <div style="background:#12303F;border-radius:16px;padding:16px 18px"><div style="font:600 14px/1.3 'IBM Plex Sans';color:#E9EFF2">Тёмная — акцент раздела</div><div style="font:400 13px/1.55 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:4px">Одна на секцию, не больше.</div></div>
+        <div style="background:#F2E2D0;border-radius:16px;padding:16px 18px"><div style="font:600 14px/1.3 'IBM Plex Sans';color:#4A3A2C">Информационная — глина</div><div style="font:400 13px/1.55 'IBM Plex Sans';color:#4A3A2C;margin-top:4px">«Важно знать до сделки», предупреждение о риске.</div></div>
+      </div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Маркеры и нумерация</div>
+      <div style="display:grid;gap:14px;margin-top:18px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:22px;height:22px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 12px/22px 'IBM Plex Sans';text-align:center">1</span><span style="font:400 15px/1.5 'IBM Plex Sans'">Нумерованный шаг — круг с цифрой</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:22px;height:22px;border-radius:999px;border:1.5px solid #B2622D;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#B2622D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg></span><span style="font:400 15px/1.5 'IBM Plex Sans'">Пункт чек-листа — контурная галочка</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:22px;height:22px;display:flex;align-items:center;justify-content:center"><span style="width:6px;height:6px;background:#2C6382;transform:rotate(45deg)"></span></span><span style="font:400 15px/1.5 'IBM Plex Sans'">Обычный список — ромб 6 px</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:22px;height:22px;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:1.5px;background:#B2622D"></span></span><span style="font:400 15px/1.5 'IBM Plex Sans'">Вложенный уровень — короткое тире</span></div>
+        <div style="height:1px;background:#C9D5DB"></div>
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font:400 46px/1 Literata,Georgia,serif;color:#C9D5DB">§ 03</span><span style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E">Нумерация разделов в PDF: серым, в левом поле, всегда со знаком §.</span></div>
+      </div>
+    </div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: арка — это <span style="font-family:ui-monospace,monospace">border-radius:3px;clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%)</span> при высоте не менее 220 px; на меньшей высоте форма читается как «пилюля» и теряет смысл.</p>
+</section>
+
+<section id="s7" style="background:#DCE6EB;border-top:1px solid #C9D5DB;border-bottom:1px solid #C9D5DB">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#12303F;color:#E9EFF2;font:400 18px/56px Literata,Georgia,serif;text-align:center">07</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Тени, свет и фактуры</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Тени тёплые, с оттенком чернозёма, а не серые. Свечения нет ни у одного элемента.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#F7F6F2;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(18,40,55,.14)"><div style="font:600 15px/1.3 'IBM Plex Sans'">Едва заметная</div><div style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px;font-family:ui-monospace,monospace">0 1px 2px rgba(18,40,55,.14)</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Карточки в сетке, таблицы, теги.</p></div>
+    <div style="background:#F7F6F2;border-radius:20px;padding:24px;box-shadow:0 3px 10px rgba(18,40,55,.16)"><div style="font:600 15px/1.3 'IBM Plex Sans'">Мягкая объёмная</div><div style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px;font-family:ui-monospace,monospace">0 3px 10px rgba(18,40,55,.16)</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Карточка лота, hover карточек, превью материала.</p></div>
+    <div style="background:#F7F6F2;border-radius:20px;padding:24px;box-shadow:inset 0 2px 5px rgba(18,40,55,.12)"><div style="font:600 15px/1.3 'IBM Plex Sans'">Внутренняя</div><div style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px;font-family:ui-monospace,monospace">inset 0 2px 5px rgba(18,40,55,.12)</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Поля ввода в состоянии active, полосы прогресса.</p></div>
+    <div style="background:#F7F6F2;border-radius:20px;padding:24px;box-shadow:0 12px 32px rgba(18,40,55,.22)"><div style="font:600 15px/1.3 'IBM Plex Sans'">Плавающая</div><div style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px;font-family:ui-monospace,monospace">0 12px 32px rgba(18,40,55,.22)</div><p style="font:400 13px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Модальное окно, закреплённая форма заявки, подсказка.</p></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px">
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB"><div style="height:130px;background-color:#E9EFF2;background-image:radial-gradient(rgba(86,100,110,.16) .6px,transparent .7px),radial-gradient(rgba(86,100,110,.1) .6px,transparent .7px);background-size:5px 5px,7px 7px;background-position:0 0,3px 4px"></div><div style="background:#F7F6F2;padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Бумага</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:4px">Фон PDF-страниц и рабочих тетрадей. Плотность точек ≤ 16%.</p></div></div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB"><div style="height:130px;background-color:#DCE6EB;background-image:repeating-linear-gradient(90deg,rgba(86,100,110,.11) 0 1px,transparent 1px 4px),repeating-linear-gradient(0deg,rgba(86,100,110,.11) 0 1px,transparent 1px 4px)"></div><div style="background:#F7F6F2;padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Лёд</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:4px">Подложка секций-цитат и обложек соцсетей. Не под мелким текстом.</p></div></div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB"><div style="height:130px;background-color:#12303F;background-image:repeating-linear-gradient(112deg,rgba(233,239,242,.05) 0 2px,transparent 2px 6px)"></div><div style="background:#F7F6F2;padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Штукатурка</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:4px">Тёмные полосы и футер: диагональный штрих 5% поверх Ладоги.</p></div></div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid #C9D5DB"><div style="height:130px;background-color:#4A3A2C;background-image:repeating-linear-gradient(0deg,rgba(233,239,242,.07) 0 1px,transparent 1px 9px),linear-gradient(180deg,rgba(242,226,208,.12),transparent)"></div><div style="background:#F7F6F2;padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Торф</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:4px">Обложка PDF-гайда и карточка «Клуб». Один такой блок на документ.</p></div></div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: фактуры собраны на CSS-градиентах — не добавляют вес и корректно печатаются. Контраст текста поверх фактуры проверяется по её самому тёмному участку.</p>
+ </div>
+</section>
+
+<section id="s8" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">08</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Фотостиль и арт-дирекшн</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Фотографии документальные: реальные участки, документы на столе, руки, межевые знаки. Естественный свет утра или вечера, тёплая температура 4800–5600 K, приглушённая насыщенность.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:radial-gradient(circle at 72% 24%,rgba(226,240,246,.9),transparent 58%),linear-gradient(168deg,#C9D5DB,#B0BEC6 52%,#74848E)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Предметная композиция</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Выписка ЕГРН, кадастровый план, чашка, рулетка. Свет сбоку, тени длинные, фон — стол.</p></figcaption>
+    </figure>
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:linear-gradient(96deg,rgba(74,58,44,.24),transparent 62%),linear-gradient(180deg,#DCE6EB 0 42%,#C9D5DB 42% 100%)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Интерьер</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Дом или кабинет с деревом и льном, окно в кадре. Никаких стеклянных офисов.</p></figcaption>
+    </figure>
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:radial-gradient(circle at 50% 40%,#B0BEC6 0 21%,transparent 22%),linear-gradient(180deg,#D3E4EE,#8FB6CB 64%,#3A7899)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Человек</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Ольга на участке или за документами: спокойное лицо, руки заняты делом.</p></figcaption>
+    </figure>
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:repeating-linear-gradient(0deg,rgba(22,32,42,.05) 0 1px,transparent 1px 12px),linear-gradient(200deg,#F7F6F2,#C9D5DB 60%,#93A2AB)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Рабочее место</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Ноутбук с открытой площадкой торгов, блокнот с расчётами. Экран читаем, но не в фокусе.</p></figcaption>
+    </figure>
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:radial-gradient(circle at 34% 62%,#8C491A 0 11%,transparent 12%),linear-gradient(150deg,#B0BEC6,#56646E)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Детали</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Межевой колышек, срез грунта, номер на столбе, подпись на документе. f/2.0.</p></figcaption>
+    </figure>
+    <figure style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;overflow:hidden">
+      <div style="height:190px;background-image:linear-gradient(180deg,#D3E4EE 0 46%,#3A7899 46% 68%,#1B4257 68% 100%)"></div>
+      <figcaption style="padding:14px 16px"><div style="font:600 14px/1.3 'IBM Plex Sans'">Атмосферный фон</div><p style="font:400 12px/1.6 'IBM Plex Sans';color:#56646E;margin-top:5px">Поле, кромка леса, горизонт. Под текстом — с затемнением 40%, только в крупных форматах.</p></figcaption>
+    </figure>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#BCD5E2;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#1B4257">Подходит</div>
+      <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font:400 15px/1.5 'IBM Plex Sans';color:#12303F">
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#1B4257;transform:rotate(45deg);margin-top:8px"></span>Естественный свет, мягкие тени, тёплый баланс белого</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#1B4257;transform:rotate(45deg);margin-top:8px"></span>Реальные участки — с грязью, снегом, бурьяном</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#1B4257;transform:rotate(45deg);margin-top:8px"></span>Документы и руки крупным планом, без лица</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#1B4257;transform:rotate(45deg);margin-top:8px"></span>Насыщенность −15%, контраст умеренный</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#1B4257;transform:rotate(45deg);margin-top:8px"></span>Композиция с воздухом сверху — под заголовок</li>
+      </ul>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #9E3B26;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#9E3B26">Не подходит</div>
+      <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font:400 15px/1.5 'IBM Plex Sans';color:#2E3B45">
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Стоковые улыбки, рукопожатия, «команда у окна»</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Холодный офисный свет, серо-синий тон</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Ключи, монеты, купюры, графики «вверх», золото</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Пересвеченный HDR, ядовитая зелень, небо «из рекламы»</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Коллажи из нескольких фото в одном блоке</li>
+      </ul>
+    </div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: карточки выше — стилизованные CSS-плейсхолдеры, задающие тон и композицию, а не готовые изображения. Обработка: экспозиция ровная, тени +8, насыщенность −15%, зерно минимальное. Кадрирование: 4:5 для соцсетей, 3:2 для сайта, 16:9 для презентаций.</p>
+</section>
+
+<section id="s9" style="background:#12303F;color:#E9EFF2">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#E9EFF2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">09</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Иконки и декоративная графика</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);max-width:62ch;margin-top:14px;text-wrap:pretty">Один язык: линия 1,75 px, скруглённые концы, сетка 24×24, без заливок. Эмодзи не используются нигде — ни на сайте, ни в письмах, ни в постах.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:clamp(30px,4vw,48px)">
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-3 6 3 6-3V6l-6 3-6-3-6 3z"/><path d="M9 6v10M15 9v10"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Участок</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Документы</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2.2 2.2L15 10.4"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Проверка</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-6h4v6"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Дом</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 18V8l6-4 6 4v10"/><path d="M12 4.5V18"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Торги</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Сроки</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V6M4 19h16"/><path d="M8 19v-6M12 19v-9M16 19v-4M20 19V8"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Доходность</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Локация</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4 0-7-3-7-7 0-5 7-13 7-13s7 8 7 13c0 4-3 7-7 7z"/><path d="M12 22V9"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Рост</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Подбор</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a3 3 0 01-3 3H8l-4 3V6a3 3 0 013-3h10a3 3 0 013 3z"/><path d="M9 9h7M9 13h4"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Консультация</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4-8 4-8-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Обучение</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 12h16M12 4v16"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Межевание</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.5 5.4 5.8.8-4.2 4 1 5.8-5.1-2.9-5.1 2.9 1-5.8-4.2-4 5.8-.8z"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Клуб</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Риск</div></div>
+    <div style="border:1px solid rgba(233,239,242,.18);border-radius:16px;padding:18px 12px;text-align:center"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg><div style="font:400 12px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:10px">Дайджест</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#1B4257;border-radius:20px;padding:24px;text-align:center"><div style="display:flex;align-items:center;gap:10px;justify-content:center"><span style="height:1px;flex:1;background:rgba(233,239,242,.35)"></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#BCD5E2" stroke-width="1.75"><path d="M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><span style="height:1px;flex:1;background:rgba(233,239,242,.35)"></span></div><div style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:14px">Разделитель разделов</div></div>
+    <div style="background:#1B4257;border-radius:20px;padding:24px;text-align:center"><span style="display:inline-flex;width:56px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);background:#E9EFF2;color:#12303F;font:400 22px/1 Literata,Georgia,serif;align-items:center;justify-content:center">07</span><div style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:14px">Номер со срезом — PDF</div></div>
+    <div style="background:#1B4257;border-radius:20px;padding:24px;text-align:center"><svg viewBox="0 0 60 24" width="72" height="28" fill="none" stroke="#8FB6CB" stroke-width="1.5" stroke-linecap="round"><path d="M2 20h56"/><path d="M8 20V12M20 20V7M32 20v-9M44 20V14M56 20v-6"/></svg><div style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:14px">Знак «межа» — подпись под цифрами</div></div>
+    <div style="background:#1B4257;border-radius:20px;padding:24px;text-align:center"><span style="display:inline-block;width:44px;height:44px;background:#BCD5E2;border-radius:2px;clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%)"></span><div style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:14px">Маленький «надел» — акцент в углу карточки</div></div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.62);margin-top:18px;max-width:70ch">Техническое пояснение: иконки — встроенный SVG со <span style="font-family:ui-monospace,monospace">stroke: currentColor</span>, размеры 20 / 24 / 30 px. Декоративные элементы не несут смысла и всегда сопровождаются текстом.</p>
+ </div>
+</section>
+<section id="s10" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">10</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">UI-компоненты для сайта</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Все элементы доступны с клавиатуры: фокус — рамка 2 px терракотой с отступом 3 px. Минимальная высота интерактивного элемента — 44 px.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Основная кнопка · состояния</div>
+      <div style="display:grid;gap:12px;margin-top:18px">
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Оставить заявку</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">default</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:0;background:#8C491A;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Оставить заявку</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">hover</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px;outline:2px solid #8C491A;outline-offset:3px">Оставить заявку</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">focus-visible</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:0;background:#4A3A2C;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px;transform:translateY(1px)">Оставить заявку</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">active</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button disabled style="border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px;opacity:.45;cursor:not-allowed">Оставить заявку</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">disabled</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:0;background:#2F6B5C;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center;gap:9px"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#E9EFF2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-10"/></svg>Заявка отправлена</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">success</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:1px solid #9E3B26;background:#F7F6F2;color:#9E3B26;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Не отправилось — повторить</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">error</span></div>
+      </div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Вторичная кнопка и ссылка</div>
+      <div style="display:grid;gap:12px;margin-top:18px">
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:1px solid #12303F;background:transparent;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Скачать чек-лист</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">default</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:1px solid #12303F;background:#DCE6EB;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Скачать чек-лист</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">hover</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button style="cursor:pointer;border:1px solid #12303F;background:#C9D5DB;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px">Скачать чек-лист</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">active</span></div>
+        <div style="display:flex;align-items:center;gap:14px"><button disabled style="border:1px solid #93A2AB;background:transparent;color:#93A2AB;font:600 15px/1 'IBM Plex Sans';padding:15px 26px;border-radius:999px;min-height:44px;cursor:not-allowed">Скачать чек-лист</button><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">disabled</span></div>
+        <div style="height:1px;background:#C9D5DB;margin:6px 0"></div>
+        <a href="#s10" style="font:600 15px/1.5 'IBM Plex Sans';color:#8C491A;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;display:inline-flex;align-items:center;gap:8px">Как я проверяю участок<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8C491A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">Текстовая ссылка: подчёркивание всегда, стрелка — только в конце блока</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Поля ввода · состояния</div>
+      <div style="display:grid;gap:14px;margin-top:18px">
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#2E3B45">Имя</span><input type="text" placeholder="Как к вам обращаться" style="display:block;width:100%;margin-top:6px;font:400 15px/1.4 'IBM Plex Sans';color:#16202A;background:#E9EFF2;border:1px solid #C9D5DB;border-radius:16px;padding:14px 16px;min-height:48px"></label>
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#2E3B45">Телефон — focus</span><input type="tel" value="+7 921 000-00-00" style="display:block;width:100%;margin-top:6px;font:400 15px/1.4 'IBM Plex Sans';color:#16202A;background:#F7F6F2;border:1px solid #B2622D;border-radius:16px;padding:14px 16px;min-height:48px;outline:2px solid rgba(178,98,45,.35);outline-offset:1px"></label>
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#9E3B26">Почта — error</span><input type="email" value="olga@" style="display:block;width:100%;margin-top:6px;font:400 15px/1.4 'IBM Plex Sans';color:#16202A;background:#F7F6F2;border:1px solid #9E3B26;border-radius:16px;padding:14px 16px;min-height:48px"><span style="display:block;font:400 13px/1.5 'IBM Plex Sans';color:#9E3B26;margin-top:6px">Проверьте адрес — не хватает домена после @</span></label>
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#23514A">Промокод — success</span><input type="text" value="TERRA-2026" style="display:block;width:100%;margin-top:6px;font:400 15px/1.4 'IBM Plex Sans';color:#16202A;background:#F7F6F2;border:1px solid #2F6B5C;border-radius:16px;padding:14px 16px;min-height:48px"><span style="display:block;font:400 13px/1.5 'IBM Plex Sans';color:#23514A;margin-top:6px">Код принят: консультация со скидкой 20%</span></label>
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#93A2AB">Кадастровый номер — disabled</span><input type="text" value="47:07:0000000:000" disabled style="display:block;width:100%;margin-top:6px;font:400 15px/1.4 'IBM Plex Sans';color:#93A2AB;background:#DCE6EB;border:1px solid #C9D5DB;border-radius:16px;padding:14px 16px;min-height:48px;cursor:not-allowed"></label>
+        <label style="display:block"><span style="font:600 13px/1.4 'IBM Plex Sans';color:#2E3B45">Задача</span><textarea rows="3" placeholder="Например: 10–15 соток под дом в 40 км от города, бюджет до 3 млн ₽" style="display:block;width:100%;margin-top:6px;font:400 15px/1.5 'IBM Plex Sans';color:#16202A;background:#E9EFF2;border:1px solid #C9D5DB;border-radius:16px;padding:14px 16px;resize:vertical"></textarea></label>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Выбор</div>
+        <div style="display:grid;gap:14px;margin-top:18px">
+          <label style="display:flex;gap:11px;align-items:flex-start;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><input type="checkbox" checked style="width:20px;height:20px;accent-color:#B2622D;margin:2px 0 0;flex:none"><span>Согласен на обработку персональных данных</span></label>
+          <label style="display:flex;gap:11px;align-items:flex-start;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:2px 0 0;flex:none"><span>Хочу получать дайджест лотов раз в неделю</span></label>
+          <div style="height:1px;background:#C9D5DB"></div>
+          <label style="display:flex;gap:11px;align-items:center;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><input type="radio" name="tn-goal" checked style="width:20px;height:20px;accent-color:#B2622D;flex:none"><span>Под свой дом</span></label>
+          <label style="display:flex;gap:11px;align-items:center;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><input type="radio" name="tn-goal" style="width:20px;height:20px;accent-color:#B2622D;flex:none"><span>Как вложение</span></label>
+          <label style="display:flex;gap:11px;align-items:center;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><input type="radio" name="tn-goal" style="width:20px;height:20px;accent-color:#B2622D;flex:none"><span>Пока разбираюсь</span></label>
+          <div style="height:1px;background:#C9D5DB"></div>
+          <label style="display:flex;gap:12px;align-items:center;font:400 15px/1.5 'IBM Plex Sans';cursor:pointer"><span style="flex:none;width:48px;height:28px;border-radius:999px;background:#B2622D;padding:3px;display:flex;justify-content:flex-end"><span style="width:22px;height:22px;border-radius:999px;background:#F7F6F2;display:block"></span></span><span>Показывать только банкротные лоты</span></label>
+          <label style="display:flex;gap:12px;align-items:center;font:400 15px/1.5 'IBM Plex Sans';color:#56646E;cursor:pointer"><span style="flex:none;width:48px;height:28px;border-radius:999px;background:#C9D5DB;padding:3px;display:flex"><span style="width:22px;height:22px;border-radius:999px;background:#F7F6F2;display:block"></span></span><span>Включить уведомления в Telegram</span></label>
+        </div>
+      </div>
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Теги</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+          <span style="font:600 13px/1 'IBM Plex Sans';color:#1B4257;background:#BCD5E2;padding:9px 14px;border-radius:999px">ИЖС</span>
+          <span style="font:600 13px/1 'IBM Plex Sans';color:#4A3A2C;background:#F2E2D0;padding:9px 14px;border-radius:999px">Банкротный лот</span>
+          <span style="font:600 13px/1 'IBM Plex Sans';color:#2E3B45;border:1px solid #C9D5DB;padding:9px 14px;border-radius:999px">Всеволожский р-н</span>
+          <span style="font:600 13px/1 'IBM Plex Sans';color:#E9EFF2;background:#12303F;padding:9px 14px;border-radius:999px">12 соток</span>
+          <span style="font:600 13px/1 'IBM Plex Sans';color:#23514A;border:1px solid #2F6B5C;padding:9px 14px;border-radius:999px">Проверено</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:14px">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;overflow:hidden;box-shadow:0 3px 10px rgba(18,40,55,.16)">
+      <div style="height:170px;background-image:radial-gradient(circle at 68% 26%,rgba(226,240,246,.85),transparent 60%),linear-gradient(168deg,#8FB6CB,#2C6382)"></div>
+      <div style="padding:22px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Лот № 14 · банкротные торги</div>
+        <h4 style="font:600 20px/1.3 Literata,Georgia,serif;margin-top:10px">18 соток, ИЖС, Приозерский район</h4>
+        <p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Электричество по границе, подъезд круглогодичный. Обременений в выписке нет — проверено 28 августа.</p>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:16px"><span style="font:400 28px/1 Literata,Georgia,serif">1 640 000 ₽</span><span style="font:400 13px/1.4 'IBM Plex Sans';color:#56646E">старт торгов</span></div>
+        <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:15px 24px;border-radius:999px;min-height:44px;margin-top:18px;width:100%">Разобрать лот со мной</button>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <div style="background:#F2E2D0;border-radius:28px;padding:24px;display:flex;gap:14px">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#8C491A" stroke-width="1.75" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+        <div><div style="font:600 16px/1.4 'IBM Plex Sans';color:#4A3A2C">Важно до подачи заявки</div><p style="font:400 14px/1.6 'IBM Plex Sans';color:#4A3A2C;margin-top:6px">Задаток на банкротных торгах не возвращается, если вы выиграли и отказались от сделки. Считаем бюджет заранее.</p></div>
+      </div>
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-left:0;border-radius:0 28px 28px 0;padding:24px 26px;border-left:2px solid #B2622D">
+        <p style="font:400 clamp(18px,2vw,22px)/1.45 Literata,Georgia,serif">«Мы дважды отказались от лота — и на третьем сэкономили 1,2 млн ₽. Ольга не торопила и объяснила, почему первые два не подходят».</p>
+        <div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:12px">Дмитрий и Анна, участок 15 соток под дом · сделка в июне 2026</div>
+      </div>
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Список с иконками</div>
+        <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font:400 15px/1.5 'IBM Plex Sans'">
+          <li style="display:flex;gap:11px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2C6382" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2.2 2.2L15 10.4"/></svg>Выписка ЕГРН, обременения, аресты</li>
+          <li style="display:flex;gap:11px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2C6382" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="M3 19l6-3 6 3 6-3V6l-6 3-6-3-6 3z"/></svg>Категория земель, ВРИ и ЗОУИТ</li>
+          <li style="display:flex;gap:11px"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2C6382" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Сроки: проверка — 3 дня, сделка — от 21 дня</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <details open style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:18px 22px">
+        <summary style="font:600 16px/1.4 'IBM Plex Sans';cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px">Что входит в проверку участка<span style="color:#B2622D">−</span></summary>
+        <p style="font:400 14px/1.65 'IBM Plex Sans';color:#56646E;margin-top:10px">Девять пунктов: право, обременения, ВРИ, категория, границы, ЗОУИТ, коммуникации, подъезд, история сделок. Итог — PDF на 4–6 страниц с выводом «брать / не брать».</p>
+      </details>
+      <details style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:18px 22px">
+        <summary style="font:600 16px/1.4 'IBM Plex Sans';cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px">Сколько стоит сопровождение<span style="color:#B2622D">+</span></summary>
+        <p style="font:400 14px/1.65 'IBM Plex Sans';color:#56646E;margin-top:10px">Фиксированная сумма, известная до старта. Никаких процентов от сделки и доплат по ходу.</p>
+      </details>
+      <details style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:18px 22px">
+        <summary style="font:600 16px/1.4 'IBM Plex Sans';cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px">Работаете только по Ленобласти<span style="color:#B2622D">+</span></summary>
+        <p style="font:400 14px/1.65 'IBM Plex Sans';color:#56646E;margin-top:10px">Основной регион — Санкт-Петербург и Ленинградская область. По другим регионам беру проверку документов дистанционно.</p>
+      </details>
+      <div style="background:#12303F;border-radius:28px;padding:26px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Подписка на дайджест</div>
+        <h4 style="font:400 22px/1.25 Literata,Georgia,serif;color:#E9EFF2;margin-top:10px">Разбор лотов раз в неделю</h4>
+        <p style="font:400 14px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);margin-top:8px">3–5 участков с ценой, ВРИ и моим комментарием, что с ними не так.</p>
+        <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+          <input type="email" placeholder="Электронная почта" style="flex:1 1 160px;font:400 15px/1.4 'IBM Plex Sans';color:#E9EFF2;background:rgba(233,239,242,.1);border:1px solid rgba(233,239,242,.32);border-radius:999px;padding:13px 18px;min-height:44px">
+          <button style="cursor:pointer;border:0;background:#E9EFF2;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:13px 22px;border-radius:999px;min-height:44px">Подписаться</button>
+        </div>
+        <p style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.55);margin-top:10px">Одно письмо в неделю. Отписка — одной ссылкой внизу письма.</p>
+      </div>
+    </div>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: hover/active в мудборде показаны отдельными экземплярами, чтобы состояния были видны рядом; в проде они задаются на <span style="font-family:ui-monospace,monospace">:hover</span>, <span style="font-family:ui-monospace,monospace">:active</span>, <span style="font-family:ui-monospace,monospace">:focus-visible</span> и переходом 180 ms.</p>
+</section>
+
+<section id="s11" style="background:#DCE6EB;border-top:1px solid #C9D5DB;border-bottom:1px solid #C9D5DB">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#12303F;color:#E9EFF2;font:400 18px/56px Literata,Georgia,serif;text-align:center">11</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Пример страницы сайта</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Собрано из тех же компонентов: навигация, первый экран, текстовый блок, карточки услуг, визуальная секция, форма подписки, финальный CTA, футер.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:clamp(30px,4vw,48px);background:#E9EFF2;border:1px solid #C9D5DB;border-radius:28px;overflow:hidden;box-shadow:0 12px 32px rgba(18,40,55,.15)">
+    <div style="display:flex;align-items:center;gap:8px;padding:12px 18px;background:#DCE6EB;border-bottom:1px solid #C9D5DB"><span style="width:9px;height:9px;border-radius:999px;background:#C9D5DB"></span><span style="width:9px;height:9px;border-radius:999px;background:#C9D5DB"></span><span style="width:9px;height:9px;border-radius:999px;background:#C9D5DB"></span><span style="font:400 12px/1 'IBM Plex Sans';color:#56646E;margin-left:10px">terranova.ru — десктоп 1440</span></div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(18px,3vw,40px);border-bottom:1px solid #C9D5DB;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);background:#12303F;display:block"></span><span style="font:600 17px/1 Literata,Georgia,serif">Terra Nova</span></div>
+      <div style="display:flex;gap:22px;font:600 14px/1 'IBM Plex Sans';color:#2E3B45;flex-wrap:wrap"><span>Услуги</span><span>Как я работаю</span><span>Разборы лотов</span><span>Отзывы</span><span>Контакты</span></div>
+      <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 14px/1 'IBM Plex Sans';padding:13px 20px;border-radius:999px;min-height:44px">Оставить заявку</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3vw,44px);padding:clamp(28px,4vw,60px) clamp(18px,3vw,40px);align-items:center">
+      <div>
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Земельный капитал · Санкт-Петербург и Ленобласть</div>
+        <h3 style="font:400 clamp(32px,4.6vw,58px)/1.02 Literata,Georgia,serif;letter-spacing:-.025em;margin-top:16px">Земля — актив, который видно и можно проверить</h3>
+        <p style="font:400 clamp(16px,1.4vw,19px)/1.6 'IBM Plex Sans';color:#2E3B45;margin-top:16px;max-width:46ch">Подберу участок под вашу задачу, проверю документы по девяти пунктам и проведу сделку — включая банкротные торги. Скажу прямо, если лот брать не стоит.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+          <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:16px 26px;border-radius:999px;min-height:48px">Записаться на консультацию</button>
+          <button style="cursor:pointer;border:1px solid #12303F;background:transparent;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:16px 26px;border-radius:999px;min-height:48px">Проверить свой участок</button>
+        </div>
+        <div style="display:flex;gap:28px;margin-top:30px;flex-wrap:wrap">
+          <div><div style="font:400 30px/1 Literata,Georgia,serif">64</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:4px">сделки с 2019 года</div></div>
+          <div><div style="font:400 30px/1 Literata,Georgia,serif">9</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:4px">пунктов проверки лота</div></div>
+          <div><div style="font:400 30px/1 Literata,Georgia,serif">21</div><div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:4px">день — средняя сделка</div></div>
+        </div>
+      </div>
+      <div style="min-height:340px;border-radius:3px;clip-path:polygon(0 0,calc(100% - 44px) 0,100% 44px,100% 100%,0 100%);background-image:radial-gradient(circle at 62% 22%,rgba(226,240,246,.8),transparent 58%),linear-gradient(178deg,#8FB6CB,#2C6382 62%,#1B4257)"></div>
+    </div>
+
+    <div style="padding:clamp(24px,3vw,44px) clamp(18px,3vw,40px);border-top:1px solid #C9D5DB">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+        <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:22px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#B2622D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a3 3 0 01-3 3H8l-4 3V6a3 3 0 013-3h10a3 3 0 013 3z"/><path d="M9 9h7M9 13h4"/></svg><h4 style="font:600 18px/1.3 Literata,Georgia,serif;margin-top:14px">Консультация</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Час разговора: разберём задачу, бюджет и реальные варианты. От 6 000 ₽.</p></div>
+        <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:22px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#B2622D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2.2 2.2L15 10.4"/></svg><h4 style="font:600 18px/1.3 Literata,Georgia,serif;margin-top:14px">Проверка лота</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">Девять пунктов и вывод «брать / не брать» в PDF. 3 рабочих дня.</p></div>
+        <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:22px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#B2622D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 18V8l6-4 6 4v10"/><path d="M12 4.5V18"/></svg><h4 style="font:600 18px/1.3 Literata,Georgia,serif;margin-top:14px">Банкротные торги</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:#56646E;margin-top:8px">От отбора лота до регистрации права. Сопровождаю весь путь.</p></div>
+        <div style="background:#12303F;border-radius:20px;padding:22px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#BCD5E2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4-8 4-8-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg><h4 style="font:600 18px/1.3 Literata,Georgia,serif;color:#E9EFF2;margin-top:14px">Клуб «Земля как актив»</h4><p style="font:400 14px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);margin-top:8px">Наставничество для тех, кто хочет разбираться сам.</p></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(18px,3vw,40px);padding:clamp(24px,3vw,44px) clamp(18px,3vw,40px);background:#DCE6EB;border-top:1px solid #C9D5DB;align-items:center">
+      <div style="min-height:230px;border-radius:20px;background-image:linear-gradient(160deg,#C9D5DB,#93A2AB 70%,#56646E)"></div>
+      <div>
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Как я работаю</div>
+        <h3 style="font:400 clamp(24px,2.8vw,34px)/1.15 Literata,Georgia,serif;margin-top:12px">Четыре шага, каждый с понятным результатом</h3>
+        <div style="display:grid;gap:12px;margin-top:18px">
+          <div style="display:flex;gap:12px"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 13px/26px 'IBM Plex Sans';text-align:center">1</span><span style="font:400 15px/1.55 'IBM Plex Sans'">Разбираем задачу и бюджет — на выходе список требований к участку</span></div>
+          <div style="display:flex;gap:12px"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 13px/26px 'IBM Plex Sans';text-align:center">2</span><span style="font:400 15px/1.55 'IBM Plex Sans'">Подбираю лоты и отсеиваю проблемные — вы видите только пригодные</span></div>
+          <div style="display:flex;gap:12px"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 13px/26px 'IBM Plex Sans';text-align:center">3</span><span style="font:400 15px/1.55 'IBM Plex Sans'">Проверяю документы по девяти пунктам и считаю расходы до конца</span></div>
+          <div style="display:flex;gap:12px"><span style="flex:none;width:26px;height:26px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 13px/26px 'IBM Plex Sans';text-align:center">4</span><span style="font:400 15px/1.55 'IBM Plex Sans'">Провожу сделку и регистрацию права — вы получаете выписку на себя</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:clamp(28px,4vw,52px) clamp(18px,3vw,40px);background:#12303F;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(18px,3vw,36px);align-items:center">
+      <div>
+        <h3 style="font:400 clamp(24px,3vw,38px)/1.1 Literata,Georgia,serif;color:#E9EFF2">Начнём с разговора, а не с покупки</h3>
+        <p style="font:400 16px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.72);margin-top:12px;max-width:44ch">Опишите задачу — отвечу в течение дня и скажу, чем реально могу помочь. Если ваш случай мне не подходит, скажу об этом сразу.</p>
+      </div>
+      <div style="background:rgba(233,239,242,.07);border:1px solid rgba(233,239,242,.22);border-radius:20px;padding:22px;display:grid;gap:10px">
+        <input type="text" placeholder="Имя" style="font:400 15px/1.4 'IBM Plex Sans';color:#E9EFF2;background:rgba(233,239,242,.1);border:1px solid rgba(233,239,242,.3);border-radius:16px;padding:14px 16px;min-height:48px">
+        <input type="tel" placeholder="Телефон или Telegram" style="font:400 15px/1.4 'IBM Plex Sans';color:#E9EFF2;background:rgba(233,239,242,.1);border:1px solid rgba(233,239,242,.3);border-radius:16px;padding:14px 16px;min-height:48px">
+        <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:16px 24px;border-radius:999px;min-height:48px">Отправить заявку</button>
+        <span style="font:400 12px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.55)">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
+      </div>
+    </div>
+
+    <div style="padding:clamp(22px,3vw,36px) clamp(18px,3vw,40px);background:#1B4257;background-image:repeating-linear-gradient(112deg,rgba(233,239,242,.05) 0 2px,transparent 2px 6px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.72)">Terra Nova · Ольга Грошева<br>ИП, Санкт-Петербург</div>
+      <div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.72)">Услуги<br>Разборы лотов<br>Клуб</div>
+      <div style="font:400 13px/1.7 'IBM Plex Sans';color:rgba(233,239,242,.72)">Telegram-канал<br>Почта<br>Политика обработки данных</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px;align-items:start">
+    <div style="max-width:390px;margin:0 auto;width:100%;background:#E9EFF2;border:8px solid #12303F;border-radius:36px;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #C9D5DB">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);background:#12303F;display:block"></span><span style="font:600 15px/1 Literata,Georgia,serif">Terra Nova</span></div>
+        <span style="display:grid;gap:4px;width:24px"><span style="height:2px;background:#12303F"></span><span style="height:2px;background:#12303F"></span><span style="height:2px;background:#12303F"></span></span>
+      </div>
+      <div style="padding:22px 18px">
+        <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Земельный капитал</div>
+        <h4 style="font:400 30px/1.06 Literata,Georgia,serif;letter-spacing:-.02em;margin-top:12px">Земля — актив, который можно проверить</h4>
+        <p style="font:400 15px/1.6 'IBM Plex Sans';color:#2E3B45;margin-top:12px">Подбор, проверка по девяти пунктам и сопровождение сделки — включая банкротные торги.</p>
+        <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:16px;border-radius:999px;min-height:48px;width:100%;margin-top:16px">Записаться на консультацию</button>
+        <button style="cursor:pointer;border:1px solid #12303F;background:transparent;color:#12303F;font:600 15px/1 'IBM Plex Sans';padding:16px;border-radius:999px;min-height:48px;width:100%;margin-top:8px">Проверить участок</button>
+      </div>
+      <div style="height:200px;margin:0 18px;border-radius:3px;clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%);background-image:linear-gradient(178deg,#8FB6CB,#2C6382 66%,#1B4257)"></div>
+      <div style="padding:22px 18px">
+        <div style="display:grid;gap:10px">
+          <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:16px;padding:16px"><h4 style="font:600 16px/1.3 Literata,Georgia,serif">Проверка лота</h4><p style="font:400 14px/1.55 'IBM Plex Sans';color:#56646E;margin-top:6px">Девять пунктов, вывод в PDF, 3 дня.</p></div>
+          <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:16px;padding:16px"><h4 style="font:600 16px/1.3 Literata,Georgia,serif">Банкротные торги</h4><p style="font:400 14px/1.55 'IBM Plex Sans';color:#56646E;margin-top:6px">От отбора лота до выписки на вас.</p></div>
+        </div>
+      </div>
+      <div style="background:#12303F;padding:22px 18px">
+        <h4 style="font:400 22px/1.15 Literata,Georgia,serif;color:#E9EFF2">Начнём с разговора</h4>
+        <input type="tel" placeholder="Телефон или Telegram" style="width:100%;font:400 15px/1.4 'IBM Plex Sans';color:#E9EFF2;background:rgba(233,239,242,.1);border:1px solid rgba(233,239,242,.3);border-radius:16px;padding:14px 16px;min-height:48px;margin-top:14px">
+        <button style="cursor:pointer;border:0;background:#B2622D;color:#E9EFF2;font:600 15px/1 'IBM Plex Sans';padding:16px;border-radius:999px;min-height:48px;width:100%;margin-top:8px">Отправить</button>
+      </div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Что меняется на 390 px</div>
+      <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font:400 15px/1.55 'IBM Plex Sans'">
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Одна колонка, поля 18–20 px, кнопки на всю ширину</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Display XL уменьшается до 30–34 px, но остаётся Literata</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Меню сворачивается в бургер; кнопка заявки остаётся в первом экране</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Срез уменьшается до 20 px, ниже 120 px блока — снимается</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Цифры-показатели переносятся в столбец, а не сжимаются</li>
+      </ul>
+    </div>
+  </div>
+ </div>
+</section>
+<section id="s12" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">12</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Дизайн-система для PDF</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Формат A4. Поля: 20 мм сверху и снизу, 22 мм слева, 18 мм справа. Основной текст 11 pt с интерлиньяжем 1,6; заголовки — 26 / 18 / 14 pt. Колонтитул снизу: название материала слева, номер страницы справа. Плотность — не более 2 800 знаков на страницу.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:clamp(30px,4vw,48px)">
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#4A3A2C;background-image:repeating-linear-gradient(0deg,rgba(233,239,242,.07) 0 1px,transparent 1px 9px);border-radius:12px;overflow:hidden;box-shadow:0 3px 10px rgba(18,40,55,.16);display:flex;flex-direction:column;justify-content:space-between;padding:9%">
+        <div>
+          <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.18em;text-transform:uppercase;color:#F2E2D0">Terra Nova · рабочая тетрадь</div>
+          <div style="width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);background:#E9EFF2;margin-top:14%"></div>
+        </div>
+        <div>
+          <div style="font:400 clamp(20px,3.2vw,30px)/1.06 Literata,Georgia,serif;color:#E9EFF2">Девять пунктов проверки участка</div>
+          <div style="font:400 10px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.75);margin-top:10px">Что смотреть в выписке, ВРИ и на местности<br>до того, как вносить задаток</div>
+          <div style="height:1px;background:rgba(233,239,242,.3);margin:14px 0 10px"></div>
+          <div style="font:400 9px/1.4 'IBM Plex Sans';color:rgba(233,239,242,.65)">Ольга Грошева · сентябрь 2026</div>
+        </div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Обложка A4 — фактура «торф», знак Terra Nova, заголовок внизу</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#E9EFF2;background-image:radial-gradient(rgba(86,100,110,.14) .6px,transparent .7px);background-size:5px 5px;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column">
+        <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">§ 01 · Основы</div>
+        <div style="font:400 clamp(16px,2.4vw,22px)/1.15 Literata,Georgia,serif;margin-top:12px">Что такое ВРИ и почему с него всё начинается</div>
+        <div style="display:grid;gap:5px;margin-top:14px">
+          <span style="height:5px;background:#C9D5DB;border-radius:3px"></span><span style="height:5px;background:#C9D5DB;border-radius:3px"></span><span style="height:5px;background:#C9D5DB;border-radius:3px;width:92%"></span><span style="height:5px;background:#C9D5DB;border-radius:3px;width:78%"></span>
+        </div>
+        <div style="background:#F2E2D0;border-radius:8px;padding:9px 11px;margin-top:14px"><div style="font:600 9px/1.3 'IBM Plex Sans';color:#4A3A2C">Важно</div><div style="font:400 8.5px/1.5 'IBM Plex Sans';color:#4A3A2C;margin-top:3px">Смена ВРИ занимает от двух месяцев и не всегда возможна.</div></div>
+        <div style="display:grid;gap:5px;margin-top:14px">
+          <span style="height:5px;background:#C9D5DB;border-radius:3px"></span><span style="height:5px;background:#C9D5DB;border-radius:3px;width:88%"></span><span style="height:5px;background:#C9D5DB;border-radius:3px;width:64%"></span>
+        </div>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;font:400 8px/1.2 'IBM Plex Sans';color:#93A2AB;border-top:1px solid #C9D5DB;padding-top:7px">Девять пунктов проверки<span>04</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Страница с текстом: одна колонка, врезка «Важно», колонтитул</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column">
+        <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Упражнение 2</div>
+        <div style="font:400 clamp(16px,2.4vw,22px)/1.15 Literata,Georgia,serif;margin-top:12px">Опишите свою задачу по участку</div>
+        <div style="font:400 8.5px/1.5 'IBM Plex Sans';color:#56646E;margin-top:8px">Заполните от руки или в PDF-редакторе. Это основа для подбора.</div>
+        <div style="display:grid;gap:12px;margin-top:16px">
+          <div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">1. Для чего покупаете землю?</div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div></div>
+          <div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">2. Бюджет вместе с расходами на оформление</div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div></div>
+          <div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">3. Максимальное удаление от города</div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div></div>
+          <div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">4. Что для вас неприемлемо ни при каких условиях?</div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div><div style="border-bottom:1px solid #C9D5DB;height:14px"></div></div>
+        </div>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;font:400 8px/1.2 'IBM Plex Sans';color:#93A2AB;border-top:1px solid #C9D5DB;padding-top:7px">Рабочая тетрадь<span>09</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Страница с упражнениями: линии для ответа 14 pt высотой</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#E9EFF2;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column">
+        <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Чек-лист</div>
+        <div style="font:400 clamp(16px,2.4vw,22px)/1.15 Literata,Georgia,serif;margin-top:12px">Перед задатком</div>
+        <div style="display:grid;gap:7px;margin-top:14px">
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">Выписка ЕГРН получена не позднее трёх дней назад</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">Обременения и аресты проверены по ФССП и картотеке</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">ВРИ допускает то, что вы планируете строить</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">ЗОУИТ: газ, ЛЭП, водоохранная зона — на карте, а не на словах</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">Границы вынесены и совпадают с забором соседей</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="flex:none;width:12px;height:12px;border:1.2px solid #B2622D;border-radius:3px"></span><span style="font:400 8.5px/1.45 'IBM Plex Sans'">Подъезд есть круглый год и не по чужой земле</span></div>
+        </div>
+        <div style="background:#BCD5E2;border-radius:8px;padding:9px 11px;margin-top:14px;font:400 8.5px/1.5 'IBM Plex Sans';color:#12303F">Если хотя бы один пункт без галочки — задаток не вносим.</div>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;font:400 8px/1.2 'IBM Plex Sans';color:#93A2AB;border-top:1px solid #C9D5DB;padding-top:7px">Чек-лист покупателя<span>02</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Чек-лист: квадратные чекбоксы 8 px, вывод в зелёной плашке</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#12303F;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column;justify-content:center">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#8FB6CB" stroke-width="1.6"><path d="M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>
+        <div style="font:400 clamp(17px,2.6vw,25px)/1.3 Literata,Georgia,serif;color:#E9EFF2;margin-top:18px">«Землю не покупают быстро. Её покупают понятно».</div>
+        <div style="font:400 9px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.65);margin-top:14px">Правило, с которого начинается каждая моя сделка</div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Страница-цитата: тёмный фон, текст по центру вертикали</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column">
+        <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Таблица · сравнение</div>
+        <div style="font:400 clamp(15px,2.2vw,20px)/1.15 Literata,Georgia,serif;margin-top:12px">Муниципальные торги и банкротные</div>
+        <table style="width:100%;border-collapse:collapse;margin-top:14px;font:400 8px/1.45 'IBM Plex Sans'">
+          <thead><tr><th style="text-align:left;padding:7px 6px;background:#DCE6EB;border-bottom:1px solid #C9D5DB;font-weight:600">Параметр</th><th style="text-align:left;padding:7px 6px;background:#DCE6EB;border-bottom:1px solid #C9D5DB;font-weight:600">Муниципальные</th><th style="text-align:left;padding:7px 6px;background:#DCE6EB;border-bottom:1px solid #C9D5DB;font-weight:600">Банкротные</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Цена входа</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Кадастровая и выше</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">−20…−50% от рынка</td></tr>
+            <tr><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Срок</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">30–45 дней</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">45–90 дней</td></tr>
+            <tr><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Задаток</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">10–20%</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">5–20%</td></tr>
+            <tr><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Риск</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Низкий</td><td style="padding:7px 6px;border-bottom:1px solid #C9D5DB">Средний: нужна проверка</td></tr>
+            <tr><td style="padding:7px 6px">Кому подходит</td><td style="padding:7px 6px">Под свой дом</td><td style="padding:7px 6px">Под вложение</td></tr>
+          </tbody>
+        </table>
+        <div style="font:400 7.5px/1.4 'IBM Plex Sans';color:#93A2AB;margin-top:8px">Данные по Ленинградской области, август 2026</div>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;font:400 8px/1.2 'IBM Plex Sans';color:#93A2AB;border-top:1px solid #C9D5DB;padding-top:7px">Гид по торгам<span>07</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Таблица: шапка на песке, линии 1 px, без вертикальных границ</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#E9EFF2;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column">
+        <div style="font:600 8px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Порядок действий</div>
+        <div style="font:400 clamp(16px,2.4vw,22px)/1.15 Literata,Georgia,serif;margin-top:12px">От лота до выписки</div>
+        <div style="display:grid;gap:11px;margin-top:16px">
+          <div style="display:flex;gap:9px"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 8.5px/18px 'IBM Plex Sans';text-align:center">1</span><div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">Отбор лота</div><div style="font:400 8px/1.45 'IBM Plex Sans';color:#56646E">Смотрим площадку, читаем сообщение о торгах</div></div></div>
+          <div style="display:flex;gap:9px"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 8.5px/18px 'IBM Plex Sans';text-align:center">2</span><div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">Проверка</div><div style="font:400 8px/1.45 'IBM Plex Sans';color:#56646E">Девять пунктов, выезд на место при необходимости</div></div></div>
+          <div style="display:flex;gap:9px"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 8.5px/18px 'IBM Plex Sans';text-align:center">3</span><div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">Заявка и задаток</div><div style="font:400 8px/1.45 'IBM Plex Sans';color:#56646E">ЭЦП, аккредитация, перевод задатка в срок</div></div></div>
+          <div style="display:flex;gap:9px"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 8.5px/18px 'IBM Plex Sans';text-align:center">4</span><div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">Торги и договор</div><div style="font:400 8px/1.45 'IBM Plex Sans';color:#56646E">Держим верхнюю границу цены, подписываем ДКП</div></div></div>
+          <div style="display:flex;gap:9px"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 8.5px/18px 'IBM Plex Sans';text-align:center">5</span><div><div style="font:600 8.5px/1.3 'IBM Plex Sans'">Регистрация права</div><div style="font:400 8px/1.45 'IBM Plex Sans';color:#56646E">МФЦ, до девяти рабочих дней, выписка на вас</div></div></div>
+        </div>
+        <div style="margin-top:auto;display:flex;justify-content:space-between;font:400 8px/1.2 'IBM Plex Sans';color:#93A2AB;border-top:1px solid #C9D5DB;padding-top:7px">Гид по торгам<span>11</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Нумерованные шаги: круг 18 px, заголовок и одна строка пояснения</figcaption>
+    </figure>
+    <figure>
+      <div data-a4 style="aspect-ratio:210/297;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:12px;overflow:hidden;padding:9%;display:flex;flex-direction:column;justify-content:space-between">
+        <div style="height:34%;border-radius:2px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);background-image:linear-gradient(178deg,#8FB6CB,#2C6382)"></div>
+        <div>
+          <div style="font:400 clamp(16px,2.4vw,22px)/1.15 Literata,Georgia,serif">Если хотите разобрать конкретный участок</div>
+          <div style="font:400 8.5px/1.55 'IBM Plex Sans';color:#56646E;margin-top:9px">Напишите мне в Telegram: пришлите кадастровый номер и задачу. Отвечу в течение дня и скажу, что с этим лотом делать.</div>
+          <div style="display:inline-block;font:600 9px/1 'IBM Plex Sans';color:#E9EFF2;background:#B2622D;padding:11px 16px;border-radius:999px;margin-top:12px">Написать Ольге</div>
+          <div style="font:400 8px/1.5 'IBM Plex Sans';color:#93A2AB;margin-top:12px">terranova.ru · t.me/terranova · Санкт-Петербург</div>
+        </div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">Финальная страница с CTA: срез сверху, контакты внизу</figcaption>
+    </figure>
+  </div>
+
+  <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px;margin-top:18px" data-note>
+    <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Правила печати</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:16px;font:400 14px/1.65 'IBM Plex Sans';color:#2E3B45">
+      <div>Безопасная область печати — 10 мм от края. Фоновые заливки выводятся под обрез только на обложке и странице-цитате; текстовые страницы всегда на светлом.</div>
+      <div>Мудборд содержит <span style="font-family:ui-monospace,monospace">@page {size:A4; margin:0}</span> и правила <span style="font-family:ui-monospace,monospace">@media print</span>: при сохранении в PDF из браузера каждая страница-макет уходит на отдельный лист A4, интерфейс мудборда не печатается.</div>
+      <div>Минимальный кегль в PDF — 9 pt (подписи), основной текст 11 pt. Межстрочный не ниже 1,5. Переносов нет, выравнивание по левому краю.</div>
+    </div>
+  </div>
+</section>
+
+<section id="s13" style="background:#12303F;color:#E9EFF2">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#E9EFF2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">13</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Дизайн-система для email</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);max-width:62ch;margin-top:14px;text-wrap:pretty">Ширина письма 620 px, одна колонка, таблицы вместо flex. Текст от 16 px, кнопки от 48 px по высоте, все важные смыслы — текстом, а не картинкой.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:clamp(30px,4vw,48px);align-items:start">
+    <figure>
+      <div style="max-width:620px;background:#E9EFF2;border-radius:16px;overflow:hidden;color:#16202A">
+        <div style="background:#12303F;padding:18px 26px;display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);background:#E9EFF2;display:block"></span><span style="font:600 16px/1 Literata,Georgia,serif;color:#E9EFF2">Terra Nova</span><span style="font:400 12px/1 'IBM Plex Sans';color:rgba(233,239,242,.6);margin-left:auto">Дайджест № 14</span></div>
+        <div style="padding:26px">
+          <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">2 сентября 2026</div>
+          <h3 style="font:400 26px/1.2 Literata,Georgia,serif;margin-top:10px">Три лота недели и один, от которого я бы отказалась</h3>
+          <p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:12px">Здравствуйте! На этой неделе разбираю три участка в Приозерском и Всеволожском районах. Один выглядит выгодно, но у него проблема с подъездом — расскажу, как это увидеть по карте.</p>
+          <div style="height:190px;border-radius:12px;margin-top:18px;background-image:linear-gradient(178deg,#8FB6CB,#2C6382)"></div>
+          <div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:8px">Лот № 14, 18 соток, ИЖС — фото с выезда 28 августа</div>
+          <div style="background:#F2E2D0;border-radius:12px;padding:18px;margin-top:20px"><div style="font:600 16px/1.4 'IBM Plex Sans';color:#4A3A2C">Коротко о лоте № 14</div><div style="font:400 15px/1.6 'IBM Plex Sans';color:#4A3A2C;margin-top:6px">Старт 1 640 000 ₽ · электричество по границе · обременений нет · подъезд круглогодичный.</div></div>
+          <ul style="list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px;font:400 16px/1.55 'IBM Plex Sans'">
+            <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Лот № 14 — беру в работу, объясняю почему</li>
+            <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Лот № 15 — цена ниже рынка на 30%, но ЗОУИТ по газу</li>
+            <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#2C6382;transform:rotate(45deg);margin-top:9px"></span>Лот № 16 — подъезд по чужой земле, отказываюсь</li>
+          </ul>
+          <a href="#s13" style="display:block;text-align:center;font:600 16px/1 'IBM Plex Sans';color:#E9EFF2;background:#B2622D;padding:18px 24px;border-radius:999px;margin-top:22px;text-decoration:none">Читать разбор трёх лотов</a>
+          <a href="#s13" style="display:block;text-align:center;font:600 15px/1.4 'IBM Plex Sans';color:#8C491A;margin-top:14px">Или сразу записаться на консультацию →</a>
+          <div style="height:1px;background:#C9D5DB;margin:22px 0"></div>
+          <p style="font:400 15px/1.65 'IBM Plex Sans';color:#2E3B45">С уважением,<br>Ольга Грошева — подбор и проверка земельных участков</p>
+        </div>
+        <div style="background:#DCE6EB;padding:20px 26px;font:400 13px/1.7 'IBM Plex Sans';color:#56646E">Terra Nova · Санкт-Петербург · terranova.ru<br>Вы получаете это письмо, потому что подписались на дайджест лотов.<br><span style="text-decoration:underline">Отписаться от рассылки</span> · <span style="text-decoration:underline">Изменить частоту</span></div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.62);margin-top:10px">Desktop preview, 620 px</figcaption>
+    </figure>
+    <div style="display:grid;gap:22px">
+      <figure>
+        <div style="max-width:340px;background:#E9EFF2;border-radius:16px;overflow:hidden;color:#16202A">
+          <div style="background:#12303F;padding:14px 18px;display:flex;align-items:center;gap:9px"><span style="width:20px;height:20px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,0 100%);background:#E9EFF2;display:block"></span><span style="font:600 15px/1 Literata,Georgia,serif;color:#E9EFF2">Terra Nova</span></div>
+          <div style="padding:18px">
+            <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Дайджест № 14</div>
+            <h4 style="font:400 21px/1.2 Literata,Georgia,serif;margin-top:9px">Три лота недели и один отказ</h4>
+            <p style="font:400 16px/1.6 'IBM Plex Sans';margin-top:10px">Разбираю участки в Приозерском и Всеволожском районах — с ценами и рисками.</p>
+            <div style="height:120px;border-radius:12px;margin-top:14px;background-image:linear-gradient(178deg,#8FB6CB,#2C6382)"></div>
+            <a href="#s13" style="display:block;text-align:center;font:600 16px/1 'IBM Plex Sans';color:#E9EFF2;background:#B2622D;padding:17px 20px;border-radius:999px;margin-top:16px;text-decoration:none">Читать разбор</a>
+          </div>
+          <div style="background:#DCE6EB;padding:16px 18px;font:400 12px/1.65 'IBM Plex Sans';color:#56646E">Terra Nova · Санкт-Петербург<br><span style="text-decoration:underline">Отписаться</span></div>
+        </div>
+        <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.62);margin-top:10px">Mobile preview, 340 px — одна колонка, кнопка на всю ширину</figcaption>
+      </figure>
+      <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Вид без изображений</div>
+        <div style="background:#E9EFF2;border-radius:12px;padding:18px;margin-top:14px;color:#16202A">
+          <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Дайджест № 14</div>
+          <div style="font:400 19px/1.25 Literata,Georgia,serif;margin-top:8px">Три лота недели и один отказ</div>
+          <div style="border:1px dashed #C9D5DB;border-radius:8px;padding:12px;margin-top:12px;font:400 13px/1.5 'IBM Plex Sans';color:#56646E">Лот № 14, 18 соток, ИЖС — фото с выезда 28 августа</div>
+          <div style="font:600 15px/1 'IBM Plex Sans';color:#E9EFF2;background:#B2622D;padding:15px;border-radius:999px;text-align:center;margin-top:12px">Читать разбор</div>
+        </div>
+        <p style="font:400 13px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:12px">Каждой картинке — alt-текст, который сам является подписью. Кнопка сделана на таблице с фоном, а не картинкой, поэтому остаётся видна.</p>
+      </div>
+      <div style="border:1px solid rgba(233,239,242,.2);border-radius:20px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Не переносится в письмо без упрощения</div>
+        <ul style="list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px;font:400 15px/1.55 'IBM Plex Sans';color:rgba(233,239,242,.86)">
+          <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#E3A08F;margin-top:11px"></span>Срез и clip-path — в письме только прямые углы или радиус 12 px</li>
+          <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#E3A08F;margin-top:11px"></span>Тени, фактуры, наложения градиентов</li>
+          <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#E3A08F;margin-top:11px"></span>Literata и IBM Plex Sans — только как <span style="font-family:ui-monospace,monospace">font-family</span> с фолбэком Georgia / Arial</li>
+          <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#E3A08F;margin-top:11px"></span>Многоколоночные сетки, accordion, переключатели, hover</li>
+          <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#E3A08F;margin-top:11px"></span>SVG-иконки — заменяются текстовым маркером или PNG с alt</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ </div>
+</section>
+
+<section id="s14" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">14</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Соцсети и карточки</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Шесть шаблонов 4:5 для Telegram. Серия держится палитрой и типографикой, но композиции разные — иначе лента выглядит как повтор.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:16px;margin-top:clamp(30px,4vw,48px)">
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#12303F;background-image:repeating-linear-gradient(112deg,rgba(233,239,242,.05) 0 2px,transparent 2px 6px);padding:26px;display:flex;flex-direction:column;justify-content:space-between">
+        <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.18em;text-transform:uppercase;color:#BCD5E2">Terra Nova</div>
+        <div>
+          <div style="width:52px;height:64px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2"></div>
+          <div style="font:400 clamp(24px,2.6vw,34px)/1.05 Literata,Georgia,serif;color:#E9EFF2;margin-top:18px">Девять пунктов проверки участка</div>
+          <div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(233,239,242,.7);margin-top:12px">Разбор по шагам · читать в канале</div>
+        </div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">1 · Обложка серии</figcaption>
+    </figure>
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#E9EFF2;border:1px solid #C9D5DB;padding:26px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font:400 clamp(22px,2.4vw,30px)/1.2 Literata,Georgia,serif">Участок без подъезда стоит ноль — сколько бы соток в нём ни было</div>
+        <div style="height:2px;width:56px;background:#B2622D;margin-top:20px"></div>
+        <div style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:14px">Ольга Грошева · Terra Nova</div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">2 · Один тезис</figcaption>
+    </figure>
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#F7F6F2;border:1px solid #C9D5DB;padding:26px;display:flex;flex-direction:column">
+        <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.16em;text-transform:uppercase;color:#8C491A">Совет 03</div>
+        <div style="font:400 clamp(80px,9vw,110px)/1 Literata,Georgia,serif;color:#F2E2D0;margin-top:6px">03</div>
+        <div style="font:400 clamp(18px,2vw,23px)/1.25 Literata,Georgia,serif;margin-top:-10px">Смотрите дату выписки ЕГРН — она живёт три дня</div>
+        <div style="font:400 13px/1.55 'IBM Plex Sans';color:#56646E;margin-top:auto">За неделю на участок успевает лечь арест. Проверяйте перед задатком, а не «в целом».</div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">3 · Нумерованный совет</figcaption>
+    </figure>
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#DCE6EB;padding:26px;display:flex;flex-direction:column">
+        <div style="font:400 clamp(19px,2.1vw,25px)/1.2 Literata,Georgia,serif">Что проверить до задатка</div>
+        <div style="display:grid;gap:11px;margin-top:18px">
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 11px/18px 'IBM Plex Sans';text-align:center">1</span><span style="font:400 14px/1.45 'IBM Plex Sans'">Право и обременения</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 11px/18px 'IBM Plex Sans';text-align:center">2</span><span style="font:400 14px/1.45 'IBM Plex Sans'">Категория и ВРИ</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 11px/18px 'IBM Plex Sans';text-align:center">3</span><span style="font:400 14px/1.45 'IBM Plex Sans'">Границы и ЗОУИТ</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 11px/18px 'IBM Plex Sans';text-align:center">4</span><span style="font:400 14px/1.45 'IBM Plex Sans'">Подъезд и коммуникации</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="flex:none;width:18px;height:18px;border-radius:999px;background:#BCD5E2;color:#1B4257;font:600 11px/18px 'IBM Plex Sans';text-align:center">5</span><span style="font:400 14px/1.45 'IBM Plex Sans'">Расходы после покупки</span></div>
+        </div>
+        <div style="font:400 12px/1.5 'IBM Plex Sans';color:#56646E;margin-top:auto">Полный список из девяти пунктов — в канале</div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">4 · Список</figcaption>
+    </figure>
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#4A3A2C;background-image:repeating-linear-gradient(0deg,rgba(233,239,242,.07) 0 1px,transparent 1px 9px);padding:26px;display:flex;flex-direction:column;justify-content:center">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#E7C4A6" stroke-width="1.6"><path d="M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>
+        <div style="font:400 clamp(20px,2.2vw,27px)/1.3 Literata,Georgia,serif;color:#E9EFF2;margin-top:16px">«Мы дважды отказались от лота — и на третьем сэкономили 1,2 млн ₽».</div>
+        <div style="font:400 13px/1.5 'IBM Plex Sans';color:rgba(242,226,208,.8);margin-top:14px">Дмитрий и Анна · сделка в июне 2026</div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">5 · Цитата и отзыв</figcaption>
+    </figure>
+    <figure>
+      <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#E9EFF2;border:1px solid #C9D5DB;display:flex;flex-direction:column">
+        <div style="height:44%;background-image:radial-gradient(circle at 66% 30%,rgba(226,240,246,.8),transparent 58%),linear-gradient(178deg,#8FB6CB,#2C6382)"></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1">
+          <div style="font:400 clamp(19px,2.1vw,25px)/1.2 Literata,Georgia,serif">Разберу ваш участок за 3 дня</div>
+          <div style="font:400 14px/1.55 'IBM Plex Sans';color:#56646E;margin-top:10px">Пришлите кадастровый номер — скажу, что с ним не так, и стоит ли брать.</div>
+          <div style="font:600 14px/1 'IBM Plex Sans';color:#E9EFF2;background:#B2622D;padding:15px;border-radius:999px;text-align:center;margin-top:auto">Написать в Telegram</div>
+        </div>
+      </div>
+      <figcaption style="font:400 13px/1.5 'IBM Plex Sans';color:#56646E;margin-top:10px">6 · Финальный CTA</figcaption>
+    </figure>
+  </div>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:#56646E;margin-top:18px;max-width:70ch">Техническое пояснение: рабочий размер 1080×1350 px. Безопасные поля 64 px, минимальный кегль 28 px в пересчёте на 1080 px. В серии из шести карточек тёмных — не больше двух подряд.</p>
+</section>
+<section id="s15" style="background:#DCE6EB;border-top:1px solid #C9D5DB;border-bottom:1px solid #C9D5DB">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#12303F;color:#E9EFF2;font:400 18px/56px Literata,Georgia,serif;text-align:center">15</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Tone of voice в дизайне</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Голос ровный и конкретный: факт, срок, цифра. Никаких обещаний быстрого богатства и никакого давления — в текстах интерфейса тоже.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px;display:grid;gap:18px">
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Заголовок</div><p style="font:400 20px/1.35 Literata,Georgia,serif;margin-top:8px">Земля — актив, который видно и можно проверить</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Подзаголовок</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Подберу участок под задачу, проверю документы по девяти пунктам и проведу сделку. Если лот брать не стоит — скажу об этом первой.</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Кнопка</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">«Записаться на консультацию» · «Проверить свой участок» · «Прислать кадастровый номер»</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Инструкция</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Впишите кадастровый номер целиком — 14 цифр с двоеточиями, как в выписке. Если номера нет, достаточно ссылки на лот.</p></div>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:26px;display:grid;gap:18px">
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Предупреждение</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Задаток на банкротных торгах не вернут, если вы выиграли и отказались. Посчитаем бюджет до подачи заявки.</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Поддерживающее сообщение</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Этот лот не подошёл — это нормально. В работе обычно три-четыре варианта, и мы дождёмся подходящего.</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Письмо</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Здравствуйте! На этой неделе разбираю три участка. Один выглядит выгодно, но у него проблема с подъездом — покажу, как это увидеть по карте.</p></div>
+      <div style="height:1px;background:#C9D5DB"></div>
+      <div><div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Подпись к материалу</div><p style="font:400 16px/1.65 'IBM Plex Sans';margin-top:8px">Чек-лист на 2 страницы: что проверить до задатка. PDF, без регистрации.</p></div>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <div style="background:#BCD5E2;border-radius:28px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#1B4257">Так говорим</div>
+        <ul style="list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px;font:400 15px/1.5 'IBM Plex Sans';color:#12303F">
+          <li>«Проверка занимает 3 рабочих дня»</li>
+          <li>«Стоимость известна до начала работы»</li>
+          <li>«Здесь есть риск — вот какой»</li>
+          <li>«Я работаю по Ленобласти, по другим регионам — только документы»</li>
+        </ul>
+      </div>
+      <div style="background:#F7F6F2;border:1px solid #9E3B26;border-radius:28px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#9E3B26">Так не говорим</div>
+        <ul style="list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px;font:400 15px/1.5 'IBM Plex Sans';color:#2E3B45">
+          <li>«Добро пожаловать в мир земельных инвестиций»</li>
+          <li>«Раскройте свой потенциал», «уникальный», «инновационный»</li>
+          <li>«Успейте — осталось 2 места», таймеры и «только сегодня»</li>
+          <li>«Заработайте миллионы на земле», «пассивный доход без усилий»</li>
+          <li>«Погрузитесь в атмосферу загородной жизни»</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ </div>
+</section>
+
+<section id="s16" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">16</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Правила использования системы</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Ограничения короткие и жёсткие: два шрифта, один акцент, один графический приём, один градиент.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:clamp(30px,4vw,48px)">
+    <div style="background:#12303F;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8FB6CB">Делать</div>
+      <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font:400 15px/1.55 'IBM Plex Sans';color:rgba(233,239,242,.9)">
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Оставлять пустое пространство справа и сверху заголовка</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Один смысл на экран или страницу</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Чередовать светлые и тёмные секции — примерно 3:1</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Подтверждать утверждения цифрой, сроком или документом</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Держать длину строки 60–75 знаков</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:6px;height:6px;background:#8FB6CB;transform:rotate(45deg);margin-top:9px"></span>Ставить срез один раз на экран — как акцент, а не как рамку для всего</li>
+      </ul>
+    </div>
+    <div style="background:#F7F6F2;border:1px solid #9E3B26;border-radius:28px;padding:26px">
+      <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#9E3B26">Не делать</div>
+      <ul style="list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;font:400 15px/1.55 'IBM Plex Sans';color:#2E3B45">
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Третий шрифт, курсив Literata, заголовки капсом</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Терракота как фон крупных блоков или в мелком тексте</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Больше одного акцента в блоке: и кнопка, и плашка, и цветной заголовок</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Ряды одинаковых карточек по всей странице</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Свечения, множественные тени, обводки поверх фактур</li>
+        <li style="display:flex;gap:10px"><span style="flex:none;width:11px;height:1.5px;background:#9E3B26;margin-top:11px"></span>Эмодзи, таймеры, «горящие» цены, восклицательные знаки в заголовках</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <div style="background:#F7F6F2;border:1px solid #C9D5DB;border-radius:28px;padding:24px">
+        <div style="font:600 12px/1.2 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:#8C491A">Частые ошибки</div>
+        <div style="display:grid;gap:12px;margin-top:16px;font:400 14px/1.6 'IBM Plex Sans';color:#2E3B45">
+          <div><span style="font-weight:600">Плотность.</span> Текст без отступов между блоками — воздух не «пустое место», а часть системы.</div>
+          <div><span style="font-weight:600">Механический приём.</span> Срез в каждом блоке превращается в шаблон и перестаёт работать.</div>
+          <div><span style="font-weight:600">Цвет вместо иерархии.</span> Важность задаётся размером и позицией, а не подкраской.</div>
+          <div><span style="font-weight:600">Сжатые заголовки.</span> Literata не сжимается по ширине; лучше уменьшить кегль.</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="border:1px solid #2F6B5C;border-radius:20px;padding:16px">
+          <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#23514A">Верно</div>
+          <div style="margin-top:12px"><div style="height:12px;width:78%;background:#12303F;border-radius:3px"></div><div style="height:6px;width:94%;background:#C9D5DB;border-radius:3px;margin-top:12px"></div><div style="height:6px;width:84%;background:#C9D5DB;border-radius:3px;margin-top:6px"></div><div style="height:22px;width:52%;background:#B2622D;border-radius:999px;margin-top:16px"></div></div>
+        </div>
+        <div style="border:1px solid #9E3B26;border-radius:20px;padding:16px">
+          <div style="font:600 11px/1.2 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:#9E3B26">Неверно</div>
+          <div style="margin-top:12px"><div style="height:12px;width:100%;background:#B2622D;border-radius:3px"></div><div style="height:6px;width:100%;background:#2C6382;border-radius:3px;margin-top:4px"></div><div style="height:6px;width:100%;background:#4A3A2C;border-radius:3px;margin-top:3px"></div><div style="display:flex;gap:4px;margin-top:8px"><span style="height:20px;flex:1;background:#B2622D;border-radius:999px"></span><span style="height:20px;flex:1;background:#12303F;border-radius:999px"></span><span style="height:20px;flex:1;background:#2F6B5C;border-radius:999px"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s17" style="background:#12303F;color:#E9EFF2">
+ <div style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#E9EFF2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">17</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">CSS-токены</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:rgba(233,239,242,.72);max-width:62ch;margin-top:14px;text-wrap:pretty">Готовый блок переменных для сайта и HTML-материалов. Имена семантические: цвет по роли, а не по оттенку.</p>
+    </div>
+  </div>
+  <pre style="margin:clamp(26px,3vw,40px) 0 0;background:#0D2432;border:1px solid rgba(233,239,242,.18);border-radius:20px;padding:clamp(18px,2.4vw,30px);overflow-x:auto;font:400 13px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#D3E4EE">:root {
+  /* Цвет — фоны и поверхности */
+  --color-bg-primary:      #E9EFF2;   /* дымка */
+  --color-bg-secondary:    #DCE6EB;   /* наледь */
+  --color-surface:         #F7F6F2;   /* бумага */
+  --color-surface-inverse: #12303F;   /* Ладога */
+
+  /* Цвет — опорные оттенки направления */
+  --color-deep:            #12303F;
+  --color-water:           #2C6382;
+  --color-ice:             #BCD5E2;
+  --color-peat:            #4A3A2C;
+
+  /* Цвет — текст и линии */
+  --color-text-primary:    #16202A;   /* 14,0:1 на bg-primary */
+  --color-text-secondary:  #56646E;   /*  4,8:1 на bg-primary */
+  --color-text-inverse:    #E9EFF2;
+  --color-border:          #C9D5DB;
+
+  /* Цвет — акцент и состояния */
+  --color-accent:          #B2622D;
+  --color-accent-hover:    #8C491A;
+  --color-accent-soft:     #F2E2D0;
+  --color-success:         #2F6B5C;
+  --color-error:           #9E3B26;
+
+  /* Единственный допустимый градиент */
+  --gradient-cover: linear-gradient(180deg, #1B4257, #12303F);
+
+  /* Типографика */
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body:    "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --text-display-xl: 92px;  --lh-display-xl: 0.94;  --ls-display-xl: -0.03em;
+  --text-display:    68px;  --lh-display:    1.00;  --ls-display:    -0.025em;
+  --text-h1:         48px;  --lh-h1:         1.05;  --ls-h1:         -0.02em;
+  --text-h2:         36px;  --lh-h2:         1.10;
+  --text-h3:         27px;  --lh-h3:         1.20;
+  --text-h4:         21px;  --lh-h4:         1.30;
+  --text-lead:       21px;  --lh-lead:       1.55;
+  --text-body-lg:    18px;  --lh-body-lg:    1.70;
+  --text-body:       16px;  --lh-body:       1.65;
+  --text-body-sm:    14px;  --lh-body-sm:    1.60;
+  --text-caption:    13px;  --lh-caption:    1.55;
+  --text-eyebrow:    12px;  --ls-eyebrow:    0.16em;
+  --text-button:     15px;  --ls-button:     0.01em;
+  --text-quote:      26px;  --lh-quote:      1.40;
+  --text-number:     64px;  --lh-number:     1.00;
+  --text-label:      13px;
+
+  /* Отступы — модуль 8 px */
+  --space-xxs: 4px;   --space-xs: 8px;   --space-sm: 16px;
+  --space-md:  24px;  --space-lg: 40px;  --space-xl: 64px;
+  --space-2xl: 96px;  --space-3xl: 144px;
+
+  /* Радиусы */
+  --radius-sm: 8px;  --radius-md: 16px;  --radius-lg: 28px;  --radius-pill: 999px;
+  --clip-cut: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 0 100%);
+
+  /* Тени */
+  --shadow-hairline: 0 1px 2px rgba(18,40,55,.14);
+  --shadow-soft:     0 3px 10px rgba(18,40,55,.16);
+  --shadow-inset:    inset 0 2px 5px rgba(18,40,55,.12);
+  --shadow-float:    0 12px 32px rgba(18,40,55,.22);
+
+  /* Контейнеры и точки перелома */
+  --container-max:  1240px;
+  --container-text: 720px;
+  --container-mail: 620px;
+  --bp-desktop: 1440px;  --bp-laptop: 1024px;
+  --bp-tablet:   768px;  --bp-mobile:  390px;
+
+  /* Движение */
+  --duration-fast: 120ms;  --duration-base: 180ms;  --duration-slow: 320ms;
+  --ease-out: cubic-bezier(.22,.61,.36,1);
+  --ease-in-out: cubic-bezier(.4,0,.2,1);
+}</pre>
+  <p data-note style="font:400 13px/1.65 'IBM Plex Sans';color:rgba(233,239,242,.62);margin-top:16px;max-width:70ch">Техническое пояснение: опорные оттенки и радиусы наследуются от дизайн-системы Organic; изменения вносятся только здесь, а не в отдельных макетах. Кириллическая пара Literata + IBM Plex Sans заменяет Caprasimo + Figtree, которые не поддерживают кириллицу, — роли и веса сохранены.</p>
+ </div>
+</section>
+
+<section id="s18" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(20px,5vw,64px)">
+  <div style="display:flex;align-items:flex-start;gap:18px">
+    <span style="flex:none;width:44px;height:56px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 15px) 0,100% 15px,100% 100%,0 100%);background:#BCD5E2;color:#12303F;font:400 18px/56px Literata,Georgia,serif;text-align:center">18</span>
+    <div>
+      <h2 style="font:400 clamp(30px,4.4vw,56px)/1.05 Literata,Georgia,serif;letter-spacing:-.02em">Итоговый чек-лист макета</h2>
+      <p style="font:400 17px/1.6 'IBM Plex Sans';color:#56646E;max-width:62ch;margin-top:14px;text-wrap:pretty">Семь вопросов к любому новому макету — сайту, странице PDF, письму или карточке.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:clamp(30px,4vw,48px)">
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Все цвета — из палитры, чистого белого и чёрного нет</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Воздуха достаточно: занято не больше 55% площади экрана</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Декора не больше одного приёма на экран</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Типографика работает: два шрифта, ясная иерархия, строка до 75 знаков</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Характер выдержан: честно, экспертно, тепло — без давления</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#F7F6F2;border:1px solid #C9D5DB;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#B2622D;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans'">Формат учтён: кегли, поля и плотность соответствуют носителю</span></label>
+    <label style="display:flex;gap:12px;align-items:flex-start;background:#BCD5E2;border-radius:20px;padding:20px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;accent-color:#8C491A;margin:1px 0 0;flex:none"><span style="font:400 15px/1.55 'IBM Plex Sans';color:#12303F">Дизайн узнаётся без фотографий — по цвету, шрифту и арке</span></label>
+  </div>
+</section>
+
+<footer style="background:#1B4257;background-image:repeating-linear-gradient(112deg,rgba(233,239,242,.05) 0 2px,transparent 2px 6px);color:rgba(233,239,242,.75)">
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,5vw,64px);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:11px"><span style="width:28px;height:34px;border-radius:2px;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);background:#E9EFF2;display:block"></span><span style="font:400 18px/1.2 Literata,Georgia,serif;color:#E9EFF2">Terra Nova — дизайн-система 1.0</span></div>
+    <div style="font:400 13px/1.7 'IBM Plex Sans'">Северный кадастр · Literata + IBM Plex Sans · Ладога, вода, латунь<br>Сентябрь 2026 · применяется ко всем макетам проекта</div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Мудборд&quot;},&quot;progressBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Мудборд&quot;}}">
+class Component extends DCLogic {
+  state = { notes: this.props.showNotes !== false };
+  componentDidMount() {
+    const bar = document.querySelector('[data-progress]');
+    if (bar && this.props.progressBar === false) bar.style.display = 'none';
+    this._onScroll = () => {
+      if (!bar) return;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); }
+  cols(n, light) {
+    return Array.from({ length: n }, (_, i) =>
+      React.createElement('span', { key: i, style: { height: '44px', borderRadius: '3px', background: light ? 'rgba(233,239,242,.22)' : 'rgba(22,32,42,.12)' } }));
+  }
+  renderVals() {
+    return {
+      notesAttr: this.state.notes ? 'on' : 'off',
+      notesLabel: this.state.notes ? 'Скрыть пояснения' : 'Показать пояснения',
+      toggleNotes: () => this.setState(s => ({ notes: !s.notes })),
+      navClick: (e) => {
+        const t = e.target.closest('[data-target]');
+        if (!t) return;
+        const el = document.getElementById(t.getAttribute('data-target'));
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
+      },
+      col12: this.cols(12, true),
+      col8: this.cols(8, true),
+      col6: this.cols(6, true),
+      col4: this.cols(4, true)
+    };
+  }
+}
+</script>
+</body>
+</html>
