@@ -226,9 +226,15 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ПОЛОСЫ-ЛОЗУНГИ
    ============================================================ */
-.band{ padding-block:var(--space-xl); }
+/* Излучина: полосы скруглены по системе 180/40 */
+.band{
+  padding-block:var(--space-2xl);
+  margin-inline:var(--space-md);
+  border-radius:var(--radius-bend-strip);
+  overflow:hidden;
+}
 .band--forest{ background:var(--gradient-cover); color:var(--text-inv); }
-.band--clay{ background:var(--clay); }
+.band--clay{ background:var(--clay); border-radius:40px 180px 40px 180px; }
 .band__slogan{
   font-family:var(--font-display); font-weight:400;
   font-size:clamp(28px, 4.6vw, 58px); line-height:1.06; letter-spacing:-.025em;
@@ -274,12 +280,17 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ДВА ПУТИ
    ============================================================ */
-.ways{ display:grid; gap:var(--space-md); }
+.ways{ display:grid; gap:var(--space-md); align-items:start; }
 .way{
   background:var(--surface); border-radius:var(--radius-lg);
   padding:var(--space-lg); border:1px solid rgba(27,34,28,.10);
 }
-.way--accent{ background:var(--forest); color:var(--text-inv); border-color:transparent; }
+.way--accent{
+  background:var(--forest); color:var(--text-inv); border-color:transparent;
+  border-radius:var(--radius-bend); padding:var(--space-xl) var(--space-lg);
+}
+.way--accent h3{ font-size:clamp(24px,2.6vw,32px); }
+.way--accent p{ font-size:var(--text-body); }
 .way--accent h3{ color:var(--text-inv); }
 .way--accent p{ color:rgba(244,243,238,.80); }
 .way--accent .way__tag{ background:rgba(244,243,238,.16); color:var(--shoot); }
@@ -372,9 +383,25 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ОШИБКИ
    ============================================================ */
-.miss{ list-style:none; margin:0; padding:0; display:grid; gap:1px; background:rgba(27,34,28,.14); border-radius:var(--radius-lg); overflow:hidden; }
-.miss li{ background:var(--bg-cold); padding:var(--space-lg); }
-.miss__n{ display:block; font-family:var(--font-display); font-size:14px; color:var(--brass); letter-spacing:.1em; margin-bottom:10px; }
+.miss{ list-style:none; margin:0; padding:0; display:grid; gap:var(--space-md); }
+.miss li{
+  background:var(--surface); border-radius:var(--radius-lg);
+  padding:var(--space-lg); position:relative;
+  border:1px solid rgba(27,34,28,.08);
+}
+/* Слом ритма: каждая четвёртая — крупная и тёмная */
+.miss li:nth-child(4n+1){
+  background:var(--forest); color:var(--text-inv); border-color:transparent;
+  border-radius:var(--radius-bend);
+}
+.miss li:nth-child(4n+1) h3{ color:var(--text-inv); font-size:24px; }
+.miss li:nth-child(4n+1) p{ color:rgba(244,243,238,.78); }
+.miss li:nth-child(4n+1) .miss__n{ color:var(--shoot); font-size:34px; }
+.miss__n{
+  display:block; font-family:var(--font-display); font-weight:600;
+  font-size:26px; line-height:1; color:var(--brass);
+  margin-bottom:var(--space-sm);
+}
 .miss h3{ font-size:20px; margin-bottom:var(--space-xs); }
 .miss p{ font-size:var(--text-sm); color:var(--text-2); margin:0; }
 
@@ -417,7 +444,17 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ЗАЯВКА
    ============================================================ */
-.cta{ background:var(--gradient-cover); color:var(--text-inv); }
+.cta{
+  background:var(--gradient-cover); color:var(--text-inv);
+  margin-inline:var(--space-md); border-radius:var(--radius-bend-strip);
+  overflow:hidden; position:relative;
+}
+.cta::before{
+  content:""; position:absolute; right:-8%; top:-12%;
+  width:44vw; max-width:520px; aspect-ratio:1; border-radius:50%;
+  background:rgba(207,224,198,.10); pointer-events:none;
+}
+.cta > .wrap{ position:relative; z-index:1; }
 .cta h2{ color:var(--text-inv); }
 .cta h2 em{ color:var(--shoot); }
 .cta__head{ max-width:760px; margin-bottom:var(--space-xl); }
@@ -470,7 +507,11 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ПОДВАЛ
    ============================================================ */
-.footer{ background:var(--forest); color:var(--text-inv); padding-block:var(--space-xl) var(--space-lg); }
+/* Волна-разделитель перед подвалом */
+.wave{ display:block; width:100%; height:clamp(40px,5vw,80px); margin-bottom:-1px; }
+.wave path{ fill:var(--forest); }
+
+.footer{ background:var(--forest); color:var(--text-inv); padding-block:var(--space-lg) var(--space-lg); }
 .footer__in{ display:grid; gap:var(--space-lg); padding-bottom:var(--space-lg); border-bottom:1px solid rgba(244,243,238,.18); }
 .footer__slogan{ margin-top:var(--space-md); font-family:var(--font-display); font-size:19px; color:var(--shoot); }
 .footer__col h4{ color:var(--text-inv); font-size:15px; margin-bottom:var(--space-sm); }
@@ -530,7 +571,9 @@ a:hover{ color:var(--forest); }
 @media (min-width:768px){
   .cards{ grid-template-columns:1fr 1fr; }
   .cards--two{ grid-template-columns:1fr 1fr; }
-  .ways{ grid-template-columns:1fr 1fr; }
+  /* Слом ритма: второй путь крупнее и смещён вниз */
+  .ways{ grid-template-columns:.85fr 1.15fr; gap:var(--space-lg); }
+  .way--accent{ margin-top:var(--space-lg); }
   .creds{ grid-template-columns:1fr 1fr; }
   .creds__item--wide{ grid-column:1 / -1; }
   .steps{ grid-template-columns:1fr 1fr; }
