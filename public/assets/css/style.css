@@ -216,7 +216,7 @@ a:hover{ color:var(--forest); }
 .hero__facts b{ font-family:var(--font-display); font-weight:600; font-size:17px; color:var(--forest); }
 .hero__facts span{ font-size:var(--text-sm); color:var(--text-2); }
 
-.hero__photo{ margin:0; max-width:340px; margin-left:auto; }
+.hero__photo{ margin:0; max-width:460px; margin-left:auto; }
 .hero__photo img{
   width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; object-position:center 20%;
   border-radius:var(--radius-bend);
@@ -228,17 +228,17 @@ a:hover{ color:var(--forest); }
    ============================================================ */
 /* Излучина: полосы скруглены по системе 180/40 */
 .band{
-  padding-block:var(--space-2xl);
+  padding-block:clamp(28px, 3.4vw, 48px);
   margin-inline:var(--space-md);
-  border-radius:var(--radius-bend-strip);
+  border-radius:var(--radius-bend);
   overflow:hidden;
 }
 .band--forest{ background:var(--gradient-cover); color:var(--text-inv); }
-.band--clay{ background:var(--clay); border-radius:40px 180px 40px 180px; }
+.band--clay{ background:var(--clay); border-radius:24px 90px 24px 90px; }
 .band__slogan{
   font-family:var(--font-display); font-weight:400;
-  font-size:clamp(28px, 4.6vw, 58px); line-height:1.06; letter-spacing:-.025em;
-  color:var(--text-inv); margin:0; max-width:22ch;
+  font-size:clamp(24px, 3.2vw, 40px); line-height:1.12; letter-spacing:-.02em;
+  color:var(--text-inv); margin:0; max-width:26ch;
 }
 .band__slogan em{ color:var(--shoot); }
 .band__slogan--dark{ color:var(--text); }
@@ -361,11 +361,11 @@ a:hover{ color:var(--forest); }
    ============================================================ */
 .deals{ display:grid; gap:var(--space-md); margin-bottom:var(--space-lg); }
 .deal{
-  background:var(--surface); border:1px solid var(--border);
+  background:var(--clay); border:1px solid transparent;
   border-radius:var(--radius-lg); padding:var(--space-md) var(--space-md) var(--space-lg);
   display:flex; flex-direction:column; gap:var(--space-md);
 }
-.deal--accent{ background:var(--clay); border-color:transparent; }
+.deal__nums div{ border-bottom-color:rgba(74,58,44,.22); }
 .deal__kind{
   font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
   color:var(--lake); margin:0; min-height:2.6em;
@@ -585,7 +585,7 @@ a:hover{ color:var(--forest); }
 }
 
 @media (min-width:1024px){
-  .hero__in{ grid-template-columns:1.55fr .45fr; align-items:center; }
+  .hero__in{ grid-template-columns:1.3fr .7fr; align-items:center; }
   .steps{ grid-template-columns:repeat(3,1fr); }
   .deals{ grid-template-columns:repeat(5,1fr); }
   .miss{ grid-template-columns:repeat(3,1fr); }
