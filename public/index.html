@@ -3,527 +3,666 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terra Nova — земля под дом, вложение или наследство</title>
-<meta name="description" content="Подбор, проверка и сопровождение покупки земельных участков по всей России. Девять пунктов проверки, работа по договору, сопровождение на банкротных торгах.">
-<link rel="canonical" href="https://terranov.ru/">
-<meta property="og:title" content="Terra Nova — земельный капитал">
-<meta property="og:description" content="Помогаю купить землю как надёжный актив: подбор, проверка рисков и сопровождение сделки. По всей России.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://terranov.ru/">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:image" content="https://terranov.ru/assets/img/olga-square.jpg">
+<title>Terra Nova — капитал, у которого есть координаты</title>
+<meta name="description" content="Подбираю, проверяю и оформляю земельные участки по всей России. Получаю землю у государства без торгов. Ольга Грошева, ИП.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-<script>document.documentElement.className+=" js";</script>
 
-<!-- ==================== ШАПКА ==================== -->
+<a class="skip" href="#main">К содержанию</a>
+
+<!-- ===================== ШАПКА ===================== -->
 <header class="header">
   <div class="header__in">
-    <a class="logo" href="/" aria-label="Terra Nova, на главную">
-      <span class="logo__word">TERRA NOVA</span>
-      <span class="logo__sub">земельный капитал</span>
+    <a class="logo" href="#hero" aria-label="Terra Nova, в начало">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="38" height="38">
+          <line x1="7" y1="9" x2="27" y2="9" stroke="#1B221C" stroke-width="2.2"/>
+          <line x1="17" y1="9" x2="17" y2="32" stroke="#1B221C" stroke-width="2.2"/>
+          <line x1="17" y1="9" x2="33" y2="32" stroke="#2C6382" stroke-width="2.2"/>
+          <line x1="33" y1="9" x2="33" y2="32" stroke="#2C6382" stroke-width="2.2"/>
+          <circle cx="33" cy="9" r="3.2" fill="#B2622D"/>
+        </svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__word">TERRA NOVA</span>
+        <span class="logo__sub">земельный капитал</span>
+      </span>
     </a>
-    <nav class="nav" aria-label="Разделы страницы">
-      <a href="#proverka">Проверка</a>
+
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#olga">Обо мне</a>
+      <a href="#puti">Два пути</a>
       <a href="#uslugi">Услуги</a>
+      <a href="#kak">Как работаю</a>
       <a href="#sdelki">Сделки</a>
-      <a href="#otzyvy">Отзывы</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn--primary btn--sm" href="#zayavka">Записаться на созвон</a>
-    <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false"><span></span></button>
+
+    <a class="btn btn--primary btn--sm header__cta" href="#zayavka">Обратиться</a>
+
+    <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
+      <span></span>
+    </button>
   </div>
 </header>
 
-<main>
+<main id="main">
 
-<!-- ==================== ПЕРВЫЙ ЭКРАН ==================== -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero__grid">
-      <div class="rv">
-        <p class="eyebrow">Земельный капитал · по всей России</p>
-        <h1>Земля под дом,<br>вложение<br>или наследство</h1>
-        <p class="lead hero__lead">Подбираю участок под задачу, проверяю его по девяти пунктам и веду сделку до записи о собственности в реестре.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#zayavka">Записаться на созвон</a>
-          <a class="btn btn--secondary" href="#uslugi">Смотреть услуги</a>
-        </div>
-        <div class="hero__facts">
-          <span><b>5</b> своих сделок с землёй</span>
-          <span>Вкладываю <b>свои деньги</b></span>
-          <span><b>ИП</b>, работа по договору</span>
-        </div>
+<!-- ===================== ПЕРВЫЙ ЭКРАН ===================== -->
+<section class="hero" id="hero">
+  <div class="wrap hero__in">
+    <div class="hero__text">
+      <p class="eyebrow">Земельный капитал · по всей России</p>
+      <h1 class="hero__title">Капитал,<br>у которого есть<br><em>координаты</em></h1>
+      <p class="lead hero__lead">
+        Не строка в приложении банка, а конкретные гектары с границами.
+        Подбираю выгодно участки под задачу и сопровождаю на всех этапах оформления.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#zayavka">Обратиться</a>
+        <a class="btn btn--outline" href="#uslugi">Смотреть услуги</a>
       </div>
-      <div class="rv">
-        <figure class="photo photo--portrait">
-          <picture>
-            <source type="image/webp" srcset="/assets/img/olga-portrait-720.webp 720w, /assets/img/olga-portrait.webp 940w" sizes="(min-width:1024px) 40vw, 100vw">
-            <img src="/assets/img/olga-portrait.jpg" srcset="/assets/img/olga-portrait-720.jpg 720w, /assets/img/olga-portrait.jpg 940w" sizes="(min-width:1024px) 40vw, 100vw" width="940" height="1253" alt="Ольга Грошева, Terra Nova" fetchpriority="high">
-          </picture>
-        </figure>
+
+      <ul class="hero__facts">
+        <li><b>Земля у государства</b><span>без торгов, законно и в разы дешевле рынка</span></li>
+        <li><b>Свои деньги</b><span>вкладываю в ту же землю, куда веду вас</span></li>
+        <li><b>До записи в реестре</b><span>бюрократию беру на себя целиком</span></li>
+      </ul>
+    </div>
+
+    <figure class="hero__photo">
+      <picture>
+        <source srcset="/assets/img/olga-portrait.webp" type="image/webp">
+        <img src="/assets/img/olga-portrait.jpg" width="720" height="900"
+             alt="Ольга Грошева" fetchpriority="high">
+      </picture>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== ЛОЗУНГ ===================== -->
+<section class="band band--forest">
+  <div class="wrap">
+    <p class="band__slogan">Сформируем для вас <em>земельный капитал</em></p>
+  </div>
+</section>
+
+<!-- ===================== ОЛЬГА ===================== -->
+<section class="section section--surface" id="olga">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Кто с вами работает</p>
+      <h2>Формирую и продаю<br>проверенные земельные участки</h2>
+      <p class="lead">
+        Земля как честный актив: подбор → проверка → сопровождение сделки → формирование
+        под инвестицию. Получаю землю в том числе на льготных условиях и без торгов.
+        Проверяю всё по документам и данным — до того, как вы отдадите деньги.
+      </p>
+    </div>
+
+    <ul class="creds">
+      <li class="creds__item">
+        <span class="creds__num">01</span>
+        <h3>Экономист и финансовый консультант</h3>
+        <p>Финансовый университет при Правительстве РФ, ВШГУ. Считаю землю как актив: доходность, риски, цену ошибки.</p>
+      </li>
+      <li class="creds__item">
+        <span class="creds__num">02</span>
+        <h3>Инженер-строитель</h3>
+        <p>Работала проектировщиком с МУП, управлениями архитектуры и администрациями. Вижу, есть ли коммуникации, что реально можно построить и как пройдут согласования.</p>
+      </li>
+      <li class="creds__item creds__item--wide">
+        <span class="creds__num">03</span>
+        <h3>Опыт в структуре поддержки бизнеса</h3>
+        <p>Помогала компаниям и социальным проектам получать землю на льготных условиях, субсидии и налоговые льготы, вела резидентов ТОСЭР. Для Индустриального парка «Череповец» привлекла <b>1 млрд ₽</b> федеральных средств на инфраструктуру — из пустой земли сделала выгодную территорию для бизнеса.</p>
+      </li>
+      <li class="creds__item">
+        <span class="creds__num">04</span>
+        <h3>Инвестор фондового рынка</h3>
+        <p>Сравниваю землю с другими активами по риску, доходности, ликвидности и горизонту. Подбираю землю как осознанную часть портфеля и честно скажу, где она выигрывает у биржи, а где нет.</p>
+      </li>
+      <li class="creds__item">
+        <span class="creds__num">05</span>
+        <h3>Подбираю стратегически</h3>
+        <p>Слежу за стратегией развития экономики страны, вижу, куда идут инвестиции и какие территории будут расти. Подбираю участки на опережение — там, где рост ещё впереди.</p>
+      </li>
+    </ul>
+
+    <div class="olga__foot">
+      <p class="olga__own">Вкладываю в землю собственные деньги и помогаю клиентам формировать весомый земельный капитал.</p>
+      <div class="olga__links">
+        <a class="chan" href="https://t.me/terranova_zemlya" target="_blank" rel="noopener">
+          <b>Telegram · @terranova_zemlya</b>
+          <span>Разбираю лоты и простым языком объясняю, что не так с участком</span>
+        </a>
+        <a class="chan" href="https://instagram.com/Olga_Terra_Nova" target="_blank" rel="noopener">
+          <b>Instagram · @Olga_Terra_Nova</b>
+          <span>Земля как большая история: реформы, устройство земли в мире, книги и фильмы</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== ОЛЬГА ==================== -->
-<section class="section section--tight" id="olga">
+<!-- ===================== ДВА ПУТИ ===================== -->
+<section class="section section--cold" id="puti">
   <div class="wrap">
-    <div class="split split--photo-left">
-      <div class="rv">
-        <figure class="photo photo--wide">
-          <!-- TODO: кадр с выезда на участок, 4:3 -->
-          <div class="photo__stub">TODO: кадр с выезда на участок, 4:3</div>
-        </figure>
-      </div>
-      <div class="rv">
-        <p class="eyebrow">Кто с вами работает</p>
-        <h2>Ольга Грошева</h2>
-        <p class="lead" style="margin-top:16px">Системный бизнес-аналитик и архитектор. Проверяю участки не на глаз, а по документам и данным — так же, как проверяют системы.</p>
-        <p class="muted">Вкладываю в землю собственные деньги: за 2024–2025 годы провела пять сделок в разных регионах России. Это значит, что я знаю цену каждой ошибки на своём кошельке, а не по учебнику.</p>
-        <p class="muted">Участница клуба «Земельные визионеры». Веду Telegram-канал Terra Nova, где разбираю лоты и объясняю простым языком, что не так с участком.</p>
-        <!-- TODO: уточнить у владельца формулировки и добавить дипломы/сертификаты, если есть -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== ДЕВЯТЬ ПУНКТОВ ==================== -->
-<section class="section" id="proverka">
-  <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Что именно проверяется</p>
-      <h2>Девять пунктов проверки</h2>
-      <p class="lead">Участок может выглядеть идеально и при этом не подходить под вашу задачу. Каждый пункт ниже — отдельная причина отказаться от покупки.</p>
+    <div class="shead">
+      <p class="eyebrow">Как землю вообще получают</p>
+      <h2>Два пути — и второй знают немногие</h2>
+      <p class="lead">Большинство ищет участок на Авито и платит чужую наценку. А землю можно получить у государства.</p>
     </div>
 
-    <div class="grid grid--3 checklist rv">
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Право и обременения</h4>
-        <p>Кто собственник, на каком основании, нет ли залога, ареста, аренды и сервитута.</p>
+    <div class="ways">
+      <article class="way">
+        <span class="way__tag">Путь первый</span>
+        <h3>Через торги</h3>
+        <p>Банкротные и муниципальные аукционы. Цена ниже рынка, но нужен допуск, стратегия и верхняя граница, за которую нельзя заходить.</p>
+        <p class="way__note">Беру на себя допуск, участие и сделку.</p>
       </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Категория земель</h4>
-        <p>Земли населённых пунктов, сельхозназначения или лесной фонд — от этого зависит, что законно построить.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>ВРИ и регламент зоны</h4>
-        <p>Вид разрешённого использования и правила застройки: этажность, отступы, процент застройки.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Границы и межевание</h4>
-        <p>Стоит ли участок на кадастровом учёте с координатами, нет ли пересечений и наложений с соседями.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>ЗОУИТ и ограничения</h4>
-        <p>Охранные зоны ЛЭП, газа, воды и объектов культурного наследия. Могут запретить стройку на половине площади.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Подъезд и право проезда</h4>
-        <p>Есть ли дорога и оформлено ли право проехать. Участок без законного подъезда почти невозможно использовать.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Коммуникации</h4>
-        <p>Электричество, газ, вода: расстояние до сетей, реальные сроки и стоимость подключения.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Рельеф, грунт и вода</h4>
-        <p>Уклон, заболоченность, уровень грунтовых вод. Определяет стоимость фундамента и планировки.</p>
-      </article>
-      <article class="card">
-        <span class="card__num"></span>
-        <h4>Расходы после покупки</h4>
-        <p>Налог, взносы, подключение, дорога, оформление. Сумма, о которой обычно узнают уже после сделки.</p>
+      <article class="way way--accent">
+        <span class="way__tag">Путь второй</span>
+        <h3>Без торгов — предварительное согласование</h3>
+        <p>Законный механизм: участок формируется и предоставляется государством напрямую, без аукциона. Про него мало кто знает, а разница с рынком бывает кратной.</p>
+        <p class="way__note">Проверю, подходит ли ваш случай, и проведу процедуру.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ==================== УСЛУГИ ==================== -->
+<!-- ===================== УСЛУГИ ===================== -->
 <section class="section" id="uslugi">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Чем помогаю</p>
-      <h2>Услуги</h2>
-      <p class="lead">Начать можно с разговора — он бесплатный и ни к чему не обязывает.</p>
+    <div class="shead">
+      <p class="eyebrow">Услуги для частных лиц</p>
+      <h2>От «просто поговорить»<br>до участка под ключ</h2>
+      <p class="lead">
+        Начните с бесплатного разговора. Дальше — ровно столько меня, сколько нужно:
+        от одной проверки до полного сопровождения.
+      </p>
     </div>
 
-    <div class="grid grid--3 rv">
-      <article class="service">
-        <h3>Консультация</h3>
-        <p class="muted">Разбираем вашу задачу: под что нужна земля, какой бюджет, какой регион. Говорю, что реально, а что нет.</p>
-        <ul>
+    <div class="cards">
+
+      <article class="card">
+        <p class="card__kicker">Разговор о земле</p>
+        <h3 class="card__title">Стоит ли вообще ввязываться — поймём за 20 минут</h3>
+        <p class="card__desc">Разбираем вашу задачу, бюджет и регион. Честно говорю, что реально, а что нет. Без продажи в лоб.</p>
+        <ul class="card__list">
           <li>20–30 минут разговора</li>
-          <li>Что искать и на что смотреть</li>
-          <li>Без продажи в лоб</li>
+          <li>что искать и на что смотреть</li>
+          <li>уйдёте с ясностью, даже если не станете клиентом</li>
         </ul>
-        <p class="service__price">Бесплатно</p>
-        <a class="btn btn--secondary btn--sm" href="#zayavka">Записаться</a>
+        <div class="card__foot">
+          <span class="card__price card__price--free">Бесплатно</span>
+          <a class="btn btn--outline btn--sm" href="#zayavka">Записаться на разговор</a>
+        </div>
       </article>
 
-      <article class="service">
-        <h3>Проверка участка или лота</h3>
-        <p class="muted">Все девять пунктов по конкретному участку. Отчёт понятным языком с прямым выводом: брать или нет.</p>
-        <ul>
-          <li>Документы, зоны, ограничения</li>
-          <li>Расходы после покупки</li>
-          <li>Письменный отчёт</li>
+      <article class="card card--brass">
+        <p class="card__kicker">Вердикт по участку</p>
+        <h3 class="card__title">20 000 ₽, которые спасают миллионы</h3>
+        <p class="card__desc">Проверяю участок или лот по девяти пунктам и даю прямой ответ: брать или нет.</p>
+        <ul class="card__list">
+          <li>документы, зоны, обременения, коммуникации</li>
+          <li>расходы, которые вылезут уже после покупки</li>
+          <li>письменный отчёт понятным языком</li>
         </ul>
-        <p class="service__price">от 20 000 ₽</p>
-        <a class="btn btn--secondary btn--sm" href="#zayavka">Заказать проверку</a>
+        <div class="card__foot">
+          <span class="card__price">от 20 000 ₽</span>
+          <a class="btn btn--primary btn--sm" href="#zayavka">Заказать проверку</a>
+        </div>
       </article>
 
-      <article class="service">
-        <h3>Сопровождение сделки и торгов</h3>
-        <p class="muted">Подбор участка под задачу, участие в банкротных торгах, сделка под ключ до регистрации собственности.</p>
-        <ul>
-          <li>Подбор вариантов</li>
-          <li>Допуск и участие в торгах</li>
-          <li>Сделка до записи в реестре</li>
+      <article class="card">
+        <p class="card__kicker">Земля от государства без торгов</p>
+        <h3 class="card__title">Легальный способ получить участок в разы дешевле рынка</h3>
+        <p class="card__desc">Через предварительное согласование получаю землю у государства — без аукциона.</p>
+        <ul class="card__list">
+          <li>проверю, подходит ли ваш случай</li>
+          <li>подготовка и подача заявления</li>
+          <li>сопровождение до предоставления и формирование участка</li>
         </ul>
-        <p class="service__price">Торги — от 30 000 ₽ или 5–15 %<br><span style="font-size:15px;color:var(--text-2)">Сделка под ключ — от 35 000 ₽ или 3–10 %</span></p>
-        <a class="btn btn--secondary btn--sm" href="#zayavka">Обсудить задачу</a>
+        <div class="card__foot">
+          <span class="card__price">от 60 000 ₽</span>
+          <a class="btn btn--outline btn--sm" href="#zayavka">Узнать, подойдёт ли мне</a>
+        </div>
       </article>
+
+      <article class="card">
+        <p class="card__kicker">Участок под ключ · сделка и торги</p>
+        <h3 class="card__title">Нахожу, выигрываю торги и довожу до вашей собственности</h3>
+        <p class="card__desc">Вы не касаетесь бюрократии — веду от подбора до записи в реестре.</p>
+        <ul class="card__list">
+          <li>подбор под задачу</li>
+          <li>допуск и участие в торгах: банкротные и муниципальные</li>
+          <li>сделка до записи о собственности</li>
+        </ul>
+        <div class="card__foot">
+          <span class="card__price">торги — от 50 000 ₽ или 5–15 % · сделка под ключ — от 60 000 ₽ или 3–10 %</span>
+          <a class="btn btn--outline btn--sm" href="#zayavka">Найти мой участок</a>
+        </div>
+      </article>
+
+      <article class="card card--premium">
+        <p class="card__kicker">Земельная стратегия под цель · премиум</p>
+        <h3 class="card__title">Когда цель крупная — строю под неё стратегию, а не продаю участок</h3>
+        <p class="card__desc">
+          Разбираем вашу глобальную задачу — доход, бизнес на земле, глэмпинг, семейный капитал,
+          портфель под вложения — и я строю стратегию: какие участки, где, каким путём получить,
+          в какой очерёдности и на какие деньги. Дальше веду по этой стратегии до результата.
+        </p>
+        <ul class="card__list">
+          <li>разбор цели, горизонта и бюджета</li>
+          <li>карта территорий и точек роста по стратегии развития регионов и отраслей</li>
+          <li>план из участков: что, где, каким путём и в какой последовательности</li>
+          <li>расчёт доходности и рисков как по инвестпортфелю</li>
+          <li>сопровождение всех сделок внутри стратегии</li>
+        </ul>
+        <div class="card__foot">
+          <span class="card__price">от 150 000 ₽ · по проекту</span>
+          <a class="btn btn--primary btn--sm" href="#zayavka">Обсудить стратегию</a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
-<!-- ==================== КАК ПРОХОДИТ РАБОТА ==================== -->
-<section class="section section--tight">
+<!-- ===================== ЛОЗУНГ ===================== -->
+<section class="band band--clay">
   <div class="wrap">
-    <div class="strip-cold rv">
-      <div class="shead" style="margin-bottom:40px">
-        <p class="eyebrow">Как проходит работа</p>
-        <h2>Четыре шага, смета до старта</h2>
-      </div>
-      <div class="grid grid--4 steps">
-        <div class="step">
-          <span class="step__n">1 · Задача</span>
-          <h4>Созвон</h4>
-          <p>Разбираем, под что нужна земля и какой бюджет. Бесплатно.</p>
-        </div>
-        <div class="step">
-          <span class="step__n">2 · Подбор</span>
-          <h4>Варианты</h4>
-          <p>Нахожу участки под задачу, в том числе лоты на торгах.</p>
-        </div>
-        <div class="step">
-          <span class="step__n">3 · Проверка</span>
-          <h4>Девять пунктов</h4>
-          <p>Проверяю каждый вариант и говорю, где риск.</p>
-        </div>
-        <div class="step">
-          <span class="step__n">4 · Сделка</span>
-          <h4>До реестра</h4>
-          <p>Сопровождаю до записи о собственности.</p>
-        </div>
-      </div>
-      <p class="muted" style="margin-top:32px;font-size:14px">Смета согласуется до начала работ, оплата по этапам. Скрытых доплат в середине сделки не бывает.</p>
-    </div>
+    <p class="band__slogan band__slogan--dark">Не всякая земля — <em>капитал</em></p>
+    <p class="band__note">Участок становится активом, только когда проверены категория, ВРИ, зоны и обременения.</p>
   </div>
 </section>
 
-<!-- ==================== РАЗБОР СДЕЛКИ ==================== -->
-<section class="section" id="razbor">
+<!-- ===================== БИЗНЕСУ ===================== -->
+<section class="section section--surface" id="biznes">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Как это выглядит на практике</p>
-      <h2>Разбор сделки: два отказа и покупка</h2>
+    <div class="shead">
+      <p class="eyebrow">Для бизнеса</p>
+      <h2>Земля под ваш бизнес —<br>с инфраструктурой, льготами и без сюрпризов</h2>
     </div>
-    <div class="split rv">
-      <div class="measure">
-        <!-- TODO: текст разбора от владельца. Нужны: задача клиента, что нашли в первом
-             и втором участке, почему отказались, чем закончился третий. Без имён. -->
-        <p class="muted">TODO: текст разбора. Нужно от владельца: с какой задачей пришёл человек, что нашлось в первом и втором участке, почему от них отказались, чем закончился третий.</p>
-      </div>
-      <div>
-        <figure class="photo photo--wide">
-          <div class="photo__stub">TODO: кадр участка или фрагмент документа</div>
-        </figure>
-      </div>
+
+    <div class="cards cards--two">
+
+      <article class="card card--wide">
+        <p class="card__kicker">Земля под производство</p>
+        <h3 class="card__title">Промышленная площадка с коммуникациями и льготами — а не головная боль</h3>
+        <p class="card__desc">
+          Подбираю и получаю землю под производство, склад, логистику — в индустриальных парках,
+          ОЭЗ и ТОСЭР или напрямую у муниципалитета. Проверяю мощности и подключения,
+          помогаю с льготами и разрешением на строительство, веду до оформления.
+        </p>
+        <ul class="card__list">
+          <li>подбор под техпроцесс: категория и ВРИ, мощности, логистика</li>
+          <li>площадки с инфраструктурой и льготные режимы: ТОСЭР, ОЭЗ, субсидии</li>
+          <li>проверка коммуникаций и техусловий: свет, газ, вода, дорога</li>
+          <li>получение земли: торги, предсогласование, работа с администрацией</li>
+          <li>сопровождение до разрешения на строительство и записи в реестре</li>
+        </ul>
+        <p class="card__trump">Я сама запускала индустриальный парк и знаю эту кухню изнутри.</p>
+        <div class="card__foot">
+          <span class="card__price">от 200 000 ₽ · по проекту</span>
+          <a class="btn btn--primary btn--sm" href="#zayavka">Обсудить площадку</a>
+        </div>
+      </article>
+
+      <article class="card card--wide">
+        <p class="card__kicker">Земля под туризм</p>
+        <h3 class="card__title">Участок под глэмпинг или базу — с видом, доступом, правом строить и льготами</h3>
+        <p class="card__desc">
+          Подбираю живописные и ликвидные участки под турпроект. Проверяю, что реально можно
+          построить и сдавать, оцениваю турпотенциал и подъезд, помогаю получить землю
+          и зайти в льготные программы под туризм.
+        </p>
+        <ul class="card__list">
+          <li>подбор локации: вид, вода и лес, доступность, турпоток</li>
+          <li>ВРИ и что реально можно построить и сдавать</li>
+          <li>коммуникации и подъезд круглый год</li>
+          <li>получение земли: торги, предсогласование, у государства</li>
+          <li>гранты и субсидии на глэмпинги и модульные отели</li>
+          <li>расчёт окупаемости проекта как инвестиции</li>
+        </ul>
+        <p class="card__trump">Знаю, как заходить в господдержку — сама вела инвестпроекты и льготные режимы.</p>
+        <div class="card__foot">
+          <span class="card__price">от 100 000 ₽ · по проекту</span>
+          <a class="btn btn--primary btn--sm" href="#zayavka">Обсудить проект</a>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
-<!-- ==================== СДЕЛКИ В РУБЛЯХ ==================== -->
+<!-- ===================== КАК ПРОХОДИТ РАБОТА ===================== -->
+<section class="section" id="kak">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Как проходит работа</p>
+      <h2>Шесть шагов —<br>от разговора до записи в реестре</h2>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="step__n">1</span>
+        <h3>Знакомство — созвон</h3>
+        <p>Разбираем, под какую задачу нужна земля и какой бюджет. Бесплатно.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">2</span>
+        <h3>Подбор — варианты</h3>
+        <p>Нахожу участок под задачу: готовые лоты с торгов и рынка или землю, которую можно получить у государства через предварительное согласование.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">3</span>
+        <h3>Условия — договор</h3>
+        <p>Фиксируем задачу, этапы, сроки, стоимость и порядок оплаты.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">4</span>
+        <h3>Работа — веду до участка</h3>
+        <p>Провожу сделку или предварительное согласование под ключ: проверка, торги или подача заявления, формирование участка, оформление. Говорю, где риск.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">5</span>
+        <h3>Результат — право в реестре</h3>
+        <p>Довожу до записи о ваших правах в реестре — собственность или аренда. Участок ваш.</p>
+      </li>
+      <li class="step step--accent">
+        <span class="step__n">6</span>
+        <h3>Дальше — новый договор</h3>
+        <p>Убедившись, что это выгодно и безопасно, клиенты возвращаются за следующим участком — так земельный капитал растёт.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== ЛОЗУНГ ===================== -->
+<section class="band band--forest">
+  <div class="wrap">
+    <p class="band__slogan">Землю <em>не напечатать</em></p>
+    <p class="band__note band__note--light">Актив, которого не станет больше.</p>
+  </div>
+</section>
+
+<!-- ===================== ПРИМЕРЫ СДЕЛОК ===================== -->
 <section class="section" id="sdelki">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Мои собственные вложения</p>
-      <h2>Пять сделок с землёй</h2>
-      <p class="lead">Это мои личные сделки, а не результаты клиентов. Показываю их, чтобы было видно: я вкладываю в землю свои деньги, а не только консультирую.</p>
+    <div class="shead">
+      <p class="eyebrow">Примеры сделок с землёй</p>
+      <h2>Несколько сделок,<br>которые показываю цифрами</h2>
+      <p class="lead">
+        Это мои собственные вложения — я иду в землю своими деньгами.
+        Показываю несколько примеров из практики: сколько вложено, сколько получено и за какой срок.
+      </p>
     </div>
 
-    <div class="cases rv">
-      <article class="case">
-        <p class="case__meta">Кейс 1 · Переуступка прав</p>
-        <div class="case__row"><span>Вложено</span><b>112 000 ₽</b></div>
-        <div class="case__row"><span>Продано</span><b>800 000 ₽</b></div>
-        <p class="case__profit">+688 000 ₽</p>
+    <div class="deals">
+      <article class="deal">
+        <p class="deal__kind">Переуступка прав</p>
+        <dl class="deal__nums">
+          <div><dt>Вложено</dt><dd>112 000 ₽</dd></div>
+          <div><dt>Продано</dt><dd>800 000 ₽</dd></div>
+        </dl>
+        <p class="deal__gain"><b>+614 %</b><span>за 1 год</span></p>
       </article>
-      <article class="case">
-        <p class="case__meta">Кейс 2 · Покупка и продажа</p>
-        <div class="case__row"><span>Вложено</span><b>600 000 ₽</b></div>
-        <div class="case__row"><span>Продано</span><b>995 000 ₽</b></div>
-        <p class="case__profit">+395 000 ₽</p>
+
+      <article class="deal">
+        <p class="deal__kind">Покупка и продажа</p>
+        <dl class="deal__nums">
+          <div><dt>Вложено</dt><dd>600 000 ₽</dd></div>
+          <div><dt>Продано</dt><dd>995 000 ₽</dd></div>
+        </dl>
+        <p class="deal__gain"><b>+66 %</b><span>за 1,5 года</span></p>
       </article>
-      <article class="case">
-        <p class="case__meta">Кейс 3 · Малый вход</p>
-        <div class="case__row"><span>Вложено</span><b>26 000 ₽</b></div>
-        <div class="case__row"><span>Продано</span><b>155 000 ₽</b></div>
-        <p class="case__profit">+129 000 ₽</p>
+
+      <article class="deal">
+        <p class="deal__kind">Малый вход</p>
+        <dl class="deal__nums">
+          <div><dt>Вложено</dt><dd>26 000 ₽</dd></div>
+          <div><dt>Продано</dt><dd>155 000 ₽</dd></div>
+        </dl>
+        <p class="deal__gain"><b>+496 %</b><span>за 1 год</span></p>
       </article>
-      <article class="case">
-        <p class="case__meta">Кейс 4 · Продажа участка</p>
-        <div class="case__row"><span>Вложено</span><b>88 000 ₽</b></div>
-        <div class="case__row"><span>Продано</span><b>450 000 ₽</b></div>
-        <p class="case__profit">+362 000 ₽</p>
+
+      <article class="deal deal--accent">
+        <p class="deal__kind">Продажа участка</p>
+        <dl class="deal__nums">
+          <div><dt>Вложено</dt><dd>88 000 ₽</dd></div>
+          <div><dt>Продано</dt><dd>450 000 ₽</dd></div>
+        </dl>
+        <p class="deal__gain"><b>+411 %</b><span>за 1 месяц</span></p>
       </article>
-      <article class="case">
-        <p class="case__meta">Кейс 5 · Продажа участка</p>
-        <div class="case__row"><span>Вложено</span><b>106 000 ₽</b></div>
-        <div class="case__row"><span>Продано</span><b>450 000 ₽</b></div>
-        <p class="case__profit">+344 000 ₽</p>
+
+      <article class="deal">
+        <p class="deal__kind">Продажа участка</p>
+        <dl class="deal__nums">
+          <div><dt>Вложено</dt><dd>106 000 ₽</dd></div>
+          <div><dt>Продано</dt><dd>450 000 ₽</dd></div>
+        </dl>
+        <p class="deal__gain"><b>+325 %</b><span>за 9 месяцев</span></p>
       </article>
     </div>
 
-    <p class="disclaimer">Суммы указаны за вычетом затрат на оформление и налога по УСН. <!-- TODO: добавить сроки сделок в месяцах и назвать 3–4 региона --><b>TODO:</b> добавить срок каждой сделки в месяцах и регионы.</p>
+    <p class="disclaimer">
+      * Прирост указан к вложенной сумме, до вычета налогов.
+      Это результаты моих личных сделок — они не являются обещанием доходности
+      и не гарантируют такого же результата в вашем случае.
+    </p>
   </div>
 </section>
 
-<!-- ==================== СДЕЛКИ В РАЗАХ ==================== -->
-<section class="section section--tight">
+<!-- ===================== НА ЧЁМ ТЕРЯЮТ ДЕНЬГИ ===================== -->
+<section class="section section--cold" id="oshibki">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Тот же результат множителем</p>
-      <h2>Во сколько раз вырос капитал</h2>
-    </div>
-    <div class="mult rv">
-      <div class="mult__i"><div class="mult__v">×7,1</div><p class="mult__c">Кейс 1 · переуступка</p></div>
-      <div class="mult__i"><div class="mult__v">×5,9</div><p class="mult__c">Кейс 3 · малый вход</p></div>
-      <div class="mult__i"><div class="mult__v">×5,1</div><p class="mult__c">Кейс 4 · продажа</p></div>
-      <div class="mult__i"><div class="mult__v">×4,2</div><p class="mult__c">Кейс 5 · продажа</p></div>
-      <div class="mult__i"><div class="mult__v">×1,7</div><p class="mult__c">Кейс 2 · покупка и продажа</p></div>
-    </div>
-    <p class="disclaimer">Множитель ×1,7 не спрятан намеренно: он показывает, что цифры настоящие, а не отобранные. Результаты прошлых сделок не гарантируют будущих. Обещаний доходности я не даю. <!-- TODO: юрист должен утвердить формулировку дисклеймера --></p>
-  </div>
-</section>
-
-<!-- ==================== ПЯТЬ ОШИБОК ==================== -->
-<section class="section" id="oshibki">
-  <div class="wrap">
-    <div class="shead rv">
+    <div class="shead">
       <p class="eyebrow">На чём теряют деньги</p>
-      <h2>Пять ошибок, которые стоят денег</h2>
+      <h2>Одиннадцать ошибок,<br>которые стоят дорого</h2>
+      <p class="lead">Каждую из них я видела в реальных сделках. Ни одна не выдумана.</p>
     </div>
-    <div class="mistakes rv">
-      <article class="mistake">
-        <div class="mistake__n">01</div>
-        <div>
-          <h4>Смотреть на цену, а не на ВРИ</h4>
-          <p>Дешёвый участок часто дешёвый по причине: на нём нельзя строить то, ради чего его берут. Вид разрешённого использования важнее цены.</p>
-        </div>
-      </article>
-      <article class="mistake">
-        <div class="mistake__n">02</div>
-        <div>
-          <h4>Верить старой выписке</h4>
-          <p>Выписка месячной давности уже может не отражать арест, залог или новую охранную зону. Проверять нужно на день сделки.</p>
-        </div>
-      </article>
-      <article class="mistake">
-        <div class="mistake__n">03</div>
-        <div>
-          <h4>Не считать расходы после покупки</h4>
-          <p>Подключение электричества, дорога, межевание, налог. Эти суммы иногда сопоставимы со стоимостью самого участка.</p>
-        </div>
-      </article>
-      <article class="mistake">
-        <div class="mistake__n">04</div>
-        <div>
-          <h4>Ехать смотреть только летом</h4>
-          <p>Летом не видно ни весенней воды, ни того, как чистят дорогу зимой. Участок стоит оценивать в худший сезон, а не в лучший.</p>
-        </div>
-      </article>
-      <article class="mistake">
-        <div class="mistake__n">05</div>
-        <div>
-          <h4>Идти на торги без верхней цены</h4>
-          <p>На торгах азарт стоит дорого. Верхнюю границу нужно определить до начала и не двигать её в процессе.</p>
-        </div>
-      </article>
-    </div>
+
+    <ol class="miss">
+      <li><span class="miss__n">01</span><h3>Смотреть на цену, а не на ВРИ</h3><p>Дешёвый участок, на котором нельзя построить то, что вы задумали, — не выгодная покупка, а замороженные деньги.</p></li>
+      <li><span class="miss__n">02</span><h3>Верить старой выписке</h3><p>Аресты, залоги и обременения появляются быстро. Проверять нужно на день сделки, а не по документу трёхмесячной давности.</p></li>
+      <li><span class="miss__n">03</span><h3>Не считать расходы после покупки</h3><p>Межевание, подключение, дорога, налоги. Участок за миллион может потребовать ещё половину сверху.</p></li>
+      <li><span class="miss__n">04</span><h3>Ехать смотреть только летом</h3><p>Весной здесь болото, зимой не чистят дорогу. Один сезон не показывает участок целиком.</p></li>
+      <li><span class="miss__n">05</span><h3>Идти на торги без верхней цены</h3><p>Азарт на аукционе стоит дороже любой консультации. Предел определяется до начала, а не в процессе.</p></li>
+      <li><span class="miss__n">06</span><h3>Покупать по рынку, когда можно у государства</h3><p>Тот же по сути участок часто можно получить через торги или предварительное согласование в разы дешевле. На Авито вы платите за чужую наценку.</p></li>
+      <li><span class="miss__n">07</span><h3>Смотреть на локацию сегодня, а не на перспективу</h3><p>Цена растёт там, куда придут дорога, газ, производство и люди. Оценивать надо планы развития территории, а не только то, что рядом сейчас.</p></li>
+      <li><span class="miss__n">08</span><h3>Путать «коммуникации рядом» с «можно подключиться»</h3><p>«Свет по границе» и «газ рядом» — ещё не подключение. Техусловия и мощность проверяют до сделки, а не после.</p></li>
+      <li><span class="miss__n">09</span><h3>Гнаться за площадью, а не за ликвидностью</h3><p>Большой дешёвый участок в глуши потом сложно продать. Важнее не число соток, а кому и как быстро вы его перепродадите.</p></li>
+      <li><span class="miss__n">10</span><h3>Покупать без чёткой цели</h3><p>Участок под перепродажу за год, под дом и под наследство — три разных участка. Без ясной цели легко купить «не тот».</p></li>
+      <li><span class="miss__n">11</span><h3>Верить обещаниям на словах</h3><p>«Потом переведёте в ИЖС», «дорогу проведут» — если этого нет в документах, значит, этого нет.</p></li>
+    </ol>
   </div>
 </section>
 
-<!-- ==================== ОТЗЫВЫ ==================== -->
-<section class="section" id="otzyvy">
+<!-- ===================== ОТЗЫВЫ ===================== -->
+<section class="section section--surface" id="otzyvy">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Что говорят люди</p>
-      <h2>Отзывы клиентов</h2>
+    <div class="shead">
+      <p class="eyebrow">Отзывы</p>
+      <h2>Что говорят те,<br>кто уже прошёл сделку</h2>
+      <p class="lead">
+        Скриншоты переписок и оценка с площадки — как есть, без переписывания и без выдуманных имён.
+      </p>
     </div>
-    <div class="reviews rv">
-      <figure class="review">
-        <img src="/assets/img/reviews/4.jpg" alt="Отзыв: сделку по покупке участка провели удалённо, всё прошло быстро и честно" loading="lazy" width="1063" height="722">
-        <figcaption>Александр · участок 17 соток, ИЖС · сделка проведена удалённо</figcaption>
-      </figure>
-      <figure class="review">
-        <img src="/assets/img/reviews/3.jpg" alt="Отзыв: спасибо, что продали по адекватной стоимости, всё прошло быстро и честно" loading="lazy" width="1061" height="843">
-        <figcaption>Покупатель участка в деревне · долго искал именно это место</figcaption>
-      </figure>
-      <figure class="review">
-        <img src="/assets/img/reviews/1.jpg" alt="Отзыв: Ольга, спасибо, с вами приятно было сотрудничать" loading="lazy" width="1075" height="866">
-        <figcaption>Сергей · сделка завершена</figcaption>
-      </figure>
-      <figure class="review">
-        <img src="/assets/img/reviews/2.jpg" alt="Отзыв: с вами приятно даже просто общаться, не говоря о нашей сделке" loading="lazy" width="994" height="440">
-        <figcaption>После сделки</figcaption>
-      </figure>
+
+    <div class="reviews">
+      <figure class="review"><img src="/assets/img/reviews/4.jpg" alt="Отзыв: сделку провели удалённо, всё прошло быстро и честно" loading="lazy"></figure>
+      <figure class="review"><img src="/assets/img/reviews/3.jpg" alt="Отзыв: продали по адекватной стоимости, всё прошло быстро и честно" loading="lazy"></figure>
+      <figure class="review"><img src="/assets/img/reviews/1.jpg" alt="Отзыв: с вами приятно было сотрудничать" loading="lazy"></figure>
+      <figure class="review"><img src="/assets/img/reviews/2.jpg" alt="Отзыв: с вами приятно даже просто общаться, всё супер" loading="lazy"></figure>
     </div>
-    <!-- TODO: получить у авторов разрешение на публикацию отзывов -->
   </div>
 </section>
 
-<!-- ==================== FAQ ==================== -->
+<!-- ===================== ВОПРОСЫ ===================== -->
 <section class="section" id="faq">
   <div class="wrap">
-    <div class="shead rv">
-      <p class="eyebrow">Прежде чем написать</p>
-      <h2>Частые вопросы</h2>
+    <div class="shead">
+      <p class="eyebrow">Частые вопросы</p>
+      <h2>О чём спрашивают<br>перед тем, как начать</h2>
     </div>
-    <div class="faq rv">
-      <details>
-        <summary>Вы работаете в моём регионе?</summary>
-        <p>TODO: ответ владельца. Нужно назвать регионы, где есть опыт сделок, и пояснить, как устроена работа в остальных.</p>
+
+    <div class="faq">
+      <details class="faq__item">
+        <summary>Какие услуги вы оказываете?</summary>
+        <div class="faq__body"><p>Подбор участка под задачу, проверка — риски, ВРИ, обременения, коммуникации, — сопровождение сделки или предварительного согласования, то есть получения земли у государства без торгов, и формирование участка под инвестицию. Под ключ или отдельным этапом.</p></div>
       </details>
-      <details>
-        <summary>Что будет, если проверка покажет, что участок плохой?</summary>
-        <p>TODO: ответ владельца. Это сильный аргумент: отказ от покупки — тоже результат работы.</p>
+
+      <details class="faq__item">
+        <summary>Как понять, что это не развод?</summary>
+        <div class="faq__body"><p>Всё прозрачно: договор с этапами, проверку делаю до того, как вы платите за участок, оплата по шагам. И я сама вкладываю в землю свои деньги — веду вас туда же, куда иду сама.</p></div>
       </details>
-      <details>
-        <summary>Сколько времени занимает проверка участка?</summary>
-        <p>TODO: ответ владельца — реальный срок в днях.</p>
+
+      <details class="faq__item">
+        <summary>А если участок окажется невыгодным или его потом не продать?</summary>
+        <div class="faq__body"><p>Я не веду в невыгодную сделку. На проверке честно показываю цифры, риски и ликвидность: если участок не окупается, «серый» или его трудно будет продать — говорю прямо и не рекомендую. Задача — чтобы вы вложились в актив, а не в проблему.</p></div>
       </details>
-      <details>
-        <summary>Что если на торгах перебьют цену?</summary>
-        <p>TODO: ответ владельца.</p>
+
+      <details class="faq__item">
+        <summary>Вы даёте гарантию доходности?</summary>
+        <div class="faq__body"><p>Нет — и это честно. «Х3» вам никто гарантировать не может. Я гарантирую проверку до того, как вы отдадите деньги, реальные расчёты доходности и рисков и что не предложу то, во что не вложилась бы сама.</p></div>
       </details>
-      <details>
-        <summary>Нужно ли мне самому ехать смотреть участок?</summary>
-        <p>TODO: ответ владельца.</p>
+
+      <details class="faq__item">
+        <summary>Дёшево у государства — где подвох?</summary>
+        <div class="faq__body"><p>Подвоха нет, есть закон: землю можно получить через торги или предварительное согласование — легальные механизмы, про которые мало кто знает, иногда в разы дешевле рынка. Где реально риск — скажу прямо и подскажу, какой путь выгоднее в вашем случае.</p></div>
       </details>
-      <details>
-        <summary>Можно у вас научиться, а не заказать под ключ?</summary>
-        <p>TODO: ответ владельца про наставничество.</p>
+
+      <details class="faq__item">
+        <summary>А если потом всплывёт арест, наследник или залог?</summary>
+        <div class="faq__body"><p>Проверяю обременения, аресты и залоги на день сделки, а не по старой выписке. Чистоту подтверждаем до подписи.</p></div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Сколько стоят услуги и как проходит оплата?</summary>
+        <div class="faq__body"><p>Стоимость и этапы фиксируем в договоре до старта, смета согласуется заранее. Скрытых доплат в середине сделки не бывает.</p></div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ==================== ЗАЯВКА ==================== -->
-<section class="section" id="zayavka">
+<!-- ===================== ПЕРВЫЙ ШАГ ===================== -->
+<section class="section cta" id="zayavka">
   <div class="wrap">
-    <div class="strip-dark rv">
-      <div style="max-width:560px">
-        <p class="eyebrow">Первый шаг</p>
-        <h2>Начнём с разговора,<br>а не с покупки</h2>
-        <p class="muted" style="margin-top:16px;font-size:18px">Созвон 20–30 минут. Разберём вашу задачу и я скажу, что с ней делать. Бесплатно и без обязательств.</p>
+    <div class="cta__head">
+      <p class="eyebrow eyebrow--light">Первый шаг</p>
+      <h2>Начнём с разговора,<br><em>а не с покупки</em></h2>
+      <p class="lead lead--light">
+        Расскажите, что вам нужно от земли. Отвечу лично — по делу, без шаблонов и без продажи в лоб.
+      </p>
+    </div>
+
+    <form class="form" method="post" action="/api/submit.php" novalidate>
+      <div class="form__row">
+        <div class="field">
+          <label for="f-name">Как вас зовут</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-contact">Как удобнее связаться</label>
+          <input id="f-contact" name="contact" type="text" placeholder="Телефон, Telegram или e-mail" required>
+        </div>
       </div>
 
-      <form class="form" style="margin-top:40px" method="post" action="/api/submit.php" novalidate>
-        <div class="field">
-          <label for="f-name">Как к вам обращаться</label>
-          <input id="f-name" name="name" type="text" placeholder="Имя" required autocomplete="name">
+      <fieldset class="field field--group">
+        <legend>Что вам нужно от земли</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="goal[]" value="izhs"><span>под дом, ИЖС</span></label>
+          <label class="check"><input type="checkbox" name="goal[]" value="invest"><span>инвестиция или доход</span></label>
+          <label class="check"><input type="checkbox" name="goal[]" value="business"><span>бизнес или производство</span></label>
+          <label class="check"><input type="checkbox" name="goal[]" value="tourism"><span>агротуризм или глэмпинг</span></label>
+          <label class="check"><input type="checkbox" name="goal[]" value="unsure"><span>ещё не решил, нужен совет</span></label>
         </div>
-        <div class="field">
-          <label for="f-contact">Телефон или Telegram</label>
-          <input id="f-contact" name="contact" type="text" placeholder="+7 ··· или @никнейм" required autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="f-task">Задача в двух фразах</label>
-          <textarea id="f-task" name="message" placeholder="Что хотите купить и зачем"></textarea>
-        </div>
+      </fieldset>
 
-        <label class="consent">
-          <input type="checkbox" name="consent_processing" value="1" required>
-          <span>Согласен на обработку персональных данных и ознакомлен с <a href="/privacy/">политикой конфиденциальности</a></span>
-        </label>
-        <label class="consent">
-          <input type="checkbox" name="consent_marketing" value="1">
-          <span>Хочу получать дайджест лотов и разборы. Отписаться можно в любой момент</span>
-        </label>
+      <div class="field">
+        <label for="f-region">Регион и примерный бюджет</label>
+        <input id="f-region" name="region" type="text" placeholder="Где ищете участок и на какую сумму ориентируетесь">
+      </div>
 
-        <button class="btn btn--primary" type="submit" style="margin-top:16px">Отправить заявку</button>
-        <p class="form__note">Отвечу в течение <!-- TODO: срок, который владелец реально держит -->TODO часов. На созвоне ничего не продаю.</p>
-      </form>
-    </div>
+      <div class="field">
+        <label for="f-message">Ваш вопрос или ситуация</label>
+        <textarea id="f-message" name="message" rows="4" placeholder="Расскажите, с чем помочь"></textarea>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" name="consent_pd" value="1" required>
+        <span>Согласен на обработку персональных данных и ознакомлен с <a href="/privacy/">политикой конфиденциальности</a></span>
+      </label>
+
+      <label class="consent">
+        <input type="checkbox" name="consent_mail" value="1">
+        <span>Хочу получать разборы лотов и материалы о земле. Необязательно</span>
+      </label>
+
+      <div class="form__actions">
+        <button class="btn btn--primary" type="submit">Отправить вопрос</button>
+        <p class="form__note">Отвечу лично в течение 24 часов. Если срочно — напишите в Telegram: <a href="https://t.me/Grosheva_OlgaN" target="_blank" rel="noopener">@Grosheva_OlgaN</a></p>
+      </div>
+    </form>
   </div>
 </section>
 
 </main>
 
-<!-- ==================== ПОДВАЛ ==================== -->
+<!-- ===================== ПОДВАЛ ===================== -->
 <footer class="footer">
-  <div class="wrap">
-    <div class="footer__grid">
-      <div>
-        <span class="logo__word" style="display:inline-block">TERRA NOVA</span>
-        <span class="logo__sub">земельный капитал</span>
-        <p style="margin-top:24px;font-size:14px;color:rgba(244,243,238,.72);max-width:34ch">Подбор, проверка и сопровождение покупки земельных участков по всей России.</p>
-      </div>
-      <div>
-        <h4>Разделы</h4>
-        <ul>
-          <li><a href="#proverka">Девять пунктов проверки</a></li>
-          <li><a href="#uslugi">Услуги</a></li>
-          <li><a href="#sdelki">Мои сделки</a></li>
-          <li><a href="#otzyvy">Отзывы</a></li>
-          <li><a href="#faq">Частые вопросы</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Связь</h4>
-        <ul>
-          <li><a href="https://t.me/terranova_zemlya" target="_blank" rel="noopener">Telegram-канал</a></li>
-          <li><a href="#zayavka">Оставить заявку</a></li>
-          <li><a href="/privacy/">Политика конфиденциальности</a></li>
-          <li><a href="/oferta/">Публичная оферта</a></li>
-        </ul>
-      </div>
+  <div class="wrap footer__in">
+    <div class="footer__brand">
+      <span class="logo__word logo__word--light">TERRA NOVA</span>
+      <span class="logo__sub logo__sub--light">земельный капитал</span>
+      <p class="footer__slogan">Земля — капитал, который остаётся</p>
     </div>
 
-    <div class="footer__legal">
-      <!-- TODO: подставить реальные реквизиты ИП -->
-      <p>ИП Грошева Ольга <b>TODO: отчество</b> · ОГРНИП <b>TODO</b> · ИНН <b>TODO</b></p>
-      <p>Адрес для обращений: <b>TODO</b> · Телефон: <b>TODO</b> · Почта для запросов о персональных данных: <b>TODO</b></p>
-      <p>Результаты прошлых сделок не гарантируют будущих. Информация на сайте не является публичной офертой, если прямо не указано иное, и не является инвестиционной рекомендацией.</p>
+    <div class="footer__col">
+      <h4>Разделы</h4>
+      <a href="#olga">Обо мне</a>
+      <a href="#uslugi">Услуги</a>
+      <a href="#sdelki">Примеры сделок</a>
+      <a href="#faq">Вопросы</a>
     </div>
+
+    <div class="footer__col">
+      <h4>Каналы</h4>
+      <a href="https://t.me/terranova_zemlya" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="https://t.me/Grosheva_OlgaN" target="_blank" rel="noopener">Написать лично</a>
+      <a href="https://instagram.com/Olga_Terra_Nova" target="_blank" rel="noopener">Instagram</a>
+    </div>
+
+    <div class="footer__col footer__col--req">
+      <h4>Реквизиты</h4>
+      <p>ИП Грошева Ольга Николаевна<br>
+         ИНН 371501385780<br>
+         ОГРНИП 326784700130136</p>
+      <p>Обращения по персональным данным — Telegram <a href="https://t.me/Grosheva_OlgaN" target="_blank" rel="noopener">@Grosheva_OlgaN</a></p>
+      <a href="/privacy/">Политика конфиденциальности</a>
+    </div>
+  </div>
+
+  <div class="wrap footer__bottom">
+    <p>© 2026 Terra Nova · Ольга Грошева</p>
+    <p>Результаты прошлых сделок не гарантируют будущих. Информация на сайте не является инвестиционной рекомендацией.</p>
   </div>
 </footer>
 
 <!-- Липкая кнопка на мобильном -->
-<div class="sticky-cta"><a class="btn btn--primary" href="#zayavka">Записаться на созвон</a></div>
+<a class="sticky-cta" href="#zayavka">Обратиться</a>
 
 <!-- Cookie -->
 <div class="cookie" id="cookie" hidden>
-  <p>Сайт использует cookie. Обязательные нужны для работы формы, аналитические — чтобы понимать, какие разделы читают. Подробнее — в <a href="/privacy/">политике конфиденциальности</a>.</p>
+  <p>Сайт использует cookie. Аналитика включается только с вашего согласия — подробнее в <a href="/privacy/">политике</a>.</p>
   <div class="cookie__actions">
     <button class="btn btn--primary btn--sm" type="button" data-cookie="all">Принять все</button>
-    <button class="btn btn--secondary btn--sm" type="button" data-cookie="necessary">Только обязательные</button>
+    <button class="btn btn--outline btn--sm" type="button" data-cookie="necessary">Только необходимые</button>
   </div>
 </div>
 
