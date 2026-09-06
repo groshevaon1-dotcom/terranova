@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=20260906d">
+<link rel="stylesheet" href="/assets/css/style.css?v=20260906e">
 </head>
 <body>
 
@@ -580,11 +580,11 @@
     <form class="form" method="post" action="/api/submit.php" novalidate>
       <div class="form__row">
         <div class="field">
-          <label for="f-name">Как вас зовут</label>
+          <label for="f-name">Как вас зовут <span class="req">обязательно</span></label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="f-phone">Телефон</label>
+          <label for="f-phone">Телефон <span class="req">обязательно, если нет других контактов</span></label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" inputmode="tel">
         </div>
       </div>
@@ -600,7 +600,7 @@
         </div>
       </div>
 
-      <p class="form__hint" id="contact-hint">Заполните хотя бы один способ связи — как вам удобнее.</p>
+      <p class="form__hint" id="contact-hint">Телефон, Telegram или e-mail — достаточно одного, на ваш выбор.</p>
 
       <fieldset class="field field--group">
         <legend>Что вам нужно от земли</legend>
@@ -625,7 +625,7 @@
 
       <label class="consent">
         <input type="checkbox" name="consent_pd" value="1" required>
-        <span>Согласен на обработку персональных данных и ознакомлен с <a href="/privacy/">политикой конфиденциальности</a></span>
+        <span>Согласен на обработку персональных данных и ознакомлен с <a href="/privacy/">политикой конфиденциальности</a> <span class="req">обязательно</span></span>
       </label>
 
       <label class="consent">
@@ -698,6 +698,6 @@
   </div>
 </div>
 
-<script src="/assets/js/main.js?v=20260906d" defer></script>
+<script src="/assets/js/main.js?v=20260906e" defer></script>
 </body>
 </html>
