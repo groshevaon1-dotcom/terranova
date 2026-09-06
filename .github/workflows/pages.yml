@@ -35,7 +35,7 @@ jobs:
           mkdir -p _site
           cp -r public/. _site/
           # Ссылки вида href="/..." превращаем в href="/terranova/..."
-          find _site -name '*.html' -exec sed -i -E 's#(href|src|action)="/([^/])#\1="/terranova/\2#g' {} +
+          find _site -name '*.html' -exec sed -i -E 's#(href|src|srcset|action)="/([^/])#\1="/terranova/\2#g' {} +
           # Отдельно — ссылки ровно на корень
           find _site -name '*.html' -exec sed -i -E 's#href="/"#href="/terranova/"#g' {} +
           # Пометка, что это предпросмотр
