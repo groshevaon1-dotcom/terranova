@@ -254,9 +254,17 @@ a:hover{ color:var(--forest); }
   background:var(--bg); border:1px solid var(--border);
   border-radius:var(--radius-lg); padding:var(--space-lg);
 }
+.creds__item:nth-child(2){ background:var(--bg-cold); border-color:transparent; }
+.creds__item--wide{ background:var(--shoot); border-color:transparent; }
+.creds__item--wide .creds__num{ background:rgba(30,61,43,.12); color:var(--forest); }
+.creds__item:nth-child(5){ background:var(--clay); border-color:transparent; }
+.creds__item:nth-child(5) .creds__num{ background:rgba(74,58,44,.12); color:var(--peat); }
 .creds__num{
-  display:block; font-family:var(--font-display); font-size:15px;
-  color:var(--lake); letter-spacing:.1em; margin-bottom:var(--space-sm);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; margin-bottom:var(--space-md);
+  font-family:var(--font-display); font-weight:600; font-size:16px;
+  color:var(--lake); background:var(--bg-cold);
+  border-radius:18px 6px 18px 6px;
 }
 .creds__item h3{ margin-bottom:var(--space-xs); }
 .creds__item p{ color:var(--text-2); font-size:var(--text-sm); margin:0; }
@@ -282,9 +290,13 @@ a:hover{ color:var(--forest); }
    ============================================================ */
 .ways{ display:grid; gap:var(--space-md); align-items:start; }
 .way{
-  background:var(--surface); border-radius:var(--radius-lg);
-  padding:var(--space-lg); border:1px solid rgba(27,34,28,.10);
+  background:var(--lake); color:var(--text-inv);
+  border-radius:var(--radius-lg); padding:var(--space-lg); border:1px solid transparent;
 }
+.way h3{ color:var(--text-inv); }
+.way p{ color:rgba(244,243,238,.82); }
+.way .way__tag{ background:rgba(244,243,238,.18); color:#DDE7EC; }
+.way .way__note{ color:#CFE0C6; border-top-color:rgba(244,243,238,.24); }
 .way--accent{
   background:var(--forest); color:var(--text-inv); border-color:transparent;
   border-radius:var(--radius-bend); padding:var(--space-xl) var(--space-lg);
@@ -349,7 +361,7 @@ a:hover{ color:var(--forest); }
   font-family:var(--font-display); font-size:26px; line-height:1;
   color:var(--lake); width:48px; height:48px; flex:0 0 auto;
   display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--border); border-radius:50%; background:var(--bg);
+  border:1px solid var(--border); border-radius:24px 8px 24px 8px; background:var(--bg);
   margin-bottom:var(--space-md);
 }
 .step--accent .step__n{ background:var(--forest); color:var(--shoot); border-color:transparent; }
@@ -368,7 +380,7 @@ a:hover{ color:var(--forest); }
 .deal__nums div{ border-bottom-color:rgba(74,58,44,.22); }
 .deal__kind{
   font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--lake); margin:0; min-height:2.6em;
+  color:var(--peat); margin:0; min-height:2.6em;
 }
 .deal__nums{ margin:0; display:grid; gap:12px; }
 .deal__nums div{ display:block; border-bottom:1px dashed var(--border); padding-bottom:10px; }
@@ -507,6 +519,54 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ПОДВАЛ
    ============================================================ */
+/* ============================================================
+   ЮРИДИЧЕСКИЕ ДОКУМЕНТЫ
+   ============================================================ */
+.doc{ max-width:var(--container-text); }
+.doc h1{ margin-bottom:var(--space-md); }
+.doc h2{
+  font-size:clamp(21px,2.2vw,27px); margin:var(--space-xl) 0 var(--space-sm);
+  padding-top:var(--space-md); border-top:1px solid var(--border);
+}
+.doc p{ margin:0 0 var(--space-sm); }
+.doc .sub{ font-size:var(--text-lead); color:var(--text-2); margin-bottom:var(--space-xs); }
+.doc .meta{
+  font-size:var(--text-caption); color:var(--text-2);
+  padding-bottom:var(--space-md); border-bottom:1px solid var(--border);
+  margin-bottom:var(--space-lg);
+}
+.doc ul{ margin:0 0 var(--space-sm); padding-left:0; list-style:none; }
+.doc li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--text-2); }
+.doc li::before{
+  content:""; position:absolute; left:0; top:10px;
+  width:6px; height:6px; border-radius:50%; background:var(--brass);
+}
+.doc .term{ font-weight:600; color:var(--text); }
+.doc footer{
+  margin-top:var(--space-xl); padding-top:var(--space-md);
+  border-top:1px solid var(--border);
+  font-size:var(--text-caption); color:var(--text-2);
+}
+
+/* ============================================================
+   ЗНАКИ СИСТЕМЫ
+   ============================================================ */
+
+/* Волна-разделитель: линия — волна — линия */
+.rule-wave{
+  display:flex; align-items:center; gap:var(--space-sm);
+  margin-block:var(--space-xl); color:var(--border);
+}
+.rule-wave::before,.rule-wave::after{
+  content:""; flex:1; height:1px; background:currentColor;
+}
+.rule-wave svg{ flex:0 0 auto; display:block; }
+.rule-wave path{ stroke:var(--lake); stroke-width:1.4; fill:none; }
+
+/* Знак «межа»: гребёнка под цифрой */
+.mezha{ display:block; width:56px; height:12px; margin-top:8px; }
+.mezha line{ stroke:var(--peat); stroke-width:1.2; opacity:.55; }
+
 /* Волна-разделитель перед подвалом */
 .wave{ display:block; width:100%; height:clamp(40px,5vw,80px); margin-bottom:-1px; }
 .wave path{ fill:var(--forest); }
