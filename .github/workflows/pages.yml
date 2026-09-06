@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -23,16 +23,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Включает Pages в настройках репозитория, если он ещё не включён
+      - name: Включить Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Собрать копию с префиксом подпапки
         run: |
+          set -e
           mkdir -p _site
           cp -r public/. _site/
           # Ссылки вида href="/..." превращаем в href="/terranova/..."
-          find _site -name '*.html' -print0 | xargs -0 sed -i -E 's#(href|src|action)="/([^/])#\1="/terranova/\2#g'
+          find _site -name '*.html' -exec sed -i -E 's#(href|src|action)="/([^/])#\1="/terranova/\2#g' {} +
           # Отдельно — ссылки ровно на корень
-          find _site -name '*.html' -print0 | xargs -0 sed -i -E 's#(href)="/"#\1="/terranova/"#g'
-          # Отметка, что это предпросмотр, а не боевой сайт
-          find _site -name '*.html' -print0 | xargs -0 sed -i 's#</title>#  · предпросмотр</title>#'
+          find _site -name '*.html' -exec sed -i -E 's#href="/"#href="/terranova/"#g' {} +
+          # Пометка, что это предпросмотр
+          find _site -name '*.html' -exec sed -i 's#</title>#  · предпросмотр</title>#' {} +
+          echo "Собрано файлов:"; find _site -type f | wc -l
 
       - uses: actions/upload-pages-artifact@v3
         with:
