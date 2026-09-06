@@ -614,6 +614,7 @@ a:hover{ color:var(--forest); }
 }
 .cookie p{ font-size:var(--text-caption); color:var(--text-2); margin:0; }
 .cookie__actions{ display:flex; flex-wrap:wrap; gap:10px; }
+.cookie .btn{ flex:1 1 auto; }
 
 /* ============================================================
    АДАПТАЦИЯ
