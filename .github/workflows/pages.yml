@@ -1,7 +1,7 @@
-# Предпросмотр сайта на GitHub Pages.
-# Боевой сайт живёт на terranov.ru в корне, а на Pages — в подпапке /terranova/,
-# поэтому здесь корневые ссылки получают префикс. Исходники при этом не меняются.
-name: Предпросмотр на GitHub Pages
+# Публикация сайта на GitHub Pages с собственным доменом terranov.ru.
+# Домен привязывается файлом CNAME, сайт отдаётся из корня — пути в public/
+# уже корневые, переписывать ничего не нужно.
+name: Публикация terranov.ru
 
 on:
   push:
@@ -23,23 +23,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Включает Pages в настройках репозитория, если он ещё не включён
       - name: Включить Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
 
-      - name: Собрать копию с префиксом подпапки
+      - name: Собрать сайт
         run: |
           set -e
           mkdir -p _site
           cp -r public/. _site/
-          # Ссылки вида href="/..." превращаем в href="/terranova/..."
-          find _site -name '*.html' -exec sed -i -E 's#(href|src|srcset|action)="/([^/])#\1="/terranova/\2#g' {} +
-          # Отдельно — ссылки ровно на корень
-          find _site -name '*.html' -exec sed -i -E 's#href="/"#href="/terranova/"#g' {} +
-          # Пометка, что это предпросмотр
-          find _site -name '*.html' -exec sed -i 's#</title>#  · предпросмотр</title>#' {} +
+          # Привязка собственного домена
+          echo "terranov.ru" > _site/CNAME
           echo "Собрано файлов:"; find _site -type f | wc -l
 
       - uses: actions/upload-pages-artifact@v3
