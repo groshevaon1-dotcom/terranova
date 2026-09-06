@@ -384,7 +384,10 @@ a:hover{ color:var(--forest); }
 .deal__nums{ margin:0; display:grid; gap:12px; }
 .deal__nums div{ display:block; border-bottom:1px dashed var(--border); padding-bottom:10px; }
 .deal__nums dt{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-2); margin-bottom:2px; }
-.deal__nums dd{ margin:0; font-family:var(--font-display); font-weight:600; font-size:19px; white-space:nowrap; }
+.deal__nums dd{ margin:0; font-family:var(--font-display); font-weight:600; font-size:18px; white-space:nowrap; }
+.deal__profit{ border-bottom:0 !important; padding-bottom:0 !important; }
+.deal__profit dt{ color:var(--peat); font-weight:600; }
+.deal__profit dd{ color:var(--burn); font-size:20px; }
 .deal__gain{ margin:auto 0 0; display:flex; flex-direction:column; }
 .deal__gain b{ font-family:var(--font-display); font-weight:600; font-size:clamp(30px,3.4vw,42px); line-height:1; color:var(--brass); letter-spacing:-.02em; }
 .deal__gain span{ font-size:var(--text-sm); color:var(--text-2); margin-top:4px; }
