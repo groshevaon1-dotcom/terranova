@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=20260906a">
 </head>
 <body>
 
@@ -203,7 +203,7 @@
         </div>
       </article>
 
-      <article class="card card--brass">
+      <article class="card">
         <p class="card__kicker">Вердикт по участку</p>
         <h3 class="card__title">20 000 ₽, которые спасают миллионы</h3>
         <p class="card__desc">Проверяю участок или лот по девяти пунктам и даю прямой ответ: брать или нет.</p>
@@ -463,7 +463,7 @@
   <div class="wrap">
     <div class="shead">
       <p class="eyebrow">На чём теряют деньги</p>
-      <h2>Одиннадцать ошибок,<br>которые стоят дорого</h2>
+      <h2>Ошибки, которые стоят дорого</h2>
       <p class="lead">Каждую из них я видела в реальных сделках. Ни одна не выдумана.</p>
     </div>
 
@@ -495,10 +495,22 @@
     </div>
 
     <div class="reviews">
-      <figure class="review"><img src="/assets/img/reviews/4.jpg" alt="Отзыв: сделку провели удалённо, всё прошло быстро и честно" loading="lazy"></figure>
-      <figure class="review"><img src="/assets/img/reviews/3.jpg" alt="Отзыв: продали по адекватной стоимости, всё прошло быстро и честно" loading="lazy"></figure>
-      <figure class="review"><img src="/assets/img/reviews/1.jpg" alt="Отзыв: с вами приятно было сотрудничать" loading="lazy"></figure>
-      <figure class="review"><img src="/assets/img/reviews/2.jpg" alt="Отзыв: с вами приятно даже просто общаться, всё супер" loading="lazy"></figure>
+      <figure class="review">
+        <img src="/assets/img/reviews/4.jpg" alt="Отзыв: сделку провели удалённо, всё прошло быстро и честно" loading="lazy">
+        <figcaption>Сделка по продаже своего участка, оформленного у государства без торгов</figcaption>
+      </figure>
+      <figure class="review">
+        <img src="/assets/img/reviews/3.jpg" alt="Отзыв: продали по адекватной стоимости, всё прошло быстро и честно" loading="lazy">
+        <figcaption>Сделка по продаже своего участка, оформленного у государства без торгов</figcaption>
+      </figure>
+      <figure class="review">
+        <img src="/assets/img/reviews/1.jpg" alt="Отзыв: с вами приятно было сотрудничать" loading="lazy">
+        <figcaption>Услуга под ключ: получение участка без торгов, договор с администрацией, а далее продажа по цене кратно выше той, что клиент потратил на оформление</figcaption>
+      </figure>
+      <figure class="review">
+        <img src="/assets/img/reviews/2.jpg" alt="Отзыв: с вами приятно даже просто общаться, всё супер" loading="lazy">
+        <figcaption>Услуга по формированию участка как инвестиция</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -568,10 +580,23 @@
           <input id="f-name" name="name" type="text" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="f-contact">Как удобнее связаться</label>
-          <input id="f-contact" name="contact" type="text" placeholder="Телефон, Telegram или e-mail" required>
+          <label for="f-phone">Телефон</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" inputmode="tel">
         </div>
       </div>
+
+      <div class="form__row">
+        <div class="field">
+          <label for="f-tg">Telegram</label>
+          <input id="f-tg" name="telegram" type="text" placeholder="@никнейм">
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.ru">
+        </div>
+      </div>
+
+      <p class="form__hint" id="contact-hint">Заполните хотя бы один способ связи — как вам удобнее.</p>
 
       <fieldset class="field field--group">
         <legend>Что вам нужно от земли</legend>
@@ -666,6 +691,6 @@
   </div>
 </div>
 
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v=20260906a" defer></script>
 </body>
 </html>

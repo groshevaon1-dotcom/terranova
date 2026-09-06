@@ -78,13 +78,25 @@
   var form = document.querySelector('form.form');
   if (form) {
     form.addEventListener('submit', function (e) {
-      var consent = form.querySelector('[name="consent_processing"]');
+      var consent = form.querySelector('[name="consent_pd"]');
       var name = form.querySelector('[name="name"]');
-      var contact = form.querySelector('[name="contact"]');
+      var phone = form.querySelector('[name="phone"]');
+      var tg = form.querySelector('[name="telegram"]');
+      var mail = form.querySelector('[name="email"]');
+      var hint = document.getElementById('contact-hint');
       var problem = null;
 
+      var hasContact = [phone, tg, mail].some(function (f) {
+        return f && f.value.trim() !== '';
+      });
+
+      if (hint) hint.classList.remove('is-error');
+
       if (!name.value.trim()) problem = name;
-      else if (!contact.value.trim()) problem = contact;
+      else if (!hasContact) {
+        problem = phone;
+        if (hint) hint.classList.add('is-error');
+      }
       else if (consent && !consent.checked) problem = consent;
 
       if (problem) {
