@@ -471,8 +471,8 @@ a:hover{ color:var(--forest); }
 .cta > .wrap{ position:relative; z-index:1; }
 .cta h2{ color:var(--text-inv); }
 .cta h2 em{ color:var(--shoot); }
-.cta__head{ max-width:760px; margin-bottom:var(--space-xl); }
-.cta__head .lead{ margin-top:var(--space-md); }
+.cta__head{ max-width:760px; margin-bottom:var(--space-lg); }
+.cta__head .lead{ margin-top:var(--space-xs); font-size:clamp(19px,2vw,24px); }
 
 .form{ max-width:820px; display:grid; gap:var(--space-md); }
 .form__row{ display:grid; gap:var(--space-md); }
