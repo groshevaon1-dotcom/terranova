@@ -33,10 +33,10 @@
   try { choice = localStorage.getItem(COOKIE_KEY); } catch (e) {}
 
   function loadAnalytics() {
-    /* TODO: подставить номер счётчика Яндекс.Метрики в ANALYTICS_ID
-       и раскомментировать загрузку. Без номера ничего не грузим. */
-    var ANALYTICS_ID = null;
+    /* Счётчик Яндекс.Метрики. Грузится только после согласия на cookie. */
+    var ANALYTICS_ID = 112329070;
     if (!ANALYTICS_ID) return;
+    if (window.ym && window.ym.a) return;   /* уже загружен */
 
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
@@ -45,7 +45,9 @@
       k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    window.ym(ANALYTICS_ID, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true });
+    window.ym(ANALYTICS_ID, 'init', {
+      clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true
+    });
   }
 
   function remember(value) {
