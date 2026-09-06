@@ -1,0 +1,49 @@
+# Предпросмотр сайта на GitHub Pages.
+# Боевой сайт живёт на terranov.ru в корне, а на Pages — в подпапке /terranova/,
+# поэтому здесь корневые ссылки получают префикс. Исходники при этом не меняются.
+name: Предпросмотр на GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать копию с префиксом подпапки
+        run: |
+          mkdir -p _site
+          cp -r public/. _site/
+          # Ссылки вида href="/..." превращаем в href="/terranova/..."
+          find _site -name '*.html' -print0 | xargs -0 sed -i -E 's#(href|src|action)="/([^/])#\1="/terranova/\2#g'
+          # Отдельно — ссылки ровно на корень
+          find _site -name '*.html' -print0 | xargs -0 sed -i -E 's#(href)="/"#\1="/terranova/"#g'
+          # Отметка, что это предпросмотр, а не боевой сайт
+          find _site -name '*.html' -print0 | xargs -0 sed -i 's#</title>#  · предпросмотр</title>#'
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
