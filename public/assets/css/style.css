@@ -288,17 +288,15 @@ a:hover{ color:var(--forest); }
 /* ============================================================
    ДВА ПУТИ
    ============================================================ */
-.ways{ display:grid; gap:var(--space-md); align-items:start; }
+.ways{ display:grid; gap:var(--space-md); align-items:stretch; }
 .way{
   background:var(--lake); color:var(--text-inv);
-  border-radius:var(--radius-lg); padding:var(--space-lg); border:1px solid transparent;
+  border-radius:var(--radius-bend); padding:var(--space-lg);
+  border:1px solid transparent;
+  display:flex; flex-direction:column;
 }
 .way h3{ color:var(--text-inv); }
-.way--accent{
-  background:var(--forest); color:var(--text-inv); border-color:transparent;
-  border-radius:var(--radius-bend); padding:var(--space-xl) var(--space-lg);
-}
-.way--accent h3{ font-size:clamp(24px,2.6vw,32px); }
+.way--accent{ background:var(--forest); }
 .way--accent h3{ color:var(--text-inv); }
 .way__tag{
   display:inline-block; font-size:11px; font-weight:600; letter-spacing:.14em;
@@ -307,13 +305,13 @@ a:hover{ color:var(--forest); }
 }
 .way h3{ margin-bottom:var(--space-sm); }
 .way p{ font-size:var(--text-sm); }
-.way__note{ margin-top:var(--space-md); padding-top:var(--space-sm); border-top:1px solid; font-weight:500; }
+.way__note{ margin-top:auto; padding-top:var(--space-md); border-top:1px solid; font-weight:500; }
 
 /* Цвета задаются после базовой типографики, иначе перебиваются */
 .way p{ color:rgba(244,243,238,.86); }
 .way .way__tag{ background:rgba(244,243,238,.18); color:#EAF1F5; }
 .way .way__note{ color:#CFE0C6; border-top-color:rgba(244,243,238,.28); }
-.way--accent p{ color:rgba(244,243,238,.84); font-size:var(--text-body); }
+.way--accent p{ color:rgba(244,243,238,.84); }
 .way--accent .way__tag{ background:rgba(244,243,238,.16); color:var(--shoot); }
 .way--accent .way__note{ color:var(--shoot); border-top-color:rgba(244,243,238,.28); }
 
@@ -647,8 +645,7 @@ a:hover{ color:var(--forest); }
   .cards{ grid-template-columns:1fr 1fr; }
   .cards--two{ grid-template-columns:1fr 1fr; }
   /* Слом ритма: второй путь крупнее и смещён вниз */
-  .ways{ grid-template-columns:.85fr 1.15fr; gap:var(--space-lg); }
-  .way--accent{ margin-top:var(--space-lg); }
+  .ways{ grid-template-columns:1fr 1fr; gap:var(--space-lg); }
   .creds{ grid-template-columns:1fr 1fr; }
   .creds__item--wide{ grid-column:1 / -1; }
   .steps{ grid-template-columns:1fr 1fr; }
