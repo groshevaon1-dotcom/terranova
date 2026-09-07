@@ -681,3 +681,11 @@ a:hover{ color:var(--forest); }
   .cards--two .card{ padding:var(--space-lg); }
   .cards--two .card__title{ font-size:var(--text-h3); }
 }
+
+/* Блок прямой связи вместо формы */
+.contact-cta{ display:flex; flex-wrap:wrap; gap:var(--space-md); margin-bottom:var(--space-lg); }
+.contact-cta .btn{ min-width:220px; }
+.btn--on-dark{ background:transparent; color:var(--shoot); border-color:var(--shoot); }
+.btn--on-dark:hover{ background:var(--shoot); color:var(--forest); border-color:var(--shoot); }
+.contact-note{ font-size:var(--text-sm); color:rgba(244,243,238,.75); max-width:60ch; }
+.contact-note a{ color:var(--shoot); }
