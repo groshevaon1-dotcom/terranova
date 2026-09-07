@@ -23,59 +23,6 @@
     });
   }
 
-  /* ---------- Cookie и аналитика ----------
-     Аналитика не запускается, пока человек не согласился.
-     Требование из юридической карты, раздел 9 CLAUDE.md.        */
-  var COOKIE_KEY = 'tn-cookie-choice';
-  var banner = document.getElementById('cookie');
-  var choice = null;
-
-  try { choice = localStorage.getItem(COOKIE_KEY); } catch (e) {}
-
-  function loadAnalytics() {
-    /* Счётчик Яндекс.Метрики. Грузится только после согласия на cookie. */
-    var ANALYTICS_ID = 112329070;
-    if (!ANALYTICS_ID) return;
-    if (window.ym && window.ym.a) return;   /* уже загружен */
-
-    (function (m, e, t, r, i, k, a) {
-      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
-      m[i].l = 1 * new Date();
-      k = e.createElement(t); a = e.getElementsByTagName(t)[0];
-      k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
-    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-    window.ym(ANALYTICS_ID, 'init', {
-      clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true
-    });
-  }
-
-  function remember(value) {
-    try {
-      localStorage.setItem(COOKIE_KEY, value);
-      localStorage.setItem('tn-cookie-date', new Date().toISOString());
-    } catch (e) {}
-  }
-
-  if (banner) {
-    if (choice === 'all') {
-      loadAnalytics();
-    } else if (choice !== 'necessary') {
-      banner.hidden = false;
-      document.body.classList.add('has-sticky');
-    }
-
-    banner.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-cookie]');
-      if (!btn) return;
-      var value = btn.getAttribute('data-cookie');
-      remember(value);
-      banner.hidden = true;
-      document.body.classList.remove('has-sticky');
-      if (value === 'all') loadAnalytics();
-    });
-  }
-
   /* ---------- Форма: без согласия не отправляем ---------- */
   var form = document.querySelector('form.form');
   if (form) {
