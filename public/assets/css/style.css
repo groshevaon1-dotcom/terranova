@@ -123,6 +123,21 @@ a:hover{ color:var(--forest); }
 .section--surface{ background:var(--surface); }
 .section--cold{ background:var(--bg-cold); }
 
+/* Выделенный блок-панель: заметнее и отделён от соседних секций */
+.section--feature{ background:var(--bg); }
+.section--feature > .wrap{
+  position:relative; overflow:hidden;
+  background:var(--bg-cold);
+  border-radius:var(--radius-bend);
+  padding:var(--space-xl) clamp(var(--space-md), 4vw, var(--space-2xl));
+  box-shadow:var(--shadow-float);
+}
+.section--feature > .wrap::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:4px;
+  background:var(--brass);
+}
+.section--feature .shead{ border-bottom-color:rgba(27,34,28,.16); }
+
 /* Заголовок раздела: воздух до содержимого */
 .shead{ max-width:900px; padding-bottom:var(--space-lg); border-bottom:1px solid var(--border); margin-bottom:var(--space-xl); }
 .shead h2 + .lead{ margin-top:var(--space-md); }
