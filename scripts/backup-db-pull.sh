@@ -9,7 +9,10 @@
 # В них персональные данные — храните папку на зашифрованном диске, не выкладывайте.
 set -euo pipefail
 
-KEY="/c/Users/grosh/.ssh/beget_terranova"
+# Системный ssh.exe/scp.exe Windows — читают ssh-agent Windows (там парольная фраза ключа).
+SSH="/c/Windows/System32/OpenSSH/ssh.exe"; [ -x "$SSH" ] || SSH="ssh"
+SCP="/c/Windows/System32/OpenSSH/scp.exe"; [ -x "$SCP" ] || SCP="scp"
+KEY="C:\\Users\\grosh\\.ssh\\beget_terranova"
 SRV="root@185.23.34.45"
 REMOTE_DIR="/var/backups/terranova-db"
 LOCAL_DIR="/d/Мои документы/Claude/Бэкапы-terranova"
@@ -17,7 +20,7 @@ LOCAL_DIR="/d/Мои документы/Claude/Бэкапы-terranova"
 mkdir -p "$LOCAL_DIR"
 
 # Имя самого свежего дампа на сервере.
-LATEST="$(ssh -i "$KEY" -o BatchMode=yes "$SRV" "ls -1t $REMOTE_DIR/terranova_*.sql.gz | head -1")"
+LATEST="$("$SSH" -i "$KEY" -o BatchMode=yes "$SRV" "ls -1t $REMOTE_DIR/terranova_*.sql.gz | head -1")"
 if [ -z "$LATEST" ]; then
   echo "На сервере нет дампов. Сначала должен отработать ночной бэкап (03:30)."
   echo "Можно создать вручную: ssh ... '/opt/terranova/backup-db.sh'"
@@ -25,7 +28,7 @@ if [ -z "$LATEST" ]; then
 fi
 
 echo "Скачиваю: $LATEST"
-scp -i "$KEY" -o BatchMode=yes "$SRV:$LATEST" "$LOCAL_DIR/"
+"$SCP" -i "$KEY" -o BatchMode=yes "$SRV:$LATEST" "$LOCAL_DIR/"
 
 NAME="$(basename "$LATEST")"
 echo
