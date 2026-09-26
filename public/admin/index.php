@@ -88,6 +88,12 @@ header('X-Robots-Tag: noindex, nofollow');
   .login{max-width:360px;margin:80px auto;background:#fff;border:1px solid #D2D6C9;border-radius:12px;padding:28px}
   .err{color:#9E3B26;font-size:14px;margin-top:8px}
   .empty{color:#5C6659;padding:40px;text-align:center}
+  .dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+  .stat{background:#fff;border:1px solid #D2D6C9;border-radius:12px;padding:16px}
+  .stat b{display:block;font-size:28px;line-height:1;color:#1E3D2B}
+  .stat.accent b{color:#B2622D}
+  .stat span{display:block;font-size:12px;color:#5C6659;margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+  .dash-sub{color:#5C6659;font-size:13px;margin:-12px 0 20px}
 </style></head><body>
 <div class="wrap">
 <?php if (!$authed): ?>
@@ -109,11 +115,36 @@ header('X-Robots-Tag: noindex, nofollow');
   )->fetchAll();
   $csrf = h($_SESSION['csrf']);
   $labels = ['new'=>'Новая','contacted'=>'Связались','in_work'=>'В работе','declined'=>'Отказ','done'=>'Готово'];
+
+  // --- Сводка для дашборда ---
+  $total = count($apps);
+  $by = ['new'=>0,'contacted'=>0,'in_work'=>0,'declined'=>0,'done'=>0];
+  $today = 0; $week = 0; $mail = 0;
+  $todayStr = date('Y-m-d');
+  $weekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+  foreach ($apps as $a) {
+    if (isset($by[$a['status']])) $by[$a['status']]++;
+    if (strpos((string)$a['created_at'], $todayStr) === 0) $today++;
+    if ($a['created_at'] >= $weekAgo) $week++;
+    if ($a['mail']) $mail++;
+  }
 ?>
   <div class="top">
-    <h1>Заявки · <?= count($apps) ?></h1>
+    <h1>Дашборд · Terra Nova</h1>
     <a href="/admin/?logout=1">Выйти</a>
   </div>
+
+  <div class="dash">
+    <div class="stat accent"><b><?= $total ?></b><span>Всего заявок</span></div>
+    <div class="stat"><b><?= $today ?></b><span>Сегодня</span></div>
+    <div class="stat"><b><?= $week ?></b><span>За 7 дней</span></div>
+    <div class="stat"><b><?= $by['new'] ?></b><span>Новые</span></div>
+    <div class="stat"><b><?= $by['in_work'] ?></b><span>В работе</span></div>
+    <div class="stat"><b><?= $by['done'] ?></b><span>Готово</span></div>
+    <div class="stat"><b><?= $by['declined'] ?></b><span>Отказ</span></div>
+    <div class="stat"><b><?= $mail ?></b><span>Подписка на рассылку</span></div>
+  </div>
+  <p class="dash-sub">Ниже — все заявки. Меняйте статус в выпадающем списке; «Удалить данные» — по запросу человека (152-ФЗ).</p>
   <?php if (!$apps): ?>
     <div class="empty">Пока заявок нет.</div>
   <?php endif; ?>
