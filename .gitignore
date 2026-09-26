@@ -48,3 +48,8 @@ design/classes.txt
 design/facts.txt
 design/heads.txt
 design/.thumbnail
+
+# Локальные дампы базы (персональные данные) — не в репозиторий
+/Бэкапы-terranova/
+backups-local/
+*.sql.gz
