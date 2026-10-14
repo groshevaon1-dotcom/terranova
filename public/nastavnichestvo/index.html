@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Наставничество по земле один на один с Ольгой Грошевой: от стратегии до участка на твоё имя. Terra Nova.">
+<link rel="icon" href="/favicon.svg?v=20260928" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico?v=20260928" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260928">
+<title>Наставничество Terra Nova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --izvestka:#F4F3EE; --naled:#DDE7EC; --bumaga:#FBFAF6;
+    --hvoya:#1E3D2B; --elnik:#2C5439; --ladoga:#2C6382; --glina:#F2E2D0; --pobeg:#CFE0C6;
+    --grafit:#1B221C; --slanec:#5C6659; --mezha:#D2D6C9;
+    --latun:#B2622D; --obzhig:#8C491A;
+    --serif:"Literata",Georgia,serif;
+    --sans:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--izvestka); color:var(--grafit);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:28px}
+
+  .wrap{width:100%; max-width:1080px}
+  h2.sec{font-family:var(--serif); font-weight:600; font-size:clamp(24px,3vw,32px);
+    line-height:1.12; letter-spacing:-0.01em; margin:0 0 6px; color:var(--grafit)}
+  .sec-lead{font-size:17px; color:var(--slanec); margin:0 0 26px; max-width:40em}
+  .eyebrow{font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ladoga); margin-bottom:12px}
+
+  .btn{display:inline-block; font-family:var(--sans); font-weight:600; font-size:16px;
+    padding:14px 28px; border-radius:999px; background:var(--latun); color:var(--izvestka);
+    border:1px solid var(--latun); text-decoration:none; transition:background .15s,border-color .15s}
+  .btn:hover{background:var(--obzhig); border-color:var(--obzhig)}
+  .note{font-size:14px; color:var(--slanec)}
+
+  /* ===== HERO ===== */
+  .hero{background:var(--bumaga); border:1px solid var(--mezha);
+    border-radius:90px 24px 90px 24px; padding:52px 56px;
+    display:grid; grid-template-columns:1.25fr .9fr; gap:48px; align-items:center}
+  .hero h1{font-family:var(--serif); font-weight:600; line-height:1.07; letter-spacing:-0.01em;
+    font-size:clamp(30px,3.8vw,44px); margin:14px 0 16px; text-wrap:balance}
+  .hero-lead{font-size:18px; color:var(--slanec); margin:0 0 26px; max-width:28em}
+  .cta{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+
+  .points{list-style:none; margin:0; padding:0; display:grid; gap:18px}
+  .points li{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start}
+  .points .d{width:11px; height:11px; margin-top:7px; border-radius:50%; background:var(--latun); flex:none}
+  .points .t{font-family:var(--serif); font-weight:600; font-size:17px; display:block; margin-bottom:2px}
+  .points .s{font-size:15px; color:var(--slanec)}
+
+  /* ===== generic card grids ===== */
+  .cards{display:grid; gap:20px}
+  .who .cards{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--bumaga); border:1px solid var(--mezha);
+    border-radius:40px 14px 40px 14px; padding:26px 24px}
+  .card h3{font-family:var(--serif); font-weight:600; font-size:18px; margin:0 0 8px}
+  .card p{margin:0; font-size:15px; color:var(--slanec)}
+
+  /* ===== why (3 big differentiators) ===== */
+  .why .cards{grid-template-columns:repeat(3,1fr)}
+  .why .card{border-top:3px solid var(--latun)}
+  .tag{display:inline-block; font-size:12px; font-weight:600; letter-spacing:.04em;
+    color:var(--ladoga); background:var(--naled); border-radius:6px; padding:3px 9px; margin-bottom:12px}
+
+  /* ===== route ===== */
+  .route .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .step{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start}
+  .step .n{font-family:var(--serif); font-weight:600; font-size:22px; color:var(--ladoga);
+    line-height:1; width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--mezha); border-radius:6px; flex:none; background:var(--bumaga)}
+  .step h4{font-family:var(--serif); font-weight:600; font-size:16px; margin:4px 0 4px}
+  .step p{margin:0; font-size:14px; color:var(--slanec)}
+
+  /* ===== dark radar block ===== */
+  .dark{background:var(--hvoya); color:var(--izvestka);
+    border-radius:180px 40px 180px 40px; padding:52px 56px}
+  .dark .eyebrow{color:var(--pobeg)}
+  .dark h2.sec{color:var(--izvestka)}
+  .dark .sec-lead{color:#C8D4C4}
+  .radar{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px}
+  .chip{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
+    border-radius:20px 8px 20px 8px; padding:22px 22px}
+  .chip .light{width:14px; height:14px; border-radius:50%; margin-bottom:12px; display:block}
+  .chip.g .light{background:#5FB07A} .chip.y .light{background:#D8A24A} .chip.r .light{background:#CC6B4F}
+  .chip .verdict{font-family:var(--serif); font-weight:600; font-size:17px; display:block; margin-bottom:4px}
+  .chip p{margin:0; font-size:14px; color:#C8D4C4}
+
+  /* ===== price ===== */
+  .price .box{background:var(--bumaga); border:1px solid var(--mezha);
+    border-radius:90px 24px 90px 24px; padding:44px 48px;
+    display:grid; grid-template-columns:1fr .8fr; gap:40px; align-items:center}
+  .price ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+  .price li{display:grid; grid-template-columns:auto 1fr; gap:10px; font-size:15px}
+  .price li::before{content:"—"; color:var(--latun); font-weight:600}
+  .price .amount{font-family:var(--serif); font-weight:600; font-size:clamp(28px,3.5vw,38px); margin:0 0 4px}
+  .price .amount em{font-style:normal; color:var(--slanec); font-size:17px}
+
+  /* ===== psy (почему наставничество) ===== */
+  .psy .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px 44px}
+  .psy .item{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start}
+  .psy .item .d{width:11px; height:11px; margin-top:7px; border-radius:50%; background:var(--latun); flex:none}
+  .psy .item .t{font-family:var(--serif); font-weight:600; font-size:17px; display:block; margin-bottom:3px}
+  .psy .item .s{font-size:15px; color:var(--slanec)}
+
+  /* ===== pain band ===== */
+  .pain{background:var(--glina); border-radius:90px 24px 90px 24px; padding:44px 52px}
+  .pain h2.sec{max-width:none}
+  .pain p{margin:0; font-size:17px; color:var(--torf,#4A3A2C); max-width:none}
+  .pain p.lead2{font-size:19px; color:var(--grafit); font-family:var(--serif); margin-bottom:12px}
+
+  /* ===== disclaimer + final ===== */
+  .fine{font-size:13px; color:var(--slanec); max-width:60em; line-height:1.55}
+  .final{background:var(--glina); border-radius:180px 40px 180px 40px; padding:48px 56px; text-align:center}
+  .final h2.sec{margin-bottom:10px}
+  .final .sec-lead{margin:0 auto 22px}
+
+  /* ===== logo footer ===== */
+  .logo{text-align:center; padding:12px 0 0}
+  .logo .word{font-family:var(--serif); letter-spacing:.26em; font-size:18px; color:var(--grafit);
+    border-top:1px solid var(--mezha); border-bottom:1px solid var(--mezha); display:inline-block; padding:8px 0}
+  .logo .sub{display:block; margin-top:8px; font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:var(--slanec)}
+
+  @media(max-width:860px){
+    .hero{grid-template-columns:1fr; gap:32px; padding:40px 30px; border-radius:60px 20px 60px 20px}
+    .who .cards{grid-template-columns:repeat(2,1fr)}
+    .why .cards{grid-template-columns:1fr}
+    .route .steps{grid-template-columns:1fr}
+    .radar{grid-template-columns:1fr}
+    .dark,.final{border-radius:60px 20px 60px 20px; padding:40px 30px}
+    .price .box{grid-template-columns:1fr; gap:28px; padding:36px 28px; border-radius:60px 20px 60px 20px}
+  }
+  @media(max-width:520px){ body{padding:22px 14px} .hero{padding:32px 22px} .who .cards{grid-template-columns:1fr} }
+</style>
+<style>
+  .topbar{width:100%; max-width:1080px; margin:0 0 4px}
+  .backbar{display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--sans); font-weight:600; font-size:15px; color:var(--grafit);
+    text-decoration:none; border:1px solid var(--mezha); background:var(--bumaga);
+    border-radius:999px; padding:10px 20px; transition:background .15s,border-color .15s}
+  .backbar:hover{border-color:var(--slanec); background:var(--izvestka)}
+</style>
+</head>
+<body>
+<nav class="topbar"><a class="backbar" href="/">&larr; На главную</a></nav>
+<!-- ===== HERO ===== -->
+<section class="hero wrap">
+  <div>
+    <div class="eyebrow">Один на один · под твой регион и цель</div>
+    <h1>Наставничество, после которого земля&nbsp;&mdash; твоя</h1>
+    <p class="hero-lead">Веду за руку от выбора стратегии до получения участка.</p>
+    <div class="cta">
+      <a class="btn" href="/#zayavka">Записаться на бесплатный разбор</a>
+      <span class="note">Онлайн · без предоплаты</span>
+    </div>
+  </div>
+  <ul class="points">
+    <li><span class="d"></span><div><span class="t">Веду до оформления</span><span class="s">Персонально под твой регион и цель — рядом на каждом шаге, до участка на твоё имя.</span></div></li>
+    <li><span class="d"></span><div><span class="t">Комплексный подход</span><span class="s">Реальные схемы работы, которые можно переиспользовать.</span></div></li>
+    <li><span class="d"></span><div><span class="t">Рабочие инструменты</span><span class="s">Собственные инструменты оценки — радар-светофор «брать / торг / слабо». Такого нет ни у кого.</span></div></li>
+  </ul>
+</section>
+
+<!-- ===== БОЛЬ: знания есть, результата нет ===== -->
+<section class="pain wrap">
+  <h2 class="sec">Прошёл обучение, а участка так и нет?</h2>
+  <p class="lead2">Это нормально — и дело не в тебе.</p>
+  <p>Знания после курсов есть почти у всех: вебинары, гайды, схемы. Не хватает не информации, а человека, который поможет приложить её к твоей ситуации — подкрутить под твой регион, бюджет и конкретный участок и довести до результата. Именно это и даёт наставничество один на один.</p>
+</section>
+
+<!-- ===== ПОЧЕМУ НАСТАВНИЧЕСТВО (психология) ===== -->
+<section class="psy wrap">
+  <h2 class="sec">Почему с наставником получается</h2>
+  <p class="sec-lead">Знания у тебя уже есть. После обучения не хватает не информации — а того, что даёт только работа один на один:</p>
+  <div class="grid">
+    <div class="item"><span class="d"></span><div><span class="t">Не страшно сделать шаг</span><span class="s">Рядом эксперт: дорогую ошибку увижу раньше тебя, слабый участок назову прямо. Страх «потеряю деньги» перестаёт держать на месте.</span></div></div>
+    <div class="item"><span class="d"></span><div><span class="t">Доведёшь до конца</span><span class="s">Курс легко забросить, живую договорённость со мной — нет. Та самая внешняя ответственность, которой не хватает после обучения.</span></div></div>
+    <div class="item"><span class="d"></span><div><span class="t">Ясность вместо каши</span><span class="s">Не «в общем про землю», а твой регион, бюджет и конкретный участок. Решения под твою ситуацию, с честным расчётом по реальным сделкам.</span></div></div>
+    <div class="item"><span class="d"></span><div><span class="t">Уйдёшь с навыком, а не с конспектом</span><span class="s">Знания — это информация в голове. Навык — мышца: растёт только в деле. Со мной ты не слушаешь, а делаешь руками на реальном участке — и умение остаётся с тобой.</span></div></div>
+  </div>
+</section>
+
+<!-- ===== ДЛЯ КОГО ===== -->
+<section class="who wrap">
+  <h2 class="sec">Для кого это</h2>
+  <p class="sec-lead">Для тех, кто уже учился земле — прошёл курсы, насмотрелся вебинаров — а участка так и нет.</p>
+  <div class="cards">
+    <div class="card"><h3>Прошёл курсы</h3><p>Теория в голове есть, а дела нет. Приложим знания к твоему реальному участку и доведём до сделки.</p></div>
+    <div class="card"><h3>Застрял на теории</h3><p>Знаешь, «как надо», но страшно сделать первый шаг и ошибиться на деньги. Пройдём вместе, с подстраховкой.</p></div>
+    <div class="card"><h3>Пробовал сам</h3><p>Искал, смотрел участки — но всё мимо или дорого. Покажу, где ты терял время, и дам рабочую систему.</p></div>
+  </div>
+</section>
+
+<!-- ===== ФИНАЛ ===== -->
+<section class="final wrap">
+  <h2 class="sec">Начнём с разбора твоей точки&nbsp;А</h2>
+  <p class="sec-lead">Посмотрим, где ты сейчас и куда хочешь прийти, — и покажу на реальных участках, как туда дойти. Без предоплаты.</p>
+  <a class="btn" href="/#zayavka">Записаться на разбор</a>
+</section>
+
+<div class="logo wrap">
+  <span class="word">TERRA NOVA<span class="sub">земельный капитал</span></span>
+</div>
+</body>
+</html>
